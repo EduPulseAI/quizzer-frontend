@@ -19,6 +19,9 @@
       "@feature/base": ["features/base/src/index.ts"],
       "@feature/base/*": ["features/base/src/*"],
       "@feature/base/server": ["features/base/src/server.ts"],
+      "@feature/topic": ["features/topic/src/index.ts"],
+      "@feature/topic/*": ["features/topic/src/*"],
+      "@feature/topic/server": ["features/topic/src/server.ts"],
       "@feature/ui": ["features/ui/src/index.ts"],
       "@feature/ui/*": ["features/ui/src/*"],
       "@feature/ui/server": ["features/ui/src/server.ts"]

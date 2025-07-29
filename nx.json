@@ -76,6 +76,15 @@
       },
       "utils": {
         "projectName": "base"
+      },
+      "api": {
+        "projectName": "base"
+      },
+      "types": {
+        "projectName": "base"
+      },
+      "constants": {
+        "projectName": "base"
       }
     }
   }
