@@ -70,6 +70,12 @@
       },
       "auth": {
         "projectName": "base"
+      },
+      "component": {
+        "projectName": "ui"
+      },
+      "utils": {
+        "projectName": "base"
       }
     }
   }
