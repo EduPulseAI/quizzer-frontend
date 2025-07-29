@@ -16,7 +16,6 @@
     "baseUrl": ".",
     "paths": {
       "@app/coding-quizzer/*": ["apps/coding-quizzer/src/*"],
-      "@app/sample/*": ["apps/sample/src/*"],
       "@feature/base": ["features/base/src/index.ts"],
       "@feature/base/*": ["features/base/src/*"],
       "@feature/base/server": ["features/base/src/server.ts"]
