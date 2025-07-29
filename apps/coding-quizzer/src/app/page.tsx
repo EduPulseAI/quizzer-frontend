@@ -24,7 +24,6 @@ export default async function Index() {
           Select a topic to begin your quiz journey
         </p>
       </div>
-
       <TopicSelect topics={data} />
     </div>
   );

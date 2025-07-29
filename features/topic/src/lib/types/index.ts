@@ -1,3 +1,5 @@
+import type { PageList } from '@feature/base/lib/types';
+
 /**
  * [get-topics]
  * Tue Jul 29 2025
@@ -17,4 +19,4 @@ export interface Topic {
  * [get-topics-response]
  * Tue Jul 29 2025
  */
-export interface GetTopicsResponse {}
+export type GetTopicsResponse = PageList<Topic>
