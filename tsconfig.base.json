@@ -1,0 +1,25 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "lib": ["es2020", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@app/coding-quizzer/*": ["apps/coding-quizzer/src/*"],
+      "@feature/base": ["features/base/src/index.ts"],
+      "@feature/base/*": ["features/base/src/*"],
+      "@feature/base/server": ["features/base/src/server.ts"]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
+}
