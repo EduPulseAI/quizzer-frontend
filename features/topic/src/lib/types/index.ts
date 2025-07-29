@@ -8,7 +8,10 @@ export type GetTopics = Topic[];
  * [topics]
  * Tue Jul 29 2025
  */
-export interface Topic {}
+export interface Topic {
+  title: string;
+  questions: number;
+}
 
 /**
  * [get-topics-response]

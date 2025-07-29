@@ -49,12 +49,12 @@ export function TopicSelect({ topics }: Props) {
             className="p-6 bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl border-2 border-gray-200 hover:border-purple-300 hover:shadow-lg transition-all duration-300 text-left group"
           >
             <div className="flex items-center gap-4">
-              <span className="text-3xl group-hover:scale-110 transition-transform">
-                {topic === 'General Knowledge' && '🌍'}
-                {topic === 'Science' && '🔬'}
-                {topic === 'History' && '📚'}
-                {topic === 'Technology' && '💻'}
-              </span>
+              {/*<span className="text-3xl group-hover:scale-110 transition-transform">*/}
+              {/*  {topic === 'General Knowledge' && '🌍'}*/}
+              {/*  {topic === 'Science' && '🔬'}*/}
+              {/*  {topic === 'History' && '📚'}*/}
+              {/*  {topic === 'Technology' && '💻'}*/}
+              {/*</span>*/}
               <div>
                 <h3 className="font-semibold text-gray-800 group-hover:text-purple-600 transition-colors">
                   {topic}
