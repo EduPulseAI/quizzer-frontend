@@ -8,3 +8,4 @@ export interface PageList<T> {
   totalPages: number;
   items: T[];
 }
+

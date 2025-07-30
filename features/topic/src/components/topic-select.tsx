@@ -1,5 +1,6 @@
 'use client';
 
+import { createQuiz } from '@feature/quiz/lib/api/create-quiz';
 import {
   Select,
   SelectContent,
@@ -16,9 +17,16 @@ interface Props {
 
 export function TopicSelect({ topics }: Props) {
   const router = useRouter()
-  const startQuiz = (topic: string) => {
-
-    router.push("/" + topic)
+  const startQuiz = async (topic: string) => {
+    const { isError, data, error } = await createQuiz({ topic });
+    
+    if (isError) {
+      console.error(error);
+      return;
+    }
+    
+    const { quizId } = data;
+    router.push("/" + quizId)
   };
 
   return (
