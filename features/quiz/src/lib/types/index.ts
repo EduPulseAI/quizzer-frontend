@@ -39,4 +39,5 @@ export interface CreateQuizResponse {
  */
 export interface CreateQuizRequest {
   topic: string;
+  questions: number;
 }

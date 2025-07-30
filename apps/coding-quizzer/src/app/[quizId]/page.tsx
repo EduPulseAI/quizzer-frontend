@@ -7,8 +7,8 @@ interface Props {
 }
 
 export async function QuizPage({ params }: Props) {
-  const id = parseInt((await params).quizId);
-  const { isError, data, error } = await getQuiz(id);
+  const quizId = parseInt((await params).quizId);
+  const { isError, data, error } = await getQuiz({ quizId });
 
   if (isError) {
     console.error(error);

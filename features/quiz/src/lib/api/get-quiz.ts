@@ -6,14 +6,16 @@ import api from '@feature/base/lib/axios';
 import { handleError } from '@feature/base/lib/axios/error';
 import type { BackendResponse } from '@feature/base/lib/axios/types';
 
-interface BackendRequestOptions {}
+interface BackendRequestOptions {
+  quizId: number;
+}
 
-export async function getQuiz(
-  options?: BackendRequestOptions
-): Promise<BackendResponse<GetQuiz>> {
+export async function getQuiz({
+  quizId,
+}: BackendRequestOptions): Promise<BackendResponse<GetQuiz>> {
   try {
     const params: URLSearchParams = new URLSearchParams();
-    const endpoint = `/api/quiz?${params.toString()}`;
+    const endpoint = `/api/quizzes/${quizId}?${params.toString()}`;
 
     const { data } = await api.get<GetQuizResponse>(endpoint);
 
