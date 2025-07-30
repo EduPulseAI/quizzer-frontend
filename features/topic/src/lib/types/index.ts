@@ -12,7 +12,7 @@ export type GetTopics = Topic[];
  */
 export interface Topic {
   title: string;
-  questions: number;
+  questions: string[];
 }
 
 /**
