@@ -18,19 +18,22 @@ export function QuizOptions({ data }: Props) {
     setSelectedAnswer(id);
   };
 
-  console.log({ data, quiz });
+  // console.log({ question, quiz });
   useEffect(() => {
     function loadQuestion() {
-      if (quiz && quiz.position) {
-        setQuestion(data.questions[quiz.position]);
+      const questionDetails = data.questions.find(q => q.position === quiz.position);
+      console.log("QuizOptions#loadQuestions", questionDetails);
+      if (questionDetails) {
+        setQuestion(questionDetails.question);
       }
     }
+
     loadQuestion();
   }, [data.questions, quiz]);
   
   return (
     <div className="space-y-4">
-      {question.options.map((option, index) => {
+      {question && question.options.map((option, index) => {
         let buttonClass =
           'w-full p-4 text-left rounded-xl border-2 transition-all duration-300 transform hover:scale-[1.02] ';
 
