@@ -1,5 +1,6 @@
 'use server';
 
+import { getQuizMapper } from '@feature/quiz/lib/utils';
 import type { GetQuiz, Quiz, GetQuizResponse } from '../types';
 import { GET_QUIZ } from '../constants';
 import api from '@feature/base/lib/axios';
@@ -17,8 +18,8 @@ export async function getQuiz({
     const params: URLSearchParams = new URLSearchParams();
     const endpoint = `/api/quizzes/${quizId}?${params.toString()}`;
 
-    const { data } = await api.get<GetQuizResponse>(endpoint);
-
+    const response = await api.get<GetQuizResponse>(endpoint);
+    const data: GetQuiz = getQuizMapper(response.data)
     return { data };
   } catch (error) {
     return handleError<GetQuiz>(error, GET_QUIZ);

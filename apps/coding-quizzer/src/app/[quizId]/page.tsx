@@ -1,3 +1,5 @@
+import { QuizHeader } from '@feature/quiz/components/quiz-header';
+import { QuizOptions } from '@feature/quiz/components/quiz-options';
 import { getQuiz } from '@feature/quiz/lib/api/get-quiz';
 
 import React from 'react';
@@ -14,10 +16,10 @@ export async function QuizPage({ params }: Props) {
     console.error(error);
   }
 
-  // const { topic, questions } = data;
   return (
     <div className="bg-white rounded-2xl shadow-xl p-8 max-w-2xl mx-auto">
-      <div></div>
+      <QuizHeader data={data} />
+      {/*<QuizOptions  data={data} />*/}
     </div>
   );
 }

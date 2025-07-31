@@ -72,19 +72,22 @@
         "projectName": "base"
       },
       "component": {
-        "projectName": "ui"
+        "projectName": "quiz"
       },
       "utils": {
-        "projectName": "base"
+        "projectName": "quiz"
       },
       "api": {
-        "projectName": "base"
+        "projectName": "quiz"
       },
       "types": {
-        "projectName": "base"
+        "projectName": "quiz"
       },
       "constants": {
-        "projectName": "base"
+        "projectName": "quiz"
+      },
+      "store": {
+        "projectName": "quiz"
       }
     }
   }
