@@ -6,6 +6,7 @@ import { GetQuiz, GetQuizResponse } from '../types';
  */
 export function getQuizMapper(r: GetQuizResponse): GetQuiz {
   return {
+    responses: r.responses,
     questions: r.questions,
     topic: r.topic,
     total: r.questions.length

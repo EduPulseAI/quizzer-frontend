@@ -9,45 +9,41 @@ interface Props {
 }
 
 export function QuizHeader({ data }: Props) {
-  const { topic, total, questions } = data;
   const quiz = useQuizQuestionStore(state => state.quiz)
-
-  const setId = useQuizQuestionStore(state => state.setId)
-  const [question, setQuestion] = useState("");
-
-  useEffect(() => {
-    if (!quiz.questionId) {
-      setId(questions[0].id);
-    }
-  }, [questions, quiz.questionId, setId]);
+  const [question, setQuestion] = useState<string>("");
+  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
     function loadQuestion() {
-      const questionDetails = questions.find(q => q.id === quiz.questionId);
+      const questionDetails = data.questions.find(q => q.position === quiz.position);
       if (questionDetails) {
-        setQuestion(questionDetails.question);
+        setQuestion(questionDetails.question.question);
       }
+    }
+    function updateProgress() {
+      setProgress(Math.floor(((quiz.position - 1) / data.total) * 100))
     }
 
     loadQuestion();
+    updateProgress()
 
-  }, [quiz, questions]);
+  }, [quiz, data.questions, data.total]);
 
   return (
     <div className="mb-8">
       <div className="flex justify-between items-center mb-4">
         <span className="text-sm font-medium text-purple-600 bg-purple-100 px-3 py-1 rounded-full">
-          {topic}
+          {data.topic}
         </span>
         <span className="text-sm text-gray-500">
-          Question {quiz.completed.length + 1} of {total}
+          Question {quiz.position} of {data.total}
         </span>
       </div>
 
       <div className="w-full bg-gray-200 rounded-full h-2 mb-6">
         <div
           className="bg-gradient-to-r from-purple-500 to-blue-500 h-2 rounded-full transition-all duration-500 ease-out"
-          style={{ width: `${Math.floor((quiz.completed.length / total) * 100)}%` }}
+          style={{ width: `${progress}%` }}
         ></div>
       </div>
 

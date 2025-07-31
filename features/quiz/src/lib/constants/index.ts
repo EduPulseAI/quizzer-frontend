@@ -17,6 +17,6 @@ export const CREATE_QUIZ: any = null;
  * Thu Jul 31 2025
  */
 export const QUIZ_DEFAULT: Quiz = {
-  questionId: undefined,
+  position: 1,
   completed: [],
 };

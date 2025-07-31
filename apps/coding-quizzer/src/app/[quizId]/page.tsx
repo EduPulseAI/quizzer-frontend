@@ -15,11 +15,11 @@ export async function QuizPage({ params }: Props) {
   if (isError) {
     console.error(error);
   }
-
+  console.log("QuizPage", data);
   return (
     <div className="bg-white rounded-2xl shadow-xl p-8 max-w-2xl mx-auto">
       <QuizHeader data={data} />
-      {/*<QuizOptions  data={data} />*/}
+      {/*<QuizOptions data={data} />*/}
     </div>
   );
 }

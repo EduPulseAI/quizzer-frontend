@@ -16,6 +16,6 @@ export const useQuizQuestionStore = create<IQuizQuestionStore>((set, get) => ({
   quiz: QUIZ_DEFAULT,
   isLoading: false,
   setQuizQuestion: (quiz: Quiz) => set({ quiz }),
-  setId: (questionId: number) => set({ quiz: {...get().quiz, questionId }}),
+  setId: (questionId: number) => set({ quiz: {...get().quiz, position: questionId }}),
   toggleLoading: () => set(({ isLoading }) => ({ isLoading: !isLoading })),
 }));

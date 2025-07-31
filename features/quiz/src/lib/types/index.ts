@@ -5,21 +5,19 @@
 export interface GetQuiz {
   topic: string;
   total: number;
-  questions: QuestionDetails[];
+  questions: PositionalQuestion[];
   responses: QuizResponseDetails[];
-
 }
 
-type QuestionId = number;
+export type AnswerId = QuestionDetails["answerId"];
 
 /**
  * [quiz]
  * Tue Jul 29 2025
  */
 export interface Quiz {
-  questionId: QuestionId;
-  completed: QuestionId[];
-
+  position: number;
+  completed: AnswerId[];
 }
 
 /**
@@ -29,7 +27,7 @@ export interface Quiz {
 export interface GetQuizResponse {
   id: number;
   topic: string;
-  questions: QuestionDetails[];
+  questions: PositionalQuestion[];
   responses: QuizResponseDetails[];
 }
 
@@ -85,4 +83,16 @@ export interface QuestionDetails {
  * [question-option]
  * Wed Jul 30 2025
  */
-export interface QuestionOption {}
+export interface QuestionOption {
+  id: number;
+  value: string;
+}
+
+/**
+ * [positional]
+ * Thu Jul 31 2025
+ */
+export interface PositionalQuestion {
+  question: QuestionDetails
+  position: number;
+}

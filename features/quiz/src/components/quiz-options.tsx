@@ -1,8 +1,8 @@
 'use client';
 
-import { useQuizQuestionStore } from '@feature/quiz/lib/store/use-quiz-question-store';
-import type { GetQuiz, QuestionOption } from '@feature/quiz/lib/types';
-import { ReactNode, useState } from 'react';
+import { useQuizQuestionStore } from '../lib/store/use-quiz-question-store';
+import { GetQuiz, QuestionDetails } from '../lib/types/index';
+import { ReactNode, useEffect, useState } from 'react';
 
 interface Props {
   data: GetQuiz;
@@ -10,8 +10,24 @@ interface Props {
 }
 
 export function QuizOptions({ data }: Props) {
-  const store = useQuizQuestionStore();
-  const [options, setOptions] = useState<QuestionOption[]>([]);
+  const quiz = useQuizQuestionStore(state => state.quiz);
+  const [question, setQuestion] = useState<QuestionDetails>();
+  const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
+
+  const handleAnswerSelect = (id: number) => {
+    setSelectedAnswer(id);
+  };
+
+  console.log({ data, quiz });
+  useEffect(() => {
+    function loadQuestion() {
+      if (quiz && quiz.position) {
+        setQuestion(data.questions[quiz.position]);
+      }
+    }
+    loadQuestion();
+  }, [data.questions, quiz]);
+  
   return (
     <div className="space-y-4">
       {question.options.map((option, index) => {
@@ -21,7 +37,7 @@ export function QuizOptions({ data }: Props) {
         if (selectedAnswer === null) {
           buttonClass +=
             'border-gray-200 hover:border-purple-300 hover:bg-purple-50 bg-white';
-        } else if (index === question.correct) {
+        } else if (option.id === question.answerId) {
           buttonClass += 'border-green-500 bg-green-100 text-green-800';
         } else if (index === selectedAnswer) {
           buttonClass += 'border-red-500 bg-red-100 text-red-800';
@@ -31,8 +47,8 @@ export function QuizOptions({ data }: Props) {
 
         return (
           <button
-            key={index}
-            onClick={() => handleAnswerSelect(index)}
+            key={option.id}
+            onClick={() => handleAnswerSelect(option.id)}
             disabled={selectedAnswer !== null}
             className={buttonClass}
           >
@@ -40,11 +56,11 @@ export function QuizOptions({ data }: Props) {
               <span className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-sm font-medium">
                 {String.fromCharCode(65 + index)}
               </span>
-              <span className="text-lg">{option}</span>
-              {selectedAnswer !== null && index === question.correct && (
+              <span className="text-lg">{option.value}</span>
+              {selectedAnswer !== null && option.id === question.answerId && (
                 <span className="ml-auto text-green-600">✓</span>
               )}
-              {selectedAnswer === index && index !== question.correct && (
+              {selectedAnswer === option.id && index !== question.answerId && (
                 <span className="ml-auto text-red-600">✗</span>
               )}
             </div>
