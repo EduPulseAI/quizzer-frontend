@@ -12,6 +12,8 @@ interface IQuizQuestionStore {
   setAnswer: (answerId: AnswerId) => void;
   setQuestion: (question: QuestionDetails) => void;
   setCompleted: (completed: QuizResponseDetails[]) => void;
+  setShowNext: (showNext: boolean) => void;
+  proceed: () => void;
 }
 
 export const useQuizQuestionStore = create<IQuizQuestionStore>((set, get) => ({
@@ -31,6 +33,13 @@ export const useQuizQuestionStore = create<IQuizQuestionStore>((set, get) => ({
     return { selected, completed: Array.from(set) }
   }),
   setQuestion: (question: QuestionDetails) => set({ question }),
+  setShowNext: (showNext: boolean) => set({ showNext }),
   setCompleted: (completed: QuizResponseDetails[]) => set({ completed: completed ?? [] }),
+  proceed: () => set({
+    position: get().position + 1,
+    question: null,
+    selected: null,
+    showNext: false
+  }),
 
 }));

@@ -18,12 +18,14 @@ export async function QuizPage({ params }: Props) {
     console.error(error);
   }
 
+  const { total, topic } = data;
+
   return (
     <div className="bg-white rounded-2xl shadow-xl p-8 max-w-2xl mx-auto">
-      <QuizLoader data={data}>
-        <QuizHeader data={data} />
-        <QuizOptions data={data} />
-        <QuizOptionFeedback />
+      <QuizLoader data={data} >
+        <QuizHeader total={total} topic={topic} />
+        <QuizOptions />
+        <QuizOptionFeedback total={total} />
       </QuizLoader>
     </div>
   );

@@ -8,16 +8,22 @@ interface Props {
 }
 
 export function QuizOptions(props: Props) {
-  const { selected, setAnswer, question } = useQuizQuestionStore();
+  const { selected, setAnswer, question, setShowNext } = useQuizQuestionStore();
 
   const handleAnswerSelect = (id: number) => {
     setAnswer(id);
+
+    // make request
+
+    setTimeout(() => {
+      setShowNext(true)
+    }, 2000)
   };
 
   
   return (
     <div className="space-y-4">
-      {question && question.options.map((option, index) => {
+      {question !== null && question.options.map((option, index) => {
         let buttonClass =
           'w-full p-4 text-left rounded-xl border-2 transition-all duration-300 transform hover:scale-[1.02] ';
 

@@ -1,34 +1,33 @@
 'use client';
 
-import { useQuizQuestionStore } from '../lib/store/use-quiz-question-store';
 import React, { useEffect, useState } from 'react';
-import { GetQuiz } from '../lib/types/index';
+import { useQuizQuestionStore } from '../lib/store/use-quiz-question-store';
 
 interface Props {
-  data: GetQuiz;
+  total: number;
+  topic: string;
 }
 
-export function QuizHeader({ data }: Props) {
+export function QuizHeader({ total, topic }: Props) {
   const { position, question } = useQuizQuestionStore();
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
     function updateProgress() {
-      setProgress(Math.floor(((position - 1) / data.total) * 100))
+      setProgress(Math.floor(((position - 1) / total) * 100));
     }
 
-    updateProgress()
-
-  }, [position, data.total]);
+    updateProgress();
+  }, [position, total]);
 
   return (
     <div className="mb-8">
       <div className="flex justify-between items-center mb-4">
         <span className="text-sm font-medium text-purple-600 bg-purple-100 px-3 py-1 rounded-full">
-          {data.topic}
+          {topic}
         </span>
         <span className="text-sm text-gray-500">
-          Question {position} of {data.total}
+          Question {position} of {total}
         </span>
       </div>
 
@@ -40,7 +39,7 @@ export function QuizHeader({ data }: Props) {
       </div>
 
       <h2 className="text-2xl font-bold text-gray-800 mb-8 leading-relaxed">
-        {question  !== null ? question.question : ""}
+        {question !== null ? question.question : ''}
       </h2>
     </div>
   );
