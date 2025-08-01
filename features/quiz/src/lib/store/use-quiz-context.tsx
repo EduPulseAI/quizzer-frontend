@@ -1,7 +1,22 @@
 'use client';
 
-import { type AnswerId, GetQuiz, type QuestionDetails, type QuizResponseDetails } from '../types/index';
-import { useEffect, useState, createContext, useContext, type ReactNode } from 'react';
+import { ErrorComponent } from '@feature/ui/components/error-component';
+import { useRouter } from 'next/navigation';
+import {
+  createContext,
+  type ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
+import { submitQuizChoice } from '../api/submit-quiz-choice';
+import {
+  type AnswerId,
+  GetQuiz,
+  type QuestionDetails,
+  type QuizResponseDetails,
+} from '../types/index';
+import { toast } from 'sonner';
 
 type QuizContextProviderProps = {
   data: GetQuiz;
@@ -29,7 +44,9 @@ export default function QuizContextProvider({
   const [selected, setSelected] = useState<QuizResponseDetails | null>(null);
   const [showNext, setShowNext] = useState(false);
 
-  function selectChoice(answerId: AnswerId) {
+  const router = useRouter()
+
+  async function selectChoice(answerId: AnswerId) {
     const set = new Set(completed);
     const selected: QuizResponseDetails = {
       question: question.id,
@@ -39,7 +56,15 @@ export default function QuizContextProvider({
     set.add(selected);
     setSelected(selected);
     setCompleted(Array.from(set))
-
+  
+    const { isError, data: res, error } = await submitQuizChoice({ quizId: data.id, selected });
+    
+    if (isError) {
+      toast.error(<ErrorComponent error={error} />)
+    } else {
+      toast.info("Saved answer " + position)
+    }
+    
     setTimeout(() => setShowNext(true), 2000)
   }
 
@@ -50,6 +75,8 @@ export default function QuizContextProvider({
       setSelected(null);
       setShowNext(false);
     }
+
+    router.refresh();
   }
 
 
@@ -70,12 +97,12 @@ export default function QuizContextProvider({
   useEffect(() => {
     function loadAnswer() {
       if (selected === null) {
-        const details = completed.find(
+        const previousAnswer = completed.find(
           (a) => a.question === question?.id
         );
 
-        if (details) {
-          setSelected(details);
+        if (previousAnswer) {
+          setSelected(previousAnswer);
           setShowNext(true);
         }
       }

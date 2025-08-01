@@ -4,7 +4,7 @@ interface Props {
   error: ErrorMessage | undefined;
 }
 
-export function ErrorMessagePage(props: Props) {
+export function ErrorComponent(props: Props) {
   return (
     <div
       style={{ display: 'flex', alignItems: 'start', flexDirection: 'column' }}

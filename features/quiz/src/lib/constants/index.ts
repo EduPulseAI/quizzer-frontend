@@ -20,3 +20,9 @@ export const QUIZ_DEFAULT: Quiz = {
   position: 1,
   completed: [],
 };
+
+/**
+ * [submit-quiz-choice]
+ * Fri Aug 01 2025
+ */
+export const SUBMIT_QUIZ_CHOICE: any = null;

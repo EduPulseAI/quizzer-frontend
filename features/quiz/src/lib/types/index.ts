@@ -11,7 +11,7 @@ export interface GetQuiz {
   responses: QuizResponseDetails[];
 }
 
-export type AnswerId = QuestionDetails["answerId"];
+export type AnswerId = QuestionDetails['answerId'];
 
 /**
  * [quiz]
@@ -95,6 +95,33 @@ export interface QuestionOption {
  * Thu Jul 31 2025
  */
 export interface PositionalQuestion {
-  question: QuestionDetails
+  question: QuestionDetails;
   position: number;
+}
+
+/**
+ * [submit-quiz-choice]
+ * Fri Aug 01 2025
+ */
+export type SubmitQuizChoice = QuizResponseDetails
+
+/**
+ * [quiz-choice]
+ * Fri Aug 01 2025
+ */
+export interface QuizChoice {}
+
+/**
+ * [submit-quiz-choice-response]
+ * Fri Aug 01 2025
+ */
+export type SubmitQuizChoiceResponse = QuizResponseDetails
+
+/**
+ * [submit-quiz-choice-request]
+ * Fri Aug 01 2025
+ */
+export interface SubmitQuizChoiceRequest {
+  optionId: number;
+  questionId: number;
 }

@@ -10,11 +10,8 @@ interface Props {
 }
 
 export function QuizOptionButton({ option, index, question }: Props) {
-  const { selected, setAnswer } = useQuiz();
+  const { selected, selectChoice } = useQuiz();
 
-  const handleAnswerSelect = (id: number) => {
-    setAnswer(id);
-  };
 
   let buttonClass =
     'w-full p-4 text-left rounded-xl border-2 transition-all duration-300 transform hover:scale-[1.02] ';
@@ -33,7 +30,7 @@ export function QuizOptionButton({ option, index, question }: Props) {
   return (
     <button
       key={option.id}
-      onClick={() => handleAnswerSelect(option.id)}
+      onClick={() => selectChoice(option.id)}
       disabled={selected !== null}
       className={buttonClass}
     >
