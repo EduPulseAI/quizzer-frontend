@@ -1,35 +1,19 @@
 'use client';
 
+import { ReactNode } from 'react';
 import { useQuizQuestionStore } from '../lib/store/use-quiz-question-store';
-import { GetQuiz, QuestionDetails } from '../lib/types/index';
-import { ReactNode, useEffect, useState } from 'react';
 
 interface Props {
-  data: GetQuiz;
   children?: ReactNode;
 }
 
-export function QuizOptions({ data }: Props) {
-  const quiz = useQuizQuestionStore(state => state.quiz);
-  const [question, setQuestion] = useState<QuestionDetails>();
-  const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
+export function QuizOptions(props: Props) {
+  const { selected, setAnswer, question } = useQuizQuestionStore();
 
   const handleAnswerSelect = (id: number) => {
-    setSelectedAnswer(id);
+    setAnswer(id);
   };
 
-  // console.log({ question, quiz });
-  useEffect(() => {
-    function loadQuestion() {
-      const questionDetails = data.questions.find(q => q.position === quiz.position);
-      console.log("QuizOptions#loadQuestions", questionDetails);
-      if (questionDetails) {
-        setQuestion(questionDetails.question);
-      }
-    }
-
-    loadQuestion();
-  }, [data.questions, quiz]);
   
   return (
     <div className="space-y-4">
@@ -37,12 +21,12 @@ export function QuizOptions({ data }: Props) {
         let buttonClass =
           'w-full p-4 text-left rounded-xl border-2 transition-all duration-300 transform hover:scale-[1.02] ';
 
-        if (selectedAnswer === null) {
+        if (selected === null) {
           buttonClass +=
             'border-gray-200 hover:border-purple-300 hover:bg-purple-50 bg-white';
         } else if (option.id === question.answerId) {
           buttonClass += 'border-green-500 bg-green-100 text-green-800';
-        } else if (index === selectedAnswer) {
+        } else if (option.id === selected.choice) {
           buttonClass += 'border-red-500 bg-red-100 text-red-800';
         } else {
           buttonClass += 'border-gray-200 bg-gray-50 text-gray-500';
@@ -52,7 +36,7 @@ export function QuizOptions({ data }: Props) {
           <button
             key={option.id}
             onClick={() => handleAnswerSelect(option.id)}
-            disabled={selectedAnswer !== null}
+            disabled={selected !== null}
             className={buttonClass}
           >
             <div className="flex items-center gap-4">
@@ -60,11 +44,16 @@ export function QuizOptions({ data }: Props) {
                 {String.fromCharCode(65 + index)}
               </span>
               <span className="text-lg">{option.value}</span>
-              {selectedAnswer !== null && option.id === question.answerId && (
-                <span className="ml-auto text-green-600">✓</span>
-              )}
-              {selectedAnswer === option.id && index !== question.answerId && (
-                <span className="ml-auto text-red-600">✗</span>
+              {selected !== null && (
+                <>
+                  {option.id === question.answerId && (
+                    <span className="ml-auto text-green-600">✓</span>
+                  )}
+
+                  {selected.choice === option.id && !selected.correct && (
+                    <span className="ml-auto text-red-600">✗</span>
+                  )}
+                </>
               )}
             </div>
           </button>

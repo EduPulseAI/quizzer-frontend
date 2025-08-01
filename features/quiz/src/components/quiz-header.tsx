@@ -9,25 +9,17 @@ interface Props {
 }
 
 export function QuizHeader({ data }: Props) {
-  const quiz = useQuizQuestionStore(state => state.quiz)
-  const [question, setQuestion] = useState<string>("");
+  const { position, question } = useQuizQuestionStore();
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    function loadQuestion() {
-      const questionDetails = data.questions.find(q => q.position === quiz.position);
-      if (questionDetails) {
-        setQuestion(questionDetails.question.question);
-      }
-    }
     function updateProgress() {
-      setProgress(Math.floor(((quiz.position - 1) / data.total) * 100))
+      setProgress(Math.floor(((position - 1) / data.total) * 100))
     }
 
-    loadQuestion();
     updateProgress()
 
-  }, [quiz, data.questions, data.total]);
+  }, [position, data.total]);
 
   return (
     <div className="mb-8">
@@ -36,7 +28,7 @@ export function QuizHeader({ data }: Props) {
           {data.topic}
         </span>
         <span className="text-sm text-gray-500">
-          Question {quiz.position} of {data.total}
+          Question {position} of {data.total}
         </span>
       </div>
 
@@ -48,7 +40,7 @@ export function QuizHeader({ data }: Props) {
       </div>
 
       <h2 className="text-2xl font-bold text-gray-800 mb-8 leading-relaxed">
-        {question}
+        {question  !== null ? question.question : ""}
       </h2>
     </div>
   );

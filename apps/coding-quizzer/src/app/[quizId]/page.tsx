@@ -1,4 +1,6 @@
 import { QuizHeader } from '@feature/quiz/components/quiz-header';
+import { QuizLoader } from '@feature/quiz/components/quiz-loader';
+import { QuizOptionFeedback } from '@feature/quiz/components/quiz-option-feedback';
 import { QuizOptions } from '@feature/quiz/components/quiz-options';
 import { getQuiz } from '@feature/quiz/lib/api/get-quiz';
 
@@ -15,11 +17,14 @@ export async function QuizPage({ params }: Props) {
   if (isError) {
     console.error(error);
   }
-  console.log("QuizPage", data);
+
   return (
     <div className="bg-white rounded-2xl shadow-xl p-8 max-w-2xl mx-auto">
-      <QuizHeader data={data} />
-      <QuizOptions data={data} />
+      <QuizLoader data={data}>
+        <QuizHeader data={data} />
+        <QuizOptions data={data} />
+        <QuizOptionFeedback />
+      </QuizLoader>
     </div>
   );
 }

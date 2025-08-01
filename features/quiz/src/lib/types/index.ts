@@ -16,8 +16,8 @@ export type AnswerId = QuestionDetails["answerId"];
  * Tue Jul 29 2025
  */
 export interface Quiz {
-  position: number;
-  completed: AnswerId[];
+  // position: number;
+  // completed: AnswerId[];
 }
 
 /**
@@ -62,8 +62,8 @@ export interface CreateQuizRequest {
  * Wed Jul 30 2025
  */
 export interface QuizResponseDetails {
-  question: string;
-  choice: string;
+  question: number;
+  choice: number;
   correct: boolean;
 }
 

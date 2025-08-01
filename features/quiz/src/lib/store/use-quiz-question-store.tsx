@@ -1,23 +1,36 @@
 'use client';
 
-import { QUIZ_DEFAULT } from '../constants/index';
-import { type PositionalQuestion, type QuestionDetails, Quiz } from '../types';
 import { create } from 'zustand';
+import { type AnswerId, type QuestionDetails, type QuizResponseDetails } from '../types';
 
 interface IQuizQuestionStore {
-  quiz: Quiz;
-  isLoading: boolean;
-  setQuiz: (quizQuestion: Quiz) => void;
-  // setQuestion: (question: PositionalQuestion) => void;
-  setId: (questionId: number) => void;
-  toggleLoading: () => void;
+  position: number;
+  selected: QuizResponseDetails | null;
+  question: QuestionDetails | null;
+  completed: QuizResponseDetails[];
+  showNext: boolean;
+  setAnswer: (answerId: AnswerId) => void;
+  setQuestion: (question: QuestionDetails) => void;
+  setCompleted: (completed: QuizResponseDetails[]) => void;
 }
 
 export const useQuizQuestionStore = create<IQuizQuestionStore>((set, get) => ({
-  quiz: QUIZ_DEFAULT,
-  isLoading: false,
-  setQuiz: (quiz: Quiz) => set({ quiz }),
-  // setQuestion: (question: PositionalQuestion) => set({ quiz: {...get().quiz, question } }),
-  setId: (questionId: number) => set({ quiz: {...get().quiz, position: questionId }}),
-  toggleLoading: () => set(({ isLoading }) => ({ isLoading: !isLoading })),
+  completed: [],
+  position: 1,
+  selected: null,
+  question: null,
+  showNext: false,
+  setAnswer: (answerId: AnswerId) => set(({ completed, question }) => {
+    const set = new Set(completed);
+    const selected: QuizResponseDetails = {
+      question: question.id,
+      choice: answerId,
+      correct: answerId === question.id,
+    };
+    set.add(selected);
+    return { selected, completed: Array.from(set) }
+  }),
+  setQuestion: (question: QuestionDetails) => set({ question }),
+  setCompleted: (completed: QuizResponseDetails[]) => set({ completed: completed ?? [] }),
+
 }));
