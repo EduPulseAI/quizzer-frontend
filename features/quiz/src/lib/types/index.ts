@@ -9,6 +9,8 @@ export interface GetQuiz {
   showResult: boolean;
   questions: PositionalQuestion[];
   responses: QuizResponseDetails[];
+  score: number;
+  correct: number;
 }
 
 export type AnswerId = QuestionDetails['answerId'];
