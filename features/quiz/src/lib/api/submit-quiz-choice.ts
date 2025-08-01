@@ -23,7 +23,7 @@ export async function submitQuizChoice(
   try {
     const endpoint = `/api/quizzes/${options.quizId}`;
     const body: SubmitQuizChoiceRequest = {
-      optionId: options.selected.choice,
+      optionId: options.selected.option,
       questionId: options.selected.question,
     };
 

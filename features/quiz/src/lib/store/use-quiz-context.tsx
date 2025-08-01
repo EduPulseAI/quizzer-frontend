@@ -50,19 +50,17 @@ export default function QuizContextProvider({
     const set = new Set(completed);
     const selected: QuizResponseDetails = {
       question: question.id,
-      choice: answerId,
+      choice: '',
+      option: answerId,
       correct: answerId === question.answerId,
     };
     set.add(selected);
     setSelected(selected);
     setCompleted(Array.from(set))
-  
-    const { isError, data: res, error } = await submitQuizChoice({ quizId: data.id, selected });
+    const { isError, error } = await submitQuizChoice({ quizId: data.id, selected });
     
     if (isError) {
       toast.error(<ErrorComponent error={error} />)
-    } else {
-      toast.info("Saved answer " + position)
     }
     
     setTimeout(() => setShowNext(true), 2000)
@@ -74,9 +72,9 @@ export default function QuizContextProvider({
       setQuestion(null);
       setSelected(null);
       setShowNext(false);
+    } else {
+      router.refresh();
     }
-
-    router.refresh();
   }
 
 
@@ -100,7 +98,6 @@ export default function QuizContextProvider({
         const previousAnswer = completed.find(
           (a) => a.question === question?.id
         );
-
         if (previousAnswer) {
           setSelected(previousAnswer);
           setShowNext(true);

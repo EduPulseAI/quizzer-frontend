@@ -65,7 +65,8 @@ export interface CreateQuizRequest {
  */
 export interface QuizResponseDetails {
   question: number;
-  choice: number;
+  choice: string;
+  option: number;
   correct: boolean;
 }
 
