@@ -1,8 +1,9 @@
 import { QuizHeader } from '@feature/quiz/components/quiz-header';
-import { QuizLoader } from '@feature/quiz/components/quiz-loader';
 import { QuizOptionFeedback } from '@feature/quiz/components/quiz-option-feedback';
 import { QuizOptions } from '@feature/quiz/components/quiz-options';
+import { QuizResults } from '@feature/quiz/components/quiz-results';
 import { getQuiz } from '@feature/quiz/lib/api/get-quiz';
+import QuizContextProvider from '@feature/quiz/lib/store/use-quiz-context';
 
 import React from 'react';
 
@@ -18,15 +19,19 @@ export async function QuizPage({ params }: Props) {
     console.error(error);
   }
 
-  const { total, topic } = data;
+  const { total, topic, showResult } = data;
 
   return (
     <div className="bg-white rounded-2xl shadow-xl p-8 max-w-2xl mx-auto">
-      <QuizLoader data={data} >
-        <QuizHeader total={total} topic={topic} />
-        <QuizOptions />
-        <QuizOptionFeedback total={total} />
-      </QuizLoader>
+      {showResult ? (
+        <QuizResults data={data} />
+      ) : (
+        <QuizContextProvider data={data}>
+          <QuizHeader total={total} topic={topic} />
+          <QuizOptions />
+          <QuizOptionFeedback total={total} />
+        </QuizContextProvider>
+      )}
     </div>
   );
 }

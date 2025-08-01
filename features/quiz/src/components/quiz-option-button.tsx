@@ -1,6 +1,6 @@
 'use client';
 
-import { useQuizQuestionStore } from '../lib/store/use-quiz-question-store';
+import { useQuiz } from '../lib/store/use-quiz-context';
 import { QuestionDetails, QuestionOption } from '../lib/types/index';
 
 interface Props {
@@ -10,7 +10,7 @@ interface Props {
 }
 
 export function QuizOptionButton({ option, index, question }: Props) {
-  const { selected, setAnswer } = useQuizQuestionStore();
+  const { selected, setAnswer } = useQuiz();
 
   const handleAnswerSelect = (id: number) => {
     setAnswer(id);
@@ -24,7 +24,7 @@ export function QuizOptionButton({ option, index, question }: Props) {
       'border-gray-200 hover:border-purple-300 hover:bg-purple-50 bg-white';
   } else if (option.id === question.answerId) {
     buttonClass += 'border-green-500 bg-green-100 text-green-800';
-  } else if (index === selected) {
+  } else if (option.id === selected.choice) {
     buttonClass += 'border-red-500 bg-red-100 text-red-800';
   } else {
     buttonClass += 'border-gray-200 bg-gray-50 text-gray-500';
@@ -45,7 +45,7 @@ export function QuizOptionButton({ option, index, question }: Props) {
         {selected !== null && option.id === question.answerId && (
           <span className="ml-auto text-green-600">✓</span>
         )}
-        {selected === option.id && option.id !== question.answerId && (
+        {selected && selected.choice === option.id && option.id !== question.answerId && (
           <span className="ml-auto text-red-600">✗</span>
         )}
       </div>

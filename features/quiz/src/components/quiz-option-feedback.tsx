@@ -1,7 +1,7 @@
 'use client';
 
+import { useQuiz } from '../lib/store/use-quiz-context';
 import { Button } from '@feature/ui/components/button';
-import { useQuizQuestionStore } from '../lib/store/use-quiz-question-store';
 import { ReactNode } from 'react';
 
 interface Props {
@@ -10,17 +10,11 @@ interface Props {
 }
 
 export function QuizOptionFeedback({ total }: Props) {
-  const { selected, question, position, showNext, proceed } = useQuizQuestionStore();
+  const { selected, proceed, showNext, question, position } = useQuiz();
 
   const correctOption = question && question.options.find(
     (o) => o.id === question.answerId
   );
-
-  const proceedToNext = () => {
-    if (position < total) {
-      proceed();
-    }
-  };
 
   if (selected === null) {
     return null;
@@ -52,7 +46,7 @@ export function QuizOptionFeedback({ total }: Props) {
       {showNext && (
         <div className="text-center">
           <Button
-            onClick={proceedToNext}
+            onClick={proceed}
             className="bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white px-8 py-3 text-lg rounded-xl transition-all duration-300 transform hover:scale-105"
           >
             {position < total ? 'Next Question' : 'View Results'}

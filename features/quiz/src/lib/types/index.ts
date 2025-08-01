@@ -3,8 +3,10 @@
  * Tue Jul 29 2025
  */
 export interface GetQuiz {
+  id: number;
   topic: string;
   total: number;
+  showResult: boolean;
   questions: PositionalQuestion[];
   responses: QuizResponseDetails[];
 }

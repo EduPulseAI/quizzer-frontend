@@ -1,7 +1,7 @@
 'use client';
 
+import { useQuiz } from '../lib/store/use-quiz-context';
 import React, { useEffect, useState } from 'react';
-import { useQuizQuestionStore } from '../lib/store/use-quiz-question-store';
 
 interface Props {
   total: number;
@@ -9,7 +9,7 @@ interface Props {
 }
 
 export function QuizHeader({ total, topic }: Props) {
-  const { position, question } = useQuizQuestionStore();
+  const { position, question } = useQuiz();
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
@@ -45,7 +45,7 @@ export function QuizHeader({ total, topic }: Props) {
       </div>
 
       <h2 className="text-2xl font-bold text-gray-800 mb-8 leading-relaxed">
-        {question !== null ? question.question : ''}
+        {question !== null ? question.question : ""}
       </h2>
     </div>
   );
