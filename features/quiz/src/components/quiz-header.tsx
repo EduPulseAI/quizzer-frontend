@@ -14,7 +14,13 @@ export function QuizHeader({ total, topic }: Props) {
 
   useEffect(() => {
     function updateProgress() {
-      setProgress(Math.floor(((position - 1) / total) * 100));
+      if (position >= total) {
+        setProgress(100)
+      } else if (position <= 1) {
+        setProgress(0)
+      } else {
+        setProgress(Math.floor(((position - 1) / total) * 100));
+      }
     }
 
     updateProgress();

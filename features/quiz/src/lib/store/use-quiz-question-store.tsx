@@ -27,7 +27,7 @@ export const useQuizQuestionStore = create<IQuizQuestionStore>((set, get) => ({
     const selected: QuizResponseDetails = {
       question: question.id,
       choice: answerId,
-      correct: answerId === question.id,
+      correct: answerId === question.answerId,
     };
     set.add(selected);
     return { selected, completed: Array.from(set) }
