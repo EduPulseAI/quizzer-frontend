@@ -11,7 +11,7 @@ interface Props {
   params: Promise<{ quizId: string }>;
 }
 
-export async function QuizPage({ params }: Props) {
+async function QuizPage({ params }: Props) {
   const quizId = parseInt((await params).quizId);
   const { isError, data, error } = await getQuiz({ quizId });
 

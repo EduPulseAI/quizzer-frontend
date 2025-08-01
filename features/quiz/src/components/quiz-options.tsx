@@ -21,7 +21,7 @@ export function QuizOptions(props: Props) {
             'border-gray-200 hover:border-purple-300 hover:bg-purple-50 bg-white';
         } else if (option.id === question.answerId) {
           buttonClass += 'border-green-500 bg-green-100 text-green-800';
-        } else if (option.id === selected.choice) {
+        } else if (option.id === selected.option) {
           buttonClass += 'border-red-500 bg-red-100 text-red-800';
         } else {
           buttonClass += 'border-gray-200 bg-gray-50 text-gray-500';
@@ -45,7 +45,7 @@ export function QuizOptions(props: Props) {
                     <span className="ml-auto text-green-600">✓</span>
                   )}
 
-                  {selected.choice === option.id && !selected.correct && (
+                  {selected.option === option.id && !selected.correct && (
                     <span className="ml-auto text-red-600">✗</span>
                   )}
                 </>

@@ -3,7 +3,7 @@ import axios, { type AxiosError } from 'axios';
 
 export function handleError<T = unknown>(
   error: any,
-  data?: T
+  data: T
 ): BackendResponse<T> {
   let err: ErrorMessage;
   if (axios.isAxiosError(error)) {

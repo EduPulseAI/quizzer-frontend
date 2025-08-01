@@ -40,7 +40,7 @@ export default function QuizContextProvider({
 }: QuizContextProviderProps) {
   const [position, setPosition] = useState(1);
   const [completed, setCompleted] = useState<QuizResponseDetails[]>(data.responses);
-  const [question, setQuestion] = useState<QuestionDetails>(data.questions[0].question);
+  const [question, setQuestion] = useState<QuestionDetails | null>(data.questions[0].question);
   const [selected, setSelected] = useState<QuizResponseDetails | null>(null);
   const [showNext, setShowNext] = useState(false);
 
@@ -49,10 +49,10 @@ export default function QuizContextProvider({
   async function selectChoice(answerId: AnswerId) {
     const set = new Set(completed);
     const selected: QuizResponseDetails = {
-      question: question.id,
+      question: question !==  null ? question.id : -1,
       choice: '',
       option: answerId,
-      correct: answerId === question.answerId,
+      correct: answerId === question?.answerId,
     };
     set.add(selected);
     setSelected(selected);
