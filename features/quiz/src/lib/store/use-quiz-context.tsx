@@ -50,39 +50,34 @@ export default function QuizContextProvider({
   const router = useRouter()
 
   async function selectChoice(answerId: AnswerId) {
-    const set = new Set(completed);
     const selected: QuizResponseDetails = {
       question: question !==  null ? question.id : -1,
-      choice: '',
+      choice: question.options.find((o) => o.id === answerId)?.value || "",
       option: answerId,
       correct: answerId === question?.answerId,
     };
 
-    set.add(selected);
-    setCompleted(Array.from(set))
     setSelected(selected);
 
-    const { isError, error, data: quizChoice } = await submitQuizChoice({ quizId: data.id, selected });
 
-    if (isError) {
-      toast.error(error.message)
-      return;
-    }
-
-    const timeSpentMs = Date.now() - startTime;
-
-    await submitAnswer({
+    const { success, message } = await submitAnswer({
       sessionId: String(data.id),
       studentId: "anonymous",
       questionId: String(selected.question),
-      answer: (question.options.find(
-        (o) => o.id === selected.option
-      ).value),
-      timeSpentMs
+      answerId: String(selected.option),
+      timeSpentMs: Date.now() - startTime,
+      skillTag: data.topic
     })
 
-    setShowNext(true)
-    // setTimeout(() => setShowNext(true), 2000)
+    if (success) {
+      const set = new Set(completed);
+      set.add(selected);
+      setCompleted(Array.from(set))
+      setTimeout(() => setShowNext(true), 2000)
+    } else {
+      toast.info(message);
+    }
+
   }
 
   function proceed() {

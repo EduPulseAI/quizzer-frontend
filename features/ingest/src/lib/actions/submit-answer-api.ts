@@ -13,11 +13,14 @@ const schema = z.object({
     .string(),
   questionId: z
     .string(),
-  answer: z
+  answerId: z
+    .string(),
+  skillTag: z
     .string(),
   timeSpentMs: z
     .number()
 });
+
 export type SubmitAnswerRequest = z.infer<typeof schema>;
 
 export interface SubmitAnswerResponse {
