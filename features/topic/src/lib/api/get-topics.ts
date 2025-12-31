@@ -17,7 +17,7 @@ export async function getTopics(
 
     const { data } = await api.get<GetTopicsResponse>(endpoint);
 
-    return { data: data.items };
+    return { data: data.content };
   } catch (error) {
     return handleError<GetTopics>(error, GET_TOPICS);
   }

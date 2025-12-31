@@ -11,11 +11,11 @@ export const api = axios.create({
 
 api.interceptors.request.use(
   async (config) => {
-    const session = await auth();
-
-    if (session?.user && 'jwtToken' in session.user) {
-      config.headers['Authorization'] = session.user.jwtToken as string;
-    }
+    // const session = await auth();
+    //
+    // if (session?.user && 'jwtToken' in session.user) {
+    //   config.headers['Authorization'] = session.user.jwtToken as string;
+    // }
 
     return config;
   },

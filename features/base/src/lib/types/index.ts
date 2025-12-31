@@ -6,5 +6,5 @@ export interface PageList<T> {
   page: number;
   pageSize: number;
   totalPages: number;
-  items: T[];
+  content: T[];
 }

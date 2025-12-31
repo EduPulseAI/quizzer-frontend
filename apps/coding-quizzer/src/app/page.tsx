@@ -8,7 +8,7 @@ export default async function Index() {
   const { isError, data, error } = await getTopics();
 
   if (isError) {
-    console.error(error);
+    console.error("Error loading topics", error);
   }
 
   return (
