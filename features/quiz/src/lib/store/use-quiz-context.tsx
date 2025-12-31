@@ -57,12 +57,14 @@ export default function QuizContextProvider({
     set.add(selected);
     setSelected(selected);
     setCompleted(Array.from(set))
-    const { isError, error } = await submitQuizChoice({ quizId: data.id, selected });
+    const { isError, error, data: quizChoice } = await submitQuizChoice({ quizId: data.id, selected });
     
     if (isError) {
       toast.error(<ErrorComponent error={error} />)
     }
-    
+
+
+
     setTimeout(() => setShowNext(true), 2000)
   }
 

@@ -31,9 +31,9 @@ export function TopicSelect({ topics }: Props) {
 
   return (
     <div className="space-y-4">
-      <Select onValueChange={startQuiz}>
+      <Select onValueChange={startQuiz} disabled={topics.length === 0}>
         <SelectTrigger className="w-full h-14 text-lg border-2 border-gray-200 hover:border-purple-300 transition-colors">
-          <SelectValue placeholder="Select a quiz topic..." />
+          <SelectValue placeholder={topics.length === 0 ? "No topics" : "Select a quiz topic..."} />
         </SelectTrigger>
         <SelectContent>
           {topics.map((topic) => (

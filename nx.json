@@ -90,5 +90,6 @@
         "projectName": "quiz"
       }
     }
-  }
+  },
+  "plugins": []
 }

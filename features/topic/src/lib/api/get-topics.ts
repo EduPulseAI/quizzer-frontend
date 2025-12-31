@@ -13,10 +13,9 @@ export async function getTopics(
 ): Promise<BackendResponse<GetTopics>> {
   try {
     const params: URLSearchParams = new URLSearchParams();
-    const endpoint = `/api/topics?${params.toString()}`;
+    const endpoint = "/api/topics?" + params.toString();
 
     const { data } = await api.get<GetTopicsResponse>(endpoint);
-
     return { data: data.content };
   } catch (error) {
     return handleError<GetTopics>(error, GET_TOPICS);
