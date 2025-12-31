@@ -27,7 +27,11 @@
       "@feature/topic/server": ["features/topic/src/server.ts"],
       "@feature/ui": ["features/ui/src/index.ts"],
       "@feature/ui/*": ["features/ui/src/*"],
-      "@feature/ui/server": ["features/ui/src/server.ts"]
+      "@feature/ui/server": ["features/ui/src/server.ts"],
+      "@feature/ingest": ["features/ingest/src/index.ts"],
+      "@feature/ingest/*": ["features/ingest/src/*"],
+      "@edupulse/client": ["clients/client/src/index.ts"],
+      "@edupulse/client/*": ["clients/client/src/*"]
     }
   },
   "exclude": ["node_modules", "tmp"]

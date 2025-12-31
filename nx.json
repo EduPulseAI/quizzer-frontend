@@ -66,7 +66,7 @@
     },
     "next-feature": {
       "axios": {
-        "projectName": "base"
+        "appProjectName": "coding-quizzer"
       },
       "auth": {
         "projectName": "base"
@@ -88,6 +88,15 @@
       },
       "store": {
         "projectName": "quiz"
+      },
+      "feature": {
+        "orgName": "edupulse"
+      },
+      "action": {},
+      "constant": {},
+      "data-type": {},
+      "client": {
+        "orgName": "edupulse"
       }
     }
   },

@@ -15,8 +15,10 @@ import {
   GetQuiz,
   type QuestionDetails,
   type QuizResponseDetails,
-} from '../types/index';
+} from '../types';
 import { toast } from 'sonner';
+import { submitAnswer } from "@feature/ingest";
+
 
 type QuizContextProviderProps = {
   data: GetQuiz;
@@ -43,6 +45,7 @@ export default function QuizContextProvider({
   const [question, setQuestion] = useState<QuestionDetails | null>(data.questions[0].question);
   const [selected, setSelected] = useState<QuizResponseDetails | null>(null);
   const [showNext, setShowNext] = useState(false);
+  const [startTime, setStartTime] = useState(Date.now())
 
   const router = useRouter()
 
@@ -54,18 +57,32 @@ export default function QuizContextProvider({
       option: answerId,
       correct: answerId === question?.answerId,
     };
+
     set.add(selected);
-    setSelected(selected);
     setCompleted(Array.from(set))
+    setSelected(selected);
+
     const { isError, error, data: quizChoice } = await submitQuizChoice({ quizId: data.id, selected });
-    
+
     if (isError) {
-      toast.error(<ErrorComponent error={error} />)
+      toast.error(error.message)
+      return;
     }
 
+    const timeSpentMs = Date.now() - startTime;
 
+    await submitAnswer({
+      sessionId: String(data.id),
+      studentId: "anonymous",
+      questionId: String(selected.question),
+      answer: (question.options.find(
+        (o) => o.id === selected.option
+      ).value),
+      timeSpentMs
+    })
 
-    setTimeout(() => setShowNext(true), 2000)
+    setShowNext(true)
+    // setTimeout(() => setShowNext(true), 2000)
   }
 
   function proceed() {
@@ -74,6 +91,7 @@ export default function QuizContextProvider({
       setQuestion(null);
       setSelected(null);
       setShowNext(false);
+      setStartTime(Date.now());
     } else {
       router.refresh();
     }
