@@ -1,27 +1,14 @@
 'use client';
 
-import { ErrorComponent } from '@feature/ui/components/error-component';
 import { useRouter } from 'next/navigation';
-import {
-  createContext,
-  type ReactNode,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
-import { submitQuizChoice } from '../api/submit-quiz-choice';
-import {
-  type AnswerId,
-  GetQuiz,
-  type QuestionDetails,
-  type QuizResponseDetails,
-} from '../types';
+import { createContext, type ReactNode, useContext, useEffect, useState, } from 'react';
+import { type AnswerId, GetQuiz, type QuestionDetails, type QuizResponseDetails, } from '../types';
 import { toast } from 'sonner';
 import { submitAnswer } from "@feature/ingest";
 
 
 type QuizContextProviderProps = {
-  data: GetQuiz;
+  quiz: GetQuiz;
   children: ReactNode;
 };
 
@@ -37,12 +24,12 @@ type QuizContextType = {
 const QuizContext = createContext<QuizContextType | null>(null);
 
 export default function QuizContextProvider({
-  data,
+  quiz,
   children,
 }: QuizContextProviderProps) {
   const [position, setPosition] = useState(1);
-  const [completed, setCompleted] = useState<QuizResponseDetails[]>(data.responses);
-  const [question, setQuestion] = useState<QuestionDetails | null>(data.questions[0].question);
+  const [completed, setCompleted] = useState<QuizResponseDetails[]>(quiz.responses);
+  const [question, setQuestion] = useState<QuestionDetails | null>(quiz.questions[0].question);
   const [selected, setSelected] = useState<QuizResponseDetails | null>(null);
   const [showNext, setShowNext] = useState(false);
   const [startTime, setStartTime] = useState(Date.now())
@@ -50,26 +37,30 @@ export default function QuizContextProvider({
   const router = useRouter()
 
   async function selectChoice(answerId: AnswerId) {
+    if (question === null) {
+      throw new Error("No question set");
+    }
+
     const selected: QuizResponseDetails = {
-      question: question !==  null ? question.id : -1,
+      question: question.id,
       choice: question.options.find((o) => o.id === answerId)?.value || "",
       option: answerId,
-      correct: answerId === question?.answerId,
+      correct: answerId === question.answerId,
     };
 
     setSelected(selected);
 
 
-    const { success, message } = await submitAnswer({
-      sessionId: String(data.id),
+    const { success, message, data: answer } = await submitAnswer({
+      sessionId: String(quiz.id),
       studentId: "anonymous",
       questionId: String(selected.question),
       answerId: String(selected.option),
       timeSpentMs: Date.now() - startTime,
-      skillTag: data.topic
+      skillTag: quiz.topic
     })
 
-    if (success) {
+    if (success && answer.isCorrect) {
       const set = new Set(completed);
       set.add(selected);
       setCompleted(Array.from(set))
@@ -81,7 +72,7 @@ export default function QuizContextProvider({
   }
 
   function proceed() {
-    if (position < data.total) {
+    if (position < quiz.total) {
       setPosition(position + 1);
       setQuestion(null);
       setSelected(null);
@@ -95,7 +86,7 @@ export default function QuizContextProvider({
 
   useEffect(() => {
     function loadQuestion() {
-      const questionDetails = data.questions.find(
+      const questionDetails = quiz.questions.find(
         (q) => q.position === position
       );
       if (questionDetails) {
@@ -105,7 +96,7 @@ export default function QuizContextProvider({
 
     loadQuestion();
 
-  }, [position, data.questions, data.total, setQuestion]);
+  }, [position, quiz.questions, quiz.total, setQuestion]);
 
   useEffect(() => {
     function loadAnswer() {
@@ -129,7 +120,7 @@ export default function QuizContextProvider({
   return (
     <QuizContext.Provider
       value={{
-        ...data,
+        ...quiz,
         position,
         question,
         selected,
