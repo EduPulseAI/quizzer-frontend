@@ -26,7 +26,7 @@ async function QuizPage({ params }: Props) {
       {showResult ? (
         <QuizResults data={data} />
       ) : (
-        <QuizContextProvider data={data}>
+        <QuizContextProvider quiz={data}>
           <QuizHeader total={total} topic={topic} />
           <QuizOptions />
           <QuizOptionFeedback total={total} />
