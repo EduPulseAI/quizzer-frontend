@@ -5,24 +5,9 @@ import axios, {
   AxiosResponse,
   InternalAxiosRequestConfig,
 } from 'axios';
-import { ApiError, ProblemDetail } from './error';
+import { ApiError } from './error';
+import type { ApiClientConfig } from './types/client';
 
-/**
- * Configuration options for the API client
- */
-export interface ApiClientConfig {
-  baseURL: string;
-  timeout?: number;
-  enableRefreshToken?: boolean;
-  maxRetries?: number;
-  retryDelay?: number;
-  onAuthenticated?: (
-    config: InternalAxiosRequestConfig
-  ) => void | Promise<void>;
-  onUnauthorized?: () => void | Promise<void>;
-  onRefreshTokenExpired?: () => void | Promise<void>;
-  onRefreshToken?: () => string | Promise<string>;
-}
 
 /**
  * Pending request queue item
@@ -47,24 +32,12 @@ export class ApiClient {
       enableRefreshToken: true,
       maxRetries: 3,
       retryDelay: 1000,
-      onUnauthorized: async () => {
-        // Redirect to login page
-        if (typeof window !== 'undefined') {
-          window.location.href = '/login';
-        }
-      },
-      onRefreshTokenExpired: async () => {
-        console.error('Session expired. Please login again.');
-        if (typeof window !== 'undefined') {
-          window.location.href = '/login?expired=true';
-        }
-      },
+      onUnauthorized: async () => {},
+      onRefreshTokenExpired: async () => {},
       onAuthenticated: async (config) => {
-        console.log('Authenticated', config.data);
+        console.log('Authenticated', config.baseURL, config.url);
       },
-      onRefreshToken: async () => {
-        return '';
-      },
+      onRefreshToken: async () => (''),
       ...config,
     };
 

@@ -77,12 +77,6 @@
       "utils": {
         "projectName": "quiz"
       },
-      "api": {
-        "projectName": "quiz"
-      },
-      "types": {
-        "projectName": "quiz"
-      },
       "constants": {
         "projectName": "quiz"
       },
@@ -98,10 +92,16 @@
       "client": {
         "orgName": "edupulse"
       },
-      "clientConfig": {
+      "client-config": {
         "clientPackage": "@edupulse/client"
-      }
+      },
+      "utility": {}
     }
   },
-  "plugins": []
+  "plugins": [],
+  "release": {
+    "version": {
+      "preVersionCommand": "pnpm dlx nx run-many -t build"
+    }
+  }
 }

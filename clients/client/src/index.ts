@@ -25,6 +25,8 @@
 // Core API utilities
 export { ApiClient, type ApiClientConfig } from './lib/client';
 export { ApiError, ApiErrorBuilder, type ProblemDetail } from './lib/error';
+
 export * from './lib/types';
+export * from './lib/types/client';
 export * from './lib/utils/error';
 export * from './lib/utils/helper';

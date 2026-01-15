@@ -31,7 +31,13 @@
       "@feature/ingest": ["features/ingest/src/index.ts"],
       "@feature/ingest/*": ["features/ingest/src/*"],
       "@edupulse/client": ["clients/client/src/index.ts"],
-      "@edupulse/client/*": ["clients/client/src/*"]
+      "@edupulse/client/*": ["clients/client/src/*"],
+      "@edupulse/session": ["features/session/src/index.ts"],
+      "@edupulse/session/server": ["features/session/src/server.ts"],
+      "@edupulse/session/*": ["features/session/src/*"],
+      "@edupulse/question": ["features/question/src/index.ts"],
+      "@edupulse/question/server": ["features/question/src/server.ts"],
+      "@edupulse/question/*": ["features/question/src/*"]
     }
   },
   "exclude": ["node_modules", "tmp"]

@@ -1,13 +1,9 @@
-import NextAuth from 'next-auth';
 import type { NextAuthResult, Session, User } from 'next-auth';
+import NextAuth from 'next-auth';
 import type { JWT } from 'next-auth/jwt';
 import CredentialsProvider from 'next-auth/providers/credentials';
-import { z } from 'zod';
-import api from '../axios';
-import type { LoginResponse } from '../axios/types';
 import { authConfig } from './auth.config';
-
-const VERCEL_DEPLOYMENT = !!process.env.VERCEL_URL;
+import { DEMO_MODE } from "../config";
 
 const nextAuthResult = NextAuth({
   ...authConfig,
@@ -19,34 +15,16 @@ const nextAuthResult = NextAuth({
         password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials) {
-        try {
-          const parsedCredentials = z
-            .object({ email: z.string().email(), password: z.string().min(6) })
-            .safeParse(credentials);
-
-          if (parsedCredentials.success) {
-            const { data } = await api.post<LoginResponse>(
-              `/api/users/login`,
-              parsedCredentials.data
-            );
-
-            if (data.accessToken) {
-              const user = {
-                id: String(data.id),
-                email: data.email,
-                role: data.role,
-                jwtToken: data.accessToken,
-              };
-
-              return user;
-            }
+        if (DEMO_MODE) {
+          const demoUser: User = {
+            id: crypto.randomUUID(),
+            email: credentials.email as string,
+            name: "Mike 0xlong"
           }
-        } catch (error) {
-          console.error(error);
+          return demoUser;
         }
-
         return null;
-      },
+      }
     }),
   ],
   callbacks: {
