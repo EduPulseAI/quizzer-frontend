@@ -1,0 +1,50 @@
+import { ApiClient, type ApiResponse, ApiError } from '@edupulse/client'
+import { BACKEND_API_URL } from '.';
+/**
+ * Centralized API client configuration
+ *
+ * This file provides a single point to configure:
+ * - Base API URL
+ * - Request/response interceptors
+ * - Default headers
+ * - Authentication handling
+ */
+
+const apiClient = new ApiClient({
+  baseURL: BACKEND_API_URL,
+  enableRefreshToken: false,
+  // timeout: 30000,
+  // maxRetries: 3,
+  // retryDelay: 1000
+});
+
+// includeInterceptors
+/**
+ * Example: Add custom request interceptor
+ */
+// apiClient.interceptors.request.use((config) => {
+//   // Add custom headers, auth tokens, etc.
+//   return config;
+// });
+
+/**
+ * Example: Add custom response interceptor
+ */
+// apiClient.interceptors.response.use(
+//   (response) => response,
+//   (error) => {
+//     // Handle errors globally
+//     return Promise.reject(error);
+//   }
+// );
+
+// Re-export commonly used utilities
+export { ApiError, type ApiResponse };
+export {
+  getErrorMessage,
+  formatProblemDetail,
+  extractValidationErrors,
+} from '@edupulse/client';
+
+// Export configured API client for use in server actions
+export default apiClient;
