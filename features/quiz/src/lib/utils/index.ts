@@ -7,11 +7,11 @@ import { GetQuiz, GetQuizResponse } from '../types';
 export function getQuizMapper(r: GetQuizResponse): GetQuiz {
 
   const correct = r.responses.reduce((sum, curr) => {
-    if (curr.correct) {
-      return sum + 1;
-    }
-    return sum
+    return sum + (curr.correct ? 1 : 0)
   }, 0)
+
+  const uniqueResponses = new Set(r.responses.map(r => r.questionId)).size;
+
   const score = correct / r.questions.length
   return {
     correct,
@@ -21,6 +21,6 @@ export function getQuizMapper(r: GetQuizResponse): GetQuiz {
     questions: r.questions,
     topic: r.topic,
     total: r.questions.length,
-    showResult: r.responses.length === r.questions.length
+    showResult: uniqueResponses === r.questions.length
   };
 }

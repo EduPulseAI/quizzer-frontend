@@ -66,10 +66,12 @@ export interface CreateQuizRequest {
  * Wed Jul 30 2025
  */
 export interface QuizResponseDetails {
-  question: number;
+  questionId: number;
   choice: string;
-  option: number;
+  optionId: number;
   correct: boolean;
+  attempt: number;
+  createdAt: Date;
 }
 
 /**

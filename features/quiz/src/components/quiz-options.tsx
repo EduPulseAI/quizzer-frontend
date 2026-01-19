@@ -21,7 +21,7 @@ export function QuizOptions(props: Props) {
             'border-gray-200 hover:border-purple-300 hover:bg-purple-50 bg-white';
         } else if (option.id === question.answerId) {
           buttonClass += 'border-green-500 bg-green-100 text-green-800';
-        } else if (option.id === selected.option) {
+        } else if (option.id === selected.optionId) {
           buttonClass += 'border-red-500 bg-red-100 text-red-800';
         } else {
           buttonClass += 'border-gray-200 bg-gray-50 text-gray-500';
@@ -31,7 +31,7 @@ export function QuizOptions(props: Props) {
           <button
             key={option.id}
             onClick={() => selectChoice(option.id)}
-            disabled={selected !== null}
+            disabled={selected && (selected.correct || selected.optionId === option.id)}
             className={buttonClass}
           >
             <div className="flex items-center gap-4">
@@ -39,13 +39,16 @@ export function QuizOptions(props: Props) {
                 {String.fromCharCode(65 + index)}
               </span>
               <span className="text-lg">{option.value}</span>
-              {selected !== null && (
+              {selected && selected.correct && (
                 <>
                   {option.id === question.answerId && (
                     <span className="ml-auto text-green-600">✓</span>
                   )}
-
-                  {selected.option === option.id && !selected.correct && (
+                </>
+              )}
+              {selected && !selected.correct && (
+                <>
+                  {selected.optionId === option.id && (
                     <span className="ml-auto text-red-600">✗</span>
                   )}
                 </>

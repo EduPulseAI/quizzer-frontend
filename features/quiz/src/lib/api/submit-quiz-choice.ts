@@ -13,7 +13,7 @@ import type {
 } from '../types';
 
 interface BackendRequestOptions {
-  selected: QuizResponseDetails;
+  selected: Pick<QuizResponseDetails, "optionId" | "questionId">;
   quizId: number;
 }
 
@@ -23,8 +23,8 @@ export async function submitQuizChoice(
   try {
     const endpoint = `/api/quizzes/${options.quizId}`;
     const body: SubmitQuizChoiceRequest = {
-      optionId: options.selected.option,
-      questionId: options.selected.question,
+      optionId: options.selected.optionId,
+      questionId: options.selected.questionId,
     };
 
     const parsed = z.object({

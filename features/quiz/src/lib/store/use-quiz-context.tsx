@@ -3,7 +3,6 @@
 import { useRouter } from 'next/navigation';
 import { createContext, type ReactNode, useContext, useEffect, useState, } from 'react';
 import { type AnswerId, GetQuiz, type QuestionDetails, type QuizResponseDetails, } from '../types';
-import { toast } from 'sonner';
 import { submitAnswer } from "@feature/ingest";
 
 
@@ -42,20 +41,21 @@ export default function QuizContextProvider({
     }
 
     const selected: QuizResponseDetails = {
-      question: question.id,
+      attempt: 0,
+      createdAt: new Date(),
+      questionId: question.id,
       choice: question.options.find((o) => o.id === answerId)?.value || "",
-      option: answerId,
-      correct: answerId === question.answerId,
+      optionId: answerId,
+      correct: answerId === question.answerId
     };
 
     setSelected(selected);
 
-
-    const { success, message, data: answer } = await submitAnswer({
+    const { success, data: answer } = await submitAnswer({
       sessionId: String(quiz.id),
       studentId: "anonymous",
-      questionId: String(selected.question),
-      answerId: String(selected.option),
+      questionId: String(selected.questionId),
+      answerId: String(selected.optionId),
       timeSpentMs: Date.now() - startTime,
       skillTag: quiz.topic
     })
@@ -66,12 +66,13 @@ export default function QuizContextProvider({
       setCompleted(Array.from(set))
       setTimeout(() => setShowNext(true), 2000)
     } else {
-      toast.info(message);
+      // toast.info(message);
     }
 
   }
 
   function proceed() {
+    console.log({ position, quiz })
     if (position < quiz.total) {
       setPosition(position + 1);
       setQuestion(null);
@@ -102,7 +103,7 @@ export default function QuizContextProvider({
     function loadAnswer() {
       if (selected === null) {
         const previousAnswer = completed.find(
-          (a) => a.question === question?.id
+          (a) => a.questionId === question?.id
         );
         if (previousAnswer) {
           setSelected(previousAnswer);
@@ -114,7 +115,6 @@ export default function QuizContextProvider({
     loadAnswer();
 
   }, [completed, question?.id, selected]);
-
 
 
   return (
