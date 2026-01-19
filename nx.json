@@ -93,7 +93,7 @@
         "orgName": "edupulse"
       },
       "client-config": {
-        "clientPackage": "@edupulse/client"
+        "clientPackage": "@edupulse/api-client"
       },
       "utility": {}
     }

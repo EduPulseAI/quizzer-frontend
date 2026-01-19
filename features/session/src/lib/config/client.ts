@@ -1,4 +1,4 @@
-import { ApiClient, type ApiResponse, ApiError } from '@edupulse/client'
+import { ApiClient, type ApiResponse, ApiError } from '@edupulse/api-client'
 import { BACKEND_API_URL } from '.';
 /**
  * Centralized API client configuration
@@ -40,11 +40,6 @@ const apiClient = new ApiClient({
 
 // Re-export commonly used utilities
 export { ApiError, type ApiResponse };
-export {
-  getErrorMessage,
-  formatProblemDetail,
-  extractValidationErrors,
-} from '@edupulse/client';
 
 // Export configured API client for use in server actions
 export default apiClient;

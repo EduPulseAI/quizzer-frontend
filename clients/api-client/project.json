@@ -1,7 +1,7 @@
 {
-  "name": "client",
+  "name": "api-client",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "clients/client/src",
+  "sourceRoot": "clients/api-client/src",
   "projectType": "library",
   "tags": [],
   "targets": {
@@ -13,7 +13,7 @@
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "outputPath": "dist/clients/client"
+        "outputPath": "dist/clients/api-client"
       },
       "configurations": {
         "development": {
@@ -28,8 +28,20 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "clients/client/jest.config.cts"
+        "jestConfig": "clients/api-client/jest.config.cts"
       }
+    },
+    "nx-release-publish": {
+      "options": {
+        "packageRoot": "dist/{projectRoot}"
+      }
+    }
+  },
+  "release": {
+    "version": {
+      "manifestRootsToUpdate": ["dist/{projectRoot}"],
+      "currentVersionResolver": "git-tag",
+      "fallbackCurrentVersionResolver": "disk"
     }
   }
 }
