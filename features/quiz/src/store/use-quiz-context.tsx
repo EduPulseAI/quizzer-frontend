@@ -2,8 +2,8 @@
 
 import { useRouter } from 'next/navigation';
 import { createContext, type ReactNode, useContext, useEffect, useState, } from 'react';
-import { type AnswerId, GetQuiz, type QuestionDetails, type QuizResponseDetails, } from '../types';
-import { submitAnswer } from "@feature/ingest";
+import type { AnswerId, GetQuiz, QuestionDetails, QuizResponseDetails } from '../lib/types';
+// import { submitAnswer } from "@feature/ingest";
 
 
 type QuizContextProviderProps = {

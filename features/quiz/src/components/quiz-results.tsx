@@ -1,8 +1,8 @@
 import { Button } from '@feature/ui/components/button';
 import { RotateCcw, Trophy } from 'lucide-react';
 import Link from 'next/link';
-import { GetQuiz } from '../lib/types/index';
 import { ReactNode } from 'react';
+import type { GetQuiz } from '../lib/types';
 
 interface Props {
   data: GetQuiz;

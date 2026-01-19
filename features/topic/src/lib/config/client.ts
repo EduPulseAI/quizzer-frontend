@@ -17,7 +17,7 @@ const apiClient = new ApiClient({
   async onAuthenticated(config: InternalAxiosRequestConfig) {
     console.log(
       '[topic-client]',
-      config.method.toUpperCase(),
+      config.method?.toUpperCase(),
       config.url,
       config.data
     );

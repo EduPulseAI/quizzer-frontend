@@ -8,7 +8,7 @@ import handleApiError from './utils/error';
 export class ApiError extends Error {
   constructor(
     public problemDetail: ProblemDetail,
-    public originalError?: Error
+    public originalError?: Error | null
   ) {
     super(
       problemDetail.detail ||

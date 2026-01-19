@@ -38,7 +38,9 @@ function extractProblemDetail(
  */
 export function handleAxiosError(e: AxiosError) {
   const builder = new ApiErrorBuilder(e);
-  builder.instance(e.config.url);
+  if (e && e.config) {
+    builder.instance(e.config.url || "");
+  }
 
   if (e.status) {
     builder.status(e.status);

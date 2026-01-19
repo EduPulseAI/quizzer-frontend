@@ -28,8 +28,6 @@
       "@feature/ui": ["features/ui/src/index.ts"],
       "@feature/ui/*": ["features/ui/src/*"],
       "@feature/ui/server": ["features/ui/src/server.ts"],
-      "@feature/ingest": ["features/ingest/src/index.ts"],
-      "@feature/ingest/*": ["features/ingest/src/*"],
       "@edupulse/session": ["features/session/src/index.ts"],
       "@edupulse/session/server": ["features/session/src/server.ts"],
       "@edupulse/session/*": ["features/session/src/*"],

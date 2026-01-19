@@ -40,7 +40,7 @@ export class ApiClient {
       onAuthenticated: async (config) => {
         console.log(
           '[api-client]',
-          config.method.toUpperCase(),
+          config.method?.toUpperCase(),
           config.url,
           config.data
         );
