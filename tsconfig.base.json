@@ -36,7 +36,10 @@
       "@edupulse/question/*": ["features/question/src/*"],
       "@edupulse/api-client": ["clients/api-client/src/index.ts"],
       "@edupulse/api-client/server": ["clients/api-client/src/server.ts"],
-      "@edupulse/api-client/*": ["clients/api-client/src/*"]
+      "@edupulse/api-client/*": ["clients/api-client/src/*"],
+      "@feature/auth": ["features/auth/src/index.ts"],
+      "@feature/auth/server": ["features/auth/src/server.ts"],
+      "@feature/auth/*": ["features/auth/src/*"]
     }
   },
   "exclude": ["node_modules", "tmp"]

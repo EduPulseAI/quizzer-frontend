@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 import { PROJECT_NAME } from "@feature/base";
-import { auth } from "@feature/base/lib/auth";
+import { auth, signIn } from "@feature/auth";
 import { DEMO_MODE } from "../lib/config";
 
 
@@ -10,6 +10,9 @@ interface Props {
 
 export async function HomeLayout(props: Props) {
   const session = await auth();
+  if (session === null || session.user === null) {
+    signIn("credentials", { email: "charlie" })
+  }
   return (
     <main className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-100 py-8 px-4">
       <div className="max-w-4xl mx-auto">

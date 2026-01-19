@@ -6,14 +6,18 @@ declare module 'next-auth' {
   }
 
   interface User extends DefaultUser {
-    role?: string;
+    id: string;
+    role: Role;
     jwtToken?: string;
+    refreshToken?: string;
+    expiration?: number;
   }
 }
 
 declare module 'next-auth/jwt' {
   interface JWT {
-    role: string;
     jwtToken: string;
+    expiration: number;
+    refreshToken: string;
   }
 }

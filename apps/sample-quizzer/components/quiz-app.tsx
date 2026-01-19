@@ -2,8 +2,8 @@
 
 import { useState } from "react"
 import { RotateCcw, Trophy, Target } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Button } from "@feature/ui/components/button"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@feature/ui/components/select"
 
 interface Question {
   question: string

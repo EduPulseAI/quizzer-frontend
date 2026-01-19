@@ -1,2 +1,2 @@
-import { handlers } from '@feature/base/lib/auth';
+import { handlers } from '@feature/auth';
 export const { GET, POST } = handlers;

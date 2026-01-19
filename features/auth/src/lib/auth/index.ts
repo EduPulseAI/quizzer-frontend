@@ -1,11 +1,11 @@
-import type { NextAuthResult, Session, User } from 'next-auth';
+import type { Session, User } from 'next-auth';
 import NextAuth from 'next-auth';
 import type { JWT } from 'next-auth/jwt';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { authConfig } from './auth.config';
-import { DEMO_MODE } from "../config";
+import { getDemoUser } from "../actions/get-demo-user-api";
 
-const nextAuthResult = NextAuth({
+export const { auth, handlers, signIn, signOut } = NextAuth({
   ...authConfig,
   providers: [
     CredentialsProvider({
@@ -15,23 +15,24 @@ const nextAuthResult = NextAuth({
         password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials) {
-        if (DEMO_MODE) {
-          const demoUser: User = {
-            id: crypto.randomUUID(),
-            email: credentials.email as string,
-            name: "Mike 0xlong"
-          }
-          return demoUser;
-        }
-        return null;
-      }
+        const { data, success } = await getDemoUser(credentials.email as string);
+
+        const user: User = {
+          id: data.id,
+          email: data.email,
+          name: data.name,
+          role: "student"
+        };
+        return user;
+      },
     }),
   ],
   callbacks: {
     async jwt({ token, user }) {
-      if (user && 'role' in user && 'jwtToken' in user) {
+      if (user) {
         token.role = user.role;
         token.jwtToken = user.jwtToken;
+        token.refreshToken = user.refreshToken;
       }
       return token;
     },
@@ -43,14 +44,12 @@ const nextAuthResult = NextAuth({
       token: JWT;
       user: User;
     }) {
-      if (
-        token &&
-        session.user &&
-        'role' in session.user &&
-        'jwtToken' in session.user
-      ) {
+      // console.log("SESSION-CALLBACK", { session, token, user })
+      if (token && session.user) {
+        session.user.id = token.sub as string;
         session.user.role = token.role as string;
         session.user.jwtToken = token.jwtToken as string;
+        session.user.refreshToken = token.refreshToken as string;
       }
       return session;
     },
@@ -64,8 +63,3 @@ const nextAuthResult = NextAuth({
     },
   },
 });
-
-export const auth: NextAuthResult['auth'] = nextAuthResult.auth;
-export const handlers: NextAuthResult['handlers'] = nextAuthResult.handlers;
-export const signIn: NextAuthResult['signIn'] = nextAuthResult.signIn;
-export const signOut: NextAuthResult['signOut'] = nextAuthResult.signOut;
