@@ -6,19 +6,20 @@ import { ReactNode } from "react";
 
 interface Props {
   topicId: string;
+  studentId: string;
   children: ReactNode;
 }
 
-export function SelectTopicButton({ topicId, children }: Props) {
+export function SelectTopicButton({ topicId, studentId, children }: Props) {
   return (
     <form>
       <button
         formAction={async () => {
           "use server"
-          const response = await startSession({ studentId: '', topicId });
+          const response = await startSession({ studentId, topicId });
           console.log("SelectTopicButton", response)
           if (response.success) {
-            redirect("/" + response.data.sessionId)
+            redirect("/session/" + response.data.sessionId)
           }
         }}
 

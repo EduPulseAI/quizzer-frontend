@@ -29,10 +29,10 @@ export class ApiClient {
     this.config = {
       timeout: 30000,
       enableRefreshToken: false,
-      maxRetries: 3,
+      maxRetries: 1,
       retryDelay: 1000,
       onUnauthorized: async () => {
-        console.log('Unauthorized');
+        console.log('[api-client] Unauthorized');
       },
       onRefreshTokenExpired: async () => {
         console.log('Refresh token expired');

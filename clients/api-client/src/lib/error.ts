@@ -18,6 +18,7 @@ export class ApiError extends Error {
     );
     this.name = 'ApiError';
     Object.setPrototypeOf(this, ApiError.prototype);
+    console.log("ApiError", problemDetail)
   }
 
   get status(): HttpStatusCode {
@@ -53,7 +54,6 @@ export class ApiError extends Error {
   }
 
   static of(error: Error | unknown): ApiError {
-    console.error('ApiError#of', error);
     return handleApiError(error);
   }
 }

@@ -1,4 +1,4 @@
-import { ApiClient, type ApiResponse, ApiError } from '@next-feature/client';
+import { ApiClient, type ApiResponse, ApiError } from '@edupulse/api-client';
 import type { InternalAxiosRequestConfig } from 'axios';
 import { BACKEND_API_URL } from '.';
 /**

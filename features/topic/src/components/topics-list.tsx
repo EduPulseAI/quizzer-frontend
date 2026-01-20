@@ -1,3 +1,4 @@
+import { auth, GET_DEMO_USER } from "@feature/auth"
 import { FileCode } from "lucide-react";
 import { ReactNode } from 'react';
 import type { Topic } from "../lib/types/topic";
@@ -8,7 +9,10 @@ interface Props {
   children?: ReactNode;
 }
 
-export function TopicsList({ topics }: Props) {
+export async function TopicsList({ topics }: Props) {
+  const session = await auth();
+  const studentId = session?.user?.id || GET_DEMO_USER.id
+
   console.log("TopicsList#topics", topics)
   if (topics.length === 0) {
     return (
@@ -29,6 +33,7 @@ export function TopicsList({ topics }: Props) {
           <SelectTopicButton
             key={topic.id}
             topicId={topic.id}
+            studentId={studentId}
           >
             <div className="flex items-center gap-4">
               <div>

@@ -8,7 +8,7 @@ export interface Question {
   text: String;
   difficulty: Difficulty;
   choices: AnswerChoice[];
-  tags: string[];
+  tag: string;
 }
 
 /**
