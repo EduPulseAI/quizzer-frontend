@@ -1,7 +1,7 @@
 {
   "name": "coding-quizzer",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/coding-quizzer",
+  "sourceRoot": "apps/coding-quizzer/src",
   "projectType": "application",
   "tags": [],
   "targets": {

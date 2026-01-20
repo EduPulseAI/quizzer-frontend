@@ -21,21 +21,19 @@ export const metadata = {
 };
 
 export default function RootLayout({
-  children,
+ children,
 }: {
   children: ReactNode;
 }) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <Providers>
-          <HomeLayout>
-            {children}
-          </HomeLayout>
-        </Providers>
-      </body>
+    <body
+      className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+    >
+    <Providers>
+      {children}
+    </Providers>
+    </body>
     </html>
   );
 }

@@ -1,6 +1,6 @@
 'use server';
 
-import { getQuizMapper } from '../utils/index';
+import { getQuizMapper } from '../utils';
 import type { GetQuiz, Quiz, GetQuizResponse } from '../types';
 import { GET_QUIZ } from '../constants';
 import api from '@feature/base/lib/axios';

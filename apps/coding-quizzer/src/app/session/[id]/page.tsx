@@ -4,6 +4,7 @@ import SessionOptions from '@edupulse/session/components/session-options';
 import SessionResults from '@edupulse/session/components/session-results';
 import { getSession } from "@edupulse/session/lib/actions/get-session-api";
 import SessionContextProvider from '@edupulse/session/stores/use-session-context';
+import { SessionMonitor } from "@edupulse/sse/components/session-monitor";
 
 
 interface Props {

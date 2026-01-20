@@ -2,6 +2,7 @@ import React, { ReactNode } from 'react';
 import { PROJECT_NAME } from "@feature/base";
 import { auth, signIn } from "@feature/auth";
 import { DEMO_MODE } from "../lib/config";
+import { Button } from "@feature/ui/components/button";
 
 
 interface Props {
@@ -10,9 +11,16 @@ interface Props {
 
 export async function HomeLayout(props: Props) {
   const session = await auth();
-  if (session === null || session.user === null) {
-    signIn("credentials", { email: "charlie" })
-  }
+
+  // async function handleSignIn() {
+  //   "use server"
+  //   const response = await signIn("credentials", { email: "Charlie" })
+  //   console.log("HomeLayout#handleSignIn", { response })
+  // }
+  //
+  // if (session === null || session.user === null) {
+  //   redirect("/login")
+  // }
   return (
     <main className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-100 py-8 px-4">
       <div className="max-w-4xl mx-auto">
@@ -22,12 +30,11 @@ export async function HomeLayout(props: Props) {
             Test your knowledge across different topics. Select a category and challenge yourself!
           </p>
           {DEMO_MODE && (
-            <button
+            <Button
               disabled={session != null}
-
             >
-            {session != null ? "DEMO MODE" : "Enable demo user"}
-          </button>)}
+            {session != null ? session.user?.name : "Enable demo user"}
+          </Button>)}
         </div>
         {props.children}
       </div>

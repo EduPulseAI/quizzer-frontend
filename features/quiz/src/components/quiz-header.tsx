@@ -1,6 +1,6 @@
 'use client';
 
-import { useQuiz } from '../lib/store/use-quiz-context';
+import { useQuiz } from '../stores/use-quiz-context';
 import React, { useEffect, useState } from 'react';
 
 interface Props {

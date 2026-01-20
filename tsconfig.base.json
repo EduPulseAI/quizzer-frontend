@@ -39,7 +39,10 @@
       "@edupulse/api-client/*": ["clients/api-client/src/*"],
       "@feature/auth": ["features/auth/src/index.ts"],
       "@feature/auth/server": ["features/auth/src/server.ts"],
-      "@feature/auth/*": ["features/auth/src/*"]
+      "@feature/auth/*": ["features/auth/src/*"],
+      "@edupulse/sse": ["features/sse/src/index.ts"],
+      "@edupulse/sse/server": ["features/sse/src/server.ts"],
+      "@edupulse/sse/*": ["features/sse/src/*"]
     }
   },
   "exclude": ["node_modules", "tmp"]
