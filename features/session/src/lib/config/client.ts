@@ -1,5 +1,6 @@
 import { ApiClient, type ApiResponse, ApiError } from '@edupulse/api-client'
 import { BACKEND_API_URL } from '.';
+import type { InternalAxiosRequestConfig } from "axios";
 /**
  * Centralized API client configuration
  *
@@ -13,6 +14,14 @@ import { BACKEND_API_URL } from '.';
 const apiClient = new ApiClient({
   baseURL: BACKEND_API_URL,
   enableRefreshToken: false,
+  async onAuthenticated(config: InternalAxiosRequestConfig) {
+    console.log(
+      '[session-client]',
+      config.method?.toUpperCase(),
+      config.url,
+      config.data
+    );
+  },
   // timeout: 30000,
   // maxRetries: 3,
   // retryDelay: 1000

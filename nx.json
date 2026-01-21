@@ -86,13 +86,13 @@
     },
     "next-feature": {
       "axios": {
-        "appProjectName": "coding-quizzer"
+        "appProjectName": "session-app"
       },
       "auth": {
         "projectName": "base"
       },
       "component": {
-        "projectName": "quiz"
+        "projectName": "session-app"
       },
       "utils": {
         "projectName": "quiz"

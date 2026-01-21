@@ -1,33 +1,37 @@
 'use client';
 
-import { useSession } from "../stores/use-session-context";
+import { useSessionStore } from '../stores/session-store';
 
-interface Props {
-}
+export function SessionHeader() {
+  const { currentQuestion } = useSessionStore();
 
-export function SessionHeader({ }: Props) {
-  const { question } = useSession();
+  if (!currentQuestion) {
+    return (
+      <div className="mb-8">
+        <div className="animate-pulse space-y-4">
+          <div className="flex justify-between items-center">
+            <div className="h-6 w-24 bg-gray-200 rounded-full" />
+            <div className="h-4 w-32 bg-gray-200 rounded" />
+          </div>
+          <div className="h-8 w-3/4 bg-gray-200 rounded" />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="mb-8">
       <div className="flex justify-between items-center mb-4">
         <span className="text-sm font-medium text-purple-600 bg-purple-100 px-3 py-1 rounded-full">
-          {question.tag}
+          {currentQuestion.tag}
         </span>
         <span className="text-sm text-gray-500">
-          Question difficulty {question.difficulty}
+          Difficulty: {currentQuestion.difficulty}
         </span>
       </div>
 
-      <div className="w-full bg-gray-200 rounded-full h-2 mb-6">
-        <div
-          className="bg-gradient-to-r from-purple-500 to-blue-500 h-2 rounded-full transition-all duration-500 ease-out"
-          // style={{ width: `${"progress"}%` }}
-        ></div>
-      </div>
-
-      <h2 className="text-2xl font-bold text-gray-800 mb-8 leading-relaxed">
-        {question.text}
+      <h2 className="text-2xl font-bold text-gray-800 leading-relaxed">
+        {currentQuestion.text}
       </h2>
     </div>
   );

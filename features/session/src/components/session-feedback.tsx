@@ -1,55 +1,70 @@
 'use client';
 
-import { ReactNode } from 'react';
-import { useSession } from "../stores/use-session-context";
-import { Button } from "@feature/ui/components/button"
+import { Button } from '@feature/ui/components/button';
+import { useSessionStore } from '../stores/session-store';
+import { useNextQuestion } from '../hooks/use-next-question';
 
-interface Props {
-  data?: unknown;
-  children?: ReactNode;
-}
+export function SessionFeedback() {
+  const { feedback, currentQuestion, proceedToNext } = useSessionStore();
+  const { nextQuestion, isLoading } = useNextQuestion();
 
-export function SessionFeedback(props: Props) {
-  const { choice, showNext, question, proceed } = useSession();
-
-  const correctOption = question && question.choices.find(
-    (o) => o.isCorrect
-  );
-
-  if (choice === null) {
+  if (!feedback) {
     return null;
   }
+
+  const canProceed = feedback.isCorrect && nextQuestion !== null;
+
+  const handleProceed = () => {
+    if (canProceed) {
+      proceedToNext(nextQuestion);
+    }
+  };
+
   return (
     <div className="mt-6 space-y-4">
-      <div className="p-4 rounded-xl bg-gray-50 border-l-4 border-purple-500">
-        <p className="text-sm text-gray-600">
-          {choice && choice.isCorrect ? (
-            <span className="text-green-600 font-medium">
-              <span role="img" aria-label={'correct'}>
-                🎉
-              </span>
-              {' '}Correct! Well done!
+      <div
+        className={`p-4 rounded-xl border-l-4 ${
+          feedback.isCorrect
+            ? 'bg-green-50 border-green-500'
+            : 'bg-red-50 border-red-500'
+        }`}
+      >
+        <p className="text-sm">
+          {feedback.isCorrect ? (
+            <span className="text-green-700 font-medium">
+              Correct! {currentQuestion?.explanation}
             </span>
           ) : (
-            <span className="text-red-600 font-medium">
-              <span role="img" aria-label={'incorrect'}>
-                ❌
-              </span>
-              {' '}Incorrect. The correct answer is:{' '}
-              <strong>{correctOption && correctOption.value}</strong>
+            <span className="text-red-700 font-medium">
+              Incorrect. Try again!
             </span>
           )}
         </p>
+        {feedback.attemptNumber > 1 && (
+          <p className="text-xs text-gray-500 mt-1">
+            Attempt {feedback.attemptNumber}
+          </p>
+        )}
       </div>
 
-      {showNext && (
+      {feedback.isCorrect && (
         <div className="text-center">
           <Button
-            onClick={proceed}
-            className="bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white px-8 py-3 text-lg rounded-xl transition-all duration-300 transform hover:scale-105"
+            disabled={!canProceed || isLoading}
+            onClick={handleProceed}
+            className="bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white px-8 py-3 text-lg rounded-xl transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            Next Question
-            <span className="ml-2">→</span>
+            {isLoading ? (
+              <>
+                <span className="animate-spin inline-block h-4 w-4 border-2 border-white border-t-transparent rounded-full mr-2" />
+                Loading...
+              </>
+            ) : (
+              <>
+                Next Question
+                <span className="ml-2">→</span>
+              </>
+            )}
           </Button>
         </div>
       )}

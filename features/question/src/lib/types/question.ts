@@ -9,6 +9,7 @@ export interface Question {
   difficulty: Difficulty;
   choices: AnswerChoice[];
   tag: string;
+  explanation: string;
 }
 
 /**

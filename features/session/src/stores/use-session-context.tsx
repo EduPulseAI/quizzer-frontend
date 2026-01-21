@@ -1,10 +1,15 @@
 'use client';
 
-import { useEffect, useState, createContext, useContext } from 'react';
-import type { Session } from "../lib/types/session";
+/**
+ * @deprecated This context is deprecated. Use useSessionStore from './session-store' instead.
+ * This file is kept for backward compatibility and will be removed in a future version.
+ */
+
 import type { AnswerChoice, Question } from "@edupulse/question/lib/types/question";
-import { submitAnswer } from "../lib/actions/submit-answer-api";
+import { createContext, useContext, useState } from 'react';
 import { getNextQuestion } from "../lib/actions/get-next-question-api";
+import { submitAnswer } from "../lib/actions/submit-answer-api";
+import type { Session } from "../lib/types/session";
 
 
 type SessionContextProviderProps = {
@@ -24,48 +29,52 @@ const SessionContext = createContext<SessionContextType | null>(null);
 
 export default function SessionContextProvider({
   children,
-  session
+  session: initialSession
 }: SessionContextProviderProps) {
-  const [question, setQuestion] = useState<Question>(session.currentQuestion)
+  const [session, setSession] = useState<Session>(initialSession);
+  const [nextQuestion, setNextQuestion] = useState<Question | null>(null);
   const [choice, setChoice] = useState<AnswerChoice | null>(null);
-  const [startTime, setStartTime] = useState(Date.now());
-  const [showNext, setShowNext] = useState(false)
+
+  async function handleNextQuestion() {
+    const { success, data, error } = await getNextQuestion(session);
+    if (success) {
+      setNextQuestion(data);
+    } else {
+      console.log("SessionContextProvider#handleNextQuestion", error);
+    }
+  }
 
   async function selectChoice(choice: AnswerChoice) {
-    if (question === null) {
+    if (session.currentQuestion === null) {
       throw new Error("No question set");
     }
 
     setChoice(choice);
 
-    const { success, data, error } = await submitAnswer({
-      session,
-      answerId: choice.choiceId,
-      startTime
-    })
+    const { success, data } = await submitAnswer({ session, choice })
 
     if (success && data.isCorrect) {
-      proceed();
+      await handleNextQuestion();
     }
 
   }
 
-  async function proceed() {
-    const { success, data } = await getNextQuestion(session);
-    if (success) {
-      setQuestion(data);
-      setChoice(null);
-      setStartTime(Date.now());
-    }
+  function proceed() {
+    setSession(prevState => ({
+      ...prevState,
+      currentQuestion: nextQuestion
+    }))
+    setChoice(null);
+    setNextQuestion(null);
   }
 
   return (
     <SessionContext.Provider
       value={{
-        question,
+        question: session.currentQuestion,
         choice,
         selectChoice,
-        showNext,
+        showNext: nextQuestion !== null,
         proceed
       }}
     >

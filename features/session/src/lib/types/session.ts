@@ -14,3 +14,16 @@ export interface Session {
   currentDifficulty: Difficulty,
   status: SessionStatus
 }
+
+export interface SessionProgress {
+  currentIndex: number;
+  totalQuestions: number;
+  correctAnswers: number;
+}
+
+export interface AnswerFeedback {
+  isCorrect: boolean;
+  explanation: string;
+  attemptNumber: number;
+  correctAnswer?: string;
+}

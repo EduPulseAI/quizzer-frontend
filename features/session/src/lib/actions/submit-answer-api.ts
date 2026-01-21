@@ -5,19 +5,14 @@ import { z } from 'zod';
 
 import api from '../config/client';
 import { SUBMIT_ANSWER } from '../constants/answer';
-import { Session } from "../types/session";
+import type { Session } from "../types/session";
+import type { AnswerChoice, Question } from "@edupulse/question/lib/types/question";
 
 const schema = z.object({
   sessionId: z
     .string(),
-  studentId: z
-    .string(),
-  questionId: z
-    .string(),
   answerId: z
-    .string(),
-  timeSpent: z
-    .number()
+    .string()
 });
 export type SubmitAnswerRequest = z.infer<typeof schema>;
 
@@ -31,18 +26,14 @@ export interface SubmitAnswerResponse {
 
 export async function submitAnswer(
   options: {
-    session: Session,
-    answerId: string;
-    startTime: number;
+    session: Session;
+    choice: AnswerChoice;
   }
 ): Promise<ApiResponse<SubmitAnswerResponse>> {
   try {
     const body: SubmitAnswerRequest = {
       sessionId: options.session.id,
-      studentId: options.session.studentId,
-      questionId: options.session.currentQuestion.id,
-      answerId: options.answerId,
-      timeSpent: Date.now() - options.startTime,
+      answerId: options.choice.choiceId
     };
 
     const parsed = schema.safeParse(body);

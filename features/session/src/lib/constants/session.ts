@@ -14,5 +14,13 @@ export const START_SESSION: StartSessionResponse = null;
  * January 19th 2026, 6:30:24 pm
  */
 export const GET_SESSION: GetSessionResponse = {
+  isComplete: false,
+  session: {
+    id: "",
+    studentId: "",
+    currentQuestion: undefined,
+    currentDifficulty: "BEGINNER",
+    status: "DWELL"
+  }
 
 };

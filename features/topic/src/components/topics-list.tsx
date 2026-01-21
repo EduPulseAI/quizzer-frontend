@@ -13,7 +13,6 @@ export async function TopicsList({ topics }: Props) {
   const session = await auth();
   const studentId = session?.user?.id || GET_DEMO_USER.id
 
-  console.log("TopicsList#topics", topics)
   if (topics.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center py-16 text-center">
