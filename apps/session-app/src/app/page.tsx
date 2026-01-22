@@ -6,8 +6,6 @@ interface Props {
 
 export default function Index(props: Props) {
   return (
-    <div>
-      Home
-    </div>
+    <>Home page</>
   );
 }
