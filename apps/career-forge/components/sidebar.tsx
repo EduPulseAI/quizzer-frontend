@@ -1,35 +1,36 @@
-"use client"
+'use client';
 
-import { cn } from "@feature/ui/lib/utils"
-import { Button } from "@feature/ui/components/button"
+import { PROJECT_NAME } from '@feature/base';
+import { Button } from '@feature/ui/components/button';
+import { cn } from '@feature/ui/lib/utils';
 import {
-  LayoutDashboard,
   Briefcase,
-  Target,
-  TrendingUp,
-  FileText,
-  BookOpen,
+  Crown,
+  LayoutDashboard,
   MessageSquare,
   Settings,
-  Crown,
   Sparkles,
-} from "lucide-react"
-import Link from "next/link"
-import { usePathname } from "next/navigation"
+} from 'lucide-react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 const navigation = [
-  { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
-  { name: "Portfolio", href: "/portfolio", icon: Briefcase },
-  { name: "Skills Analysis", href: "/skills", icon: Target },
-  { name: "Job Matching", href: "/jobs", icon: TrendingUp },
-  { name: "Resume Builder", href: "/resume", icon: FileText },
-  { name: "Interview Prep", href: "/interview", icon: MessageSquare },
-  { name: "Learning", href: "/learning", icon: BookOpen },
-  { name: "Settings", href: "/settings", icon: Settings },
-]
+  { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
+  { name: 'Portfolio', href: '/portfolio', icon: Briefcase },
+  // { name: "Skills Analysis", href: "/skills", icon: Target },
+  // { name: "Job Matching", href: "/jobs", icon: TrendingUp },
+  // { name: "Resume Builder", href: "/resume", icon: FileText },
+  { name: 'Interview Prep', href: '/prep', icon: MessageSquare },
+  // { name: "Learning", href: "/learning", icon: BookOpen },
+  { name: 'Settings', href: '/settings', icon: Settings },
+];
 
+// interface Props {
+//   pathname: string;
+// }
 export function Sidebar() {
   const pathname = usePathname()
+  // const pathname = (await headers()).get('x-pathname') || '/'
 
   return (
     <aside className="w-64 bg-slate-900/50 backdrop-blur-xl border-r border-slate-800/50 flex flex-col">
@@ -41,7 +42,7 @@ export function Sidebar() {
           </div>
           <div>
             <h1 className="text-lg font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-              CareerForge AI
+              {PROJECT_NAME}
             </h1>
             <p className="text-xs text-slate-500">Free Plan</p>
           </div>

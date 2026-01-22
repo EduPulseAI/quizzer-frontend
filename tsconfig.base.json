@@ -42,7 +42,10 @@
       "@edupulse/sse/*": ["features/sse/src/*"],
       "@edupulse/quiz": ["features/quiz/src/index.ts"],
       "@edupulse/quiz/server": ["features/quiz/src/server.ts"],
-      "@edupulse/quiz/*": ["features/quiz/src/*"]
+      "@edupulse/quiz/*": ["features/quiz/src/*"],
+      "@edupulse/profile": ["features/profile/src/index.ts"],
+      "@edupulse/profile/server": ["features/profile/src/server.ts"],
+      "@edupulse/profile/*": ["features/profile/src/*"]
     }
   },
   "exclude": ["node_modules", "tmp"]
