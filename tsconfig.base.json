@@ -39,7 +39,10 @@
       "@feature/auth/*": ["features/auth/src/*"],
       "@edupulse/sse": ["features/sse/src/index.ts"],
       "@edupulse/sse/server": ["features/sse/src/server.ts"],
-      "@edupulse/sse/*": ["features/sse/src/*"]
+      "@edupulse/sse/*": ["features/sse/src/*"],
+      "@edupulse/quiz": ["features/quiz/src/index.ts"],
+      "@edupulse/quiz/server": ["features/quiz/src/server.ts"],
+      "@edupulse/quiz/*": ["features/quiz/src/*"]
     }
   },
   "exclude": ["node_modules", "tmp"]

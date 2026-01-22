@@ -1,5 +1,9 @@
+/* eslint-disable @typescript-eslint/no-empty-object-type */
+/* eslint-disable @typescript-eslint/no-empty-interface */
+
 import { z } from 'zod';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const envSchema = z.object({
   NODE_ENV: z.enum(['development', 'production']),
   QUIZ_API_URL: z.string().url(),

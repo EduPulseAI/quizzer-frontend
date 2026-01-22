@@ -86,20 +86,10 @@
     },
     "next-feature": {
       "axios": {
-        "appProjectName": "session-app"
+        "appProjectName": "career-forge"
       },
       "auth": {
-        "projectName": "base"
-      },
-      "component": {
-        "projectName": "career-forge",
-        "componentType": "component"
-      },
-      "utils": {
-        "projectName": "quiz"
-      },
-      "constants": {
-        "projectName": "quiz"
+        "projectName": "profile"
       },
       "store": {
         "projectName": "quiz"
@@ -107,16 +97,28 @@
       "feature": {
         "orgName": "edupulse"
       },
-      "action": {},
-      "constant": {},
-      "data-type": {},
       "client": {
         "orgName": "edupulse"
       },
+      "component": {
+        "projectName": "career-forge",
+        "componentType": "component"
+      },
+      "action": {
+        "projectName": "quiz"
+      },
+      "constant": {
+        "projectName": "quiz"
+      },
+      "utility": {
+        "projectName": "quiz"
+      },
+      "data-type": {
+        "projectName": "quiz"
+      },
       "client-config": {
         "clientPackage": "@edupulse/api-client"
-      },
-      "utility": {}
+      }
     }
   },
   "plugins": [],

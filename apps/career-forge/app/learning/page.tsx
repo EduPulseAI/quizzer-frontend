@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { AppLayout } from "@/components/app-layout"
+import { AppLayout } from "../../components/app-layout"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@feature/ui/components/card"
 import { Button } from "@feature/ui/components/button"
 import { Badge } from "@feature/ui/components/badge"

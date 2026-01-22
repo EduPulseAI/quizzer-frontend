@@ -1,4 +1,4 @@
-import { AdminLayout } from "@/components/admin-layout"
+import { AdminLayout } from "../../components/admin-layout"
 import { Card, CardContent, CardHeader, CardTitle } from "@feature/ui/components/card"
 import { Users, CreditCard, TrendingUp, Activity } from "lucide-react"
 

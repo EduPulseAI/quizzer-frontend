@@ -1,6 +1,6 @@
 "use client"
 
-import { AppLayout } from "@/components/app-layout"
+import { AppLayout } from "../../components/app-layout"
 import { Button } from "@feature/ui/components/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@feature/ui/components/card"
 import { Check, Sparkles, Zap, Crown } from "lucide-react"

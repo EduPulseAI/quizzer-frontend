@@ -1,8 +1,8 @@
-import { SkillsHeader } from "@/components/skills-header"
-import { SkillsChart } from "@/components/skills-chart"
-import { SkillsTable } from "@/components/skills-table"
-import { SkillsSuggestions } from "@/components/skills-suggestions"
-import { AppLayout } from "@/components/app-layout"
+import { SkillsHeader } from "../../components/skills-header"
+import { SkillsChart } from "../../components/skills-chart"
+import { SkillsTable } from "../../components/skills-table"
+import { SkillsSuggestions } from "../../components/skills-suggestions"
+import { AppLayout } from "../../components/app-layout"
 
 export default function SkillsPage() {
   return (

@@ -1,14 +1,12 @@
-"use client"
+import { ReactNode } from 'react';
+import { Sidebar } from '../../components/sidebar';
+import { TopBar } from '../../components/top-bar';
 
-import type { ReactNode } from "react"
-import { Sidebar } from "../../components/sidebar"
-import { TopBar } from "../../components/top-bar"
-
-interface AppLayoutProps {
-  children: ReactNode
+interface Props {
+  children: ReactNode;
 }
 
-export function AppLayout({ children }: AppLayoutProps) {
+async function AppLayout({ children }: Props) {
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-slate-950 to-slate-900">
       {/* Animated background effects */}
@@ -25,5 +23,7 @@ export function AppLayout({ children }: AppLayoutProps) {
         </div>
       </div>
     </div>
-  )
+  );
 }
+
+export default AppLayout;

@@ -2,7 +2,7 @@
 
 import api, { ApiError, type ApiResponse } from '../config/client';
 import { GET_TOPICS } from '../constants/topic';
-import type { Topic } from "../types/topic";
+import { Topic } from "../types/topic";
 
 interface GetTopicsRequest {}
 

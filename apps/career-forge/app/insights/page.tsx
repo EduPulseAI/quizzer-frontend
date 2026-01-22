@@ -1,6 +1,6 @@
-import { InsightsHeader } from "@/components/insights-header"
-import { InsightsFeed } from "@/components/insights-feed"
-import { AppLayout } from "@/components/app-layout"
+import { InsightsHeader } from "../../components/insights-header"
+import { InsightsFeed } from "../../components/insights-feed"
+import { AppLayout } from "../../components/app-layout"
 
 export default function InsightsPage() {
   return (
