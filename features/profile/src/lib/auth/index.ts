@@ -2,7 +2,7 @@ import type { Session, User } from 'next-auth';
 import NextAuth from 'next-auth';
 import type { JWT } from 'next-auth/jwt';
 import CredentialsProvider from 'next-auth/providers/credentials';
-import { postLogin } from '../actions/post-login-api';
+import { postLogin } from '../actions/submit-login-action';
 import { authConfig } from './auth.config';
 
 export const { auth, handlers, signIn, signOut } = NextAuth({
@@ -16,13 +16,13 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
       },
       async authorize(credentials) {
         try {
-          const response =  await postLogin(credentials);
+          const response = await postLogin(credentials);
           if (response.error) {
-            console.error("authorize#error", response.error);
+            console.error('authorize#error', response.error);
           }
           return response.data;
         } catch (e) {
-          console.log("authorize#error", e)
+          console.log('authorize#error', e);
         }
         return null;
       },

@@ -26,7 +26,12 @@ export async function submitSignupAction(
   formData: FormData
 ): Promise<ApiResponse<SubmitSignupRequest>> {
   try {
-    const body: SubmitSignupRequest = {};
+    const body: SubmitSignupRequest = {
+      name: formData.get("name") as string,
+      email: formData.get("email") as string,
+      password: formData.get("password") as string,
+      confirmPassword: formData.get("confirmPassword") as string
+    };
 
     const parsed = schema.safeParse(body);
 
