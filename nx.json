@@ -92,7 +92,8 @@
         "projectName": "base"
       },
       "component": {
-        "projectName": "session-app"
+        "projectName": "career-forge",
+        "componentType": "component"
       },
       "utils": {
         "projectName": "quiz"
