@@ -1,7 +1,7 @@
 "use client"
 
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
+import { cn } from "@feature/ui/lib/utils"
+import { Button } from "@feature/ui/components/button"
 import { LayoutDashboard, Users, CreditCard, FileText, Settings, BarChart3, Shield, Sparkles } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"

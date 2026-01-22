@@ -1,6 +1,6 @@
 "use client"
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Avatar, AvatarFallback, AvatarImage } from "@feature/ui/components/avatar"
 import { Sparkles } from "lucide-react"
 
 export function DashboardHero() {

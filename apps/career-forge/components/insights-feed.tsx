@@ -1,8 +1,8 @@
 "use client"
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "@feature/ui/components/card"
+import { Badge } from "@feature/ui/components/badge"
+import { Button } from "@feature/ui/components/button"
 import { Lightbulb, TrendingUp, Target, RefreshCw } from "lucide-react"
 
 const insights = [

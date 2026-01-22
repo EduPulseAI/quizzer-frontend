@@ -1,7 +1,7 @@
 "use client"
 
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
+import { cn } from "@feature/ui/lib/utils"
+import { Button } from "@feature/ui/components/button"
 import {
   LayoutDashboard,
   Briefcase,

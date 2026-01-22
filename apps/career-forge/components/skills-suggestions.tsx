@@ -1,8 +1,8 @@
 "use client"
 
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@feature/ui/components/accordion"
+import { Card, CardContent, CardHeader, CardTitle } from "@feature/ui/components/card"
+import { Button } from "@feature/ui/components/button"
 import { Lightbulb, ExternalLink } from "lucide-react"
 
 const suggestions = [

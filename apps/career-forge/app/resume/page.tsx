@@ -3,10 +3,10 @@
 import type React from "react"
 
 import { AppLayout } from "@/components/app-layout"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
+import { Card, CardContent, CardHeader, CardTitle } from "@feature/ui/components/card"
+import { Button } from "@feature/ui/components/button"
+import { Input } from "@feature/ui/components/input"
+import { Textarea } from "@feature/ui/components/textarea"
 import { Download, FileText, Plus, Upload } from "lucide-react"
 import { useState } from "react"
 

@@ -1,10 +1,10 @@
 "use client"
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Button } from "@/components/ui/button"
-import { Label } from "@/components/ui/label"
+import { Card, CardContent, CardHeader, CardTitle } from "@feature/ui/components/card"
+import { Input } from "@feature/ui/components/input"
+import { Textarea } from "@feature/ui/components/textarea"
+import { Button } from "@feature/ui/components/button"
+import { Label } from "@feature/ui/components/label"
 import { Sparkles } from "lucide-react"
 
 export function JobFitForm() {

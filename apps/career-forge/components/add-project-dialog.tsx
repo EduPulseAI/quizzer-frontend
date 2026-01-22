@@ -11,11 +11,11 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
+} from "@feature/ui/components/dialog"
+import { Button } from "@feature/ui/components/button"
+import { Input } from "@feature/ui/components/input"
+import { Label } from "@feature/ui/components/label"
+import { Textarea } from "@feature/ui/components/textarea"
 import { Plus } from "lucide-react"
 
 export function AddProjectDialog() {

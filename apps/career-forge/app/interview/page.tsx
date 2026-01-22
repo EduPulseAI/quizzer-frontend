@@ -1,7 +1,7 @@
 import { AppLayout } from "@/components/app-layout"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@feature/ui/components/card"
+import { Button } from "@feature/ui/components/button"
+import { Badge } from "@feature/ui/components/badge"
 import { Play, BookOpen, CheckCircle2, Clock } from "lucide-react"
 
 const interviewTopics = [

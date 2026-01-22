@@ -1,7 +1,7 @@
 "use client"
 
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
+import { Button } from "@feature/ui/components/button"
+import { Input } from "@feature/ui/components/input"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,8 +9,8 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+} from "@feature/ui/components/dropdown-menu"
+import { Avatar, AvatarFallback, AvatarImage } from "@feature/ui/components/avatar"
 import { Bell, Search, LogOut, User, CreditCard } from "lucide-react"
 import { useRouter } from "next/navigation"
 

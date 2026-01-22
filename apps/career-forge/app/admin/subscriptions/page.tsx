@@ -1,10 +1,10 @@
 import { AdminLayout } from "@/components/admin-layout"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Badge } from "@/components/ui/badge"
+import { Card, CardContent, CardHeader, CardTitle } from "@feature/ui/components/card"
+import { Button } from "@feature/ui/components/button"
+import { Input } from "@feature/ui/components/input"
+import { Badge } from "@feature/ui/components/badge"
 import { Search, Download } from "lucide-react"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@feature/ui/components/table"
 
 const subscriptions = [
   {

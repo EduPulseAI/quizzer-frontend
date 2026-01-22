@@ -1,11 +1,11 @@
 import { AdminLayout } from "@/components/admin-layout"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Badge } from "@/components/ui/badge"
+import { Card, CardContent, CardHeader, CardTitle } from "@feature/ui/components/card"
+import { Button } from "@feature/ui/components/button"
+import { Input } from "@feature/ui/components/input"
+import { Badge } from "@feature/ui/components/badge"
 import { Search, UserPlus, MoreVertical } from "lucide-react"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@feature/ui/components/table"
+import { Avatar, AvatarFallback, AvatarImage } from "@feature/ui/components/avatar"
 
 const users = [
   { id: 1, name: "John Doe", email: "john@example.com", plan: "Pro", status: "Active", joined: "2024-01-15" },

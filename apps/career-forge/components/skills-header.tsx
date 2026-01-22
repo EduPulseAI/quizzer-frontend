@@ -1,7 +1,7 @@
 "use client"
 
-import { Card } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
+import { Card } from "@feature/ui/components/card"
+import { Button } from "@feature/ui/components/button"
 import { Upload, Sparkles } from "lucide-react"
 
 export function SkillsHeader() {

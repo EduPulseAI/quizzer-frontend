@@ -1,6 +1,6 @@
 "use client"
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@feature/ui/components/card"
 
 const topSkills = [
   { name: "React", score: 8, color: "bg-chart-1" },

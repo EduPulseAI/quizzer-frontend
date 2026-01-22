@@ -3,10 +3,10 @@
 import type React from "react"
 
 import { AppLayout } from "@/components/app-layout"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { Progress } from "@/components/ui/progress"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@feature/ui/components/card"
+import { Button } from "@feature/ui/components/button"
+import { Badge } from "@feature/ui/components/badge"
+import { Progress } from "@feature/ui/components/progress"
 import { BookOpen, Play, Clock, Award, TrendingUp, Upload } from "lucide-react"
 import { useState } from "react"
 

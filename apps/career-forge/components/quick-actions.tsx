@@ -1,6 +1,6 @@
 "use client"
 
-import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardDescription, CardHeader, CardTitle } from "@feature/ui/components/card"
 import { FileText, Briefcase, Sparkles } from "lucide-react"
 import Link from "next/link"
 
