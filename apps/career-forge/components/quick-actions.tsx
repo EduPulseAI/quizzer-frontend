@@ -1,4 +1,3 @@
-"use client"
 
 import { Card, CardDescription, CardHeader, CardTitle } from "@feature/ui/components/card"
 import { FileText, Briefcase, Sparkles } from "lucide-react"
@@ -9,12 +8,12 @@ const actions = [
     title: "Analyze Resume",
     description: "Upload your resume for AI-powered insights",
     icon: FileText,
-    href: "/skills",
+    href: "/resume",
     gradient: "from-indigo-500 to-purple-600",
   },
   {
     title: "Build Portfolio",
-    description: "Create a stunning professional portfolio",
+    description: "Create a stunning professional portfolio projects",
     icon: Briefcase,
     href: "/portfolio",
     gradient: "from-purple-500 to-pink-600",

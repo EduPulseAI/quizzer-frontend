@@ -10,7 +10,7 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  transpilePackages: ['@feature/ui', '@feature/base'],
+  transpilePackages: ['@feature/ui', '@feature/base', '@edupulse/profile'],
   eslint: {
     ignoreDuringBuilds: true,
   },

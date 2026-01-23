@@ -2,7 +2,7 @@ import { auth } from '@edupulse/profile';
 import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { ReactNode } from 'react';
-import { Sidebar } from '../../components/sidebar';
+import { type NavigationRoute, Sidebar } from '../../components/sidebar';
 import { TopBar } from '../../components/top-bar';
 
 interface Props {
@@ -10,7 +10,7 @@ interface Props {
 }
 
 async function AppLayout({ children }: Props) {
-  const pathname = (await headers()).get('x-pathname') || '/'
+  const pathname = (await headers()).get('x-pathname') as NavigationRoute;
 
   const session = await auth();
   if (session === null) {
@@ -19,9 +19,7 @@ async function AppLayout({ children }: Props) {
 
   const user = session.user;
 
-  console.log("AppLayout", { user, pathname })
-
-  return (
+ return (
     <div className="min-h-screen bg-gradient-to-br from-black via-slate-950 to-slate-900">
       {/* Animated background effects */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">

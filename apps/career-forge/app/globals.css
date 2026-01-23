@@ -1,6 +1,13 @@
 @import "tailwindcss";
 @import "tw-animate-css";
-@source "../../../features/ui/src/**/*.{js,ts,jsx,tsx}"
+
+/* Scan feature libraries for Tailwind classes */
+@source "../../../features/ui/src/**/*.{js,ts,jsx,tsx}";
+@source "../../../features/base/src/**/*.{js,ts,jsx,tsx}";
+
+/* Scan this app's source files for Tailwind classes */
+@source "../components/**/*.{js,ts,jsx,tsx}";
+@source "../app/**/*.{js,ts,jsx,tsx}";
 
 @custom-variant dark (&:is(.dark *));
 

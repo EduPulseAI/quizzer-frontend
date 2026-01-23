@@ -1,5 +1,5 @@
-"use client"
 
+import { PROJECT_NAME } from '@feature/base';
 import { Avatar, AvatarFallback, AvatarImage } from "@feature/ui/components/avatar"
 import { Sparkles } from "lucide-react"
 
@@ -21,7 +21,7 @@ export function DashboardHero() {
           </div>
 
           <div className="space-y-2">
-            <h1 className="text-4xl font-bold text-balance">Welcome to CareerForge AI</h1>
+            <h1 className="text-4xl font-bold text-balance">Welcome to {PROJECT_NAME}</h1>
             <p className="text-xl text-muted-foreground flex items-center justify-center gap-2">
               <Sparkles className="h-5 w-5 text-primary" />
               AI-Powered Career Builder

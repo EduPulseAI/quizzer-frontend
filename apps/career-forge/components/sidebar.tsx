@@ -1,5 +1,3 @@
-'use client';
-
 import { PROJECT_NAME } from '@feature/base';
 import { Button } from '@feature/ui/components/button';
 import { cn } from '@feature/ui/lib/utils';
@@ -12,7 +10,6 @@ import {
   Sparkles,
 } from 'lucide-react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 
 const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
@@ -23,15 +20,15 @@ const navigation = [
   { name: 'Interview Prep', href: '/prep', icon: MessageSquare },
   // { name: "Learning", href: "/learning", icon: BookOpen },
   { name: 'Settings', href: '/settings', icon: Settings },
-];
+] as const;
+
+export type NavigationRoute = typeof navigation[number]["href"];
 
 interface Props {
-  pathname?: string;
+  pathname: NavigationRoute;
 }
 
-export async function Sidebar({ pathname = '/' }: Props) {
-  // const pathname = usePathname()
-  // const pathname = (await headers()).get('x-pathname') || '/'
+export async function Sidebar({ pathname }: Props) {
 
   return (
     <aside className="w-64 bg-slate-900/50 backdrop-blur-xl border-r border-slate-800/50 flex flex-col">
