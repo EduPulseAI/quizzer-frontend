@@ -25,23 +25,23 @@ export function SessionFeedback() {
       <div
         className={`p-4 rounded-xl border-l-4 ${
           feedback.isCorrect
-            ? 'bg-green-50 border-green-500'
-            : 'bg-red-50 border-red-500'
+            ? 'bg-green-500/10 border-green-500 shadow-[0_0_15px_rgba(34,197,94,0.2)]'
+            : 'bg-red-500/10 border-red-500 shadow-[0_0_15px_rgba(239,68,68,0.2)]'
         }`}
       >
         <p className="text-sm">
           {feedback.isCorrect ? (
-            <span className="text-green-700 font-medium">
+            <span className="text-green-400 font-medium">
               Correct! {currentQuestion?.explanation}
             </span>
           ) : (
-            <span className="text-red-700 font-medium">
+            <span className="text-red-400 font-medium">
               Incorrect. Try again!
             </span>
           )}
         </p>
         {feedback.attemptNumber > 1 && (
-          <p className="text-xs text-gray-500 mt-1">
+          <p className="text-xs text-slate-500 mt-1">
             Attempt {feedback.attemptNumber}
           </p>
         )}
@@ -52,7 +52,7 @@ export function SessionFeedback() {
           <Button
             disabled={!canProceed || isLoading}
             onClick={handleProceed}
-            className="bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white px-8 py-3 text-lg rounded-xl transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white px-10 py-4 text-lg rounded-xl border-[3px] border-blue-400/50 hover:border-blue-300 transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isLoading ? (
               <>

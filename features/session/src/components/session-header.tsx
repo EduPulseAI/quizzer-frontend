@@ -10,10 +10,10 @@ export function SessionHeader() {
       <div className="mb-8">
         <div className="animate-pulse space-y-4">
           <div className="flex justify-between items-center">
-            <div className="h-6 w-24 bg-gray-200 rounded-full" />
-            <div className="h-4 w-32 bg-gray-200 rounded" />
+            <div className="h-6 w-24 bg-slate-700/50 rounded-full" />
+            <div className="h-4 w-32 bg-slate-700/50 rounded" />
           </div>
-          <div className="h-8 w-3/4 bg-gray-200 rounded" />
+          <div className="h-8 w-3/4 bg-slate-700/50 rounded" />
         </div>
       </div>
     );
@@ -22,15 +22,15 @@ export function SessionHeader() {
   return (
     <div className="mb-8">
       <div className="flex justify-between items-center mb-4">
-        <span className="text-sm font-medium text-purple-600 bg-purple-100 px-3 py-1 rounded-full">
+        <span className="text-sm font-medium text-blue-300 bg-blue-500/20 px-3 py-1 rounded-full border border-blue-500/30">
           {currentQuestion.tag}
         </span>
-        <span className="text-sm text-gray-500">
+        <span className="text-sm text-slate-400">
           Difficulty: {currentQuestion.difficulty}
         </span>
       </div>
 
-      <h2 className="text-2xl font-bold text-gray-800 leading-relaxed">
+      <h2 className="text-2xl font-bold text-slate-100 leading-relaxed">
         {currentQuestion.text}
       </h2>
     </div>

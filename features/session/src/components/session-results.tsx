@@ -17,11 +17,11 @@ export function SessionResults({ data }: Props) {
   const timeSpent = '5:32'; // This would come from actual session tracking
 
   const getGrade = (accuracy: number) => {
-    if (accuracy >= 90) return { letter: 'A', color: 'text-green-600', bg: 'bg-green-100' };
-    if (accuracy >= 80) return { letter: 'B', color: 'text-blue-600', bg: 'bg-blue-100' };
-    if (accuracy >= 70) return { letter: 'C', color: 'text-yellow-600', bg: 'bg-yellow-100' };
-    if (accuracy >= 60) return { letter: 'D', color: 'text-orange-600', bg: 'bg-orange-100' };
-    return { letter: 'F', color: 'text-red-600', bg: 'bg-red-100' };
+    if (accuracy >= 90) return { letter: 'A', color: 'text-green-400', bg: 'bg-green-500/20', border: 'border-green-500/30' };
+    if (accuracy >= 80) return { letter: 'B', color: 'text-blue-400', bg: 'bg-blue-500/20', border: 'border-blue-500/30' };
+    if (accuracy >= 70) return { letter: 'C', color: 'text-yellow-400', bg: 'bg-yellow-500/20', border: 'border-yellow-500/30' };
+    if (accuracy >= 60) return { letter: 'D', color: 'text-orange-400', bg: 'bg-orange-500/20', border: 'border-orange-500/30' };
+    return { letter: 'F', color: 'text-red-400', bg: 'bg-red-500/20', border: 'border-red-500/30' };
   };
 
   const grade = getGrade(accuracy);
@@ -29,17 +29,17 @@ export function SessionResults({ data }: Props) {
   return (
     <div className="text-center space-y-8">
       <div>
-        <h2 className="text-3xl font-bold text-gray-800 mb-2">
+        <h2 className="text-3xl font-bold text-slate-100 mb-2">
           Session Complete!
         </h2>
-        <p className="text-gray-600">
+        <p className="text-slate-400">
           Great job completing this quiz session
         </p>
       </div>
 
       <div className="flex justify-center">
         <div
-          className={`w-32 h-32 rounded-full ${grade.bg} flex items-center justify-center`}
+          className={`w-32 h-32 rounded-full ${grade.bg} border-2 ${grade.border} flex items-center justify-center`}
         >
           <span className={`text-6xl font-bold ${grade.color}`}>
             {grade.letter}
@@ -48,24 +48,24 @@ export function SessionResults({ data }: Props) {
       </div>
 
       <div className="grid grid-cols-3 gap-4">
-        <div className="p-4 bg-gray-50 rounded-xl">
-          <div className="text-2xl font-bold text-purple-600">
+        <div className="p-4 bg-slate-800/50 rounded-xl border border-slate-700/50">
+          <div className="text-2xl font-bold text-blue-400">
             {correctAnswers}/{totalQuestions}
           </div>
-          <div className="text-sm text-gray-500">Correct</div>
+          <div className="text-sm text-slate-500">Correct</div>
         </div>
-        <div className="p-4 bg-gray-50 rounded-xl">
-          <div className="text-2xl font-bold text-blue-600">{accuracy}%</div>
-          <div className="text-sm text-gray-500">Accuracy</div>
+        <div className="p-4 bg-slate-800/50 rounded-xl border border-slate-700/50">
+          <div className="text-2xl font-bold text-cyan-400">{accuracy}%</div>
+          <div className="text-sm text-slate-500">Accuracy</div>
         </div>
-        <div className="p-4 bg-gray-50 rounded-xl">
-          <div className="text-2xl font-bold text-green-600">{timeSpent}</div>
-          <div className="text-sm text-gray-500">Time</div>
+        <div className="p-4 bg-slate-800/50 rounded-xl border border-slate-700/50">
+          <div className="text-2xl font-bold text-green-400">{timeSpent}</div>
+          <div className="text-sm text-slate-500">Time</div>
         </div>
       </div>
 
-      <div className="p-4 bg-purple-50 rounded-xl border border-purple-200">
-        <p className="text-purple-700">
+      <div className="p-4 bg-blue-500/10 rounded-xl border border-blue-500/30">
+        <p className="text-blue-300">
           {accuracy >= 80
             ? 'Excellent work! You have a strong understanding of this topic.'
             : accuracy >= 60
@@ -78,13 +78,13 @@ export function SessionResults({ data }: Props) {
         <Link href="/dashboard">
           <Button
             variant="outline"
-            className="px-6 py-3 rounded-xl border-2 border-gray-300 hover:border-purple-300 transition-colors"
+            className="px-6 py-3 rounded-xl border-2 border-slate-600 hover:border-blue-500/50 text-slate-300 hover:text-slate-100 transition-colors"
           >
             Back to Dashboard
           </Button>
         </Link>
         <Link href={`/quiz/${session.currentQuestion?.tag ?? ''}`}>
-          <Button className="px-6 py-3 rounded-xl bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white transition-all duration-300 transform hover:scale-105">
+          <Button className="px-6 py-3 rounded-xl bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white transition-all duration-300 transform hover:scale-105">
             Try Another Quiz
           </Button>
         </Link>
