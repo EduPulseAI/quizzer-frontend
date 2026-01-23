@@ -8,7 +8,8 @@ import { Input } from '@feature/ui/components/input';
 import { Label } from '@feature/ui/components/label';
 import { ArrowRight, Lock, Mail } from 'lucide-react';
 import Link from 'next/link';
-import React, { useActionState } from 'react';
+import { useRouter } from "next/navigation";
+import React, { useActionState, useEffect } from 'react';
 
 interface Props {
   action: (
@@ -31,6 +32,14 @@ export function LoginForm({
     action,
     initialState
   );
+  const router = useRouter();
+
+  useEffect(() => {
+    if (formState?.success) {
+      router.push("/dashboard")
+    }
+
+  }, [formState?.success]);
 
   const extractError = (key: string) => {
     if (formState?.error && formState.error.errors) {
@@ -53,6 +62,7 @@ export function LoginForm({
               id="email"
               type="email"
               name="email"
+              defaultValue={formState?.data.email}
               placeholder="you@example.com"
               className="pl-10 bg-slate-800/50 border-slate-700 focus:border-blue-500 focus:ring-blue-500/20"
               required
@@ -73,6 +83,7 @@ export function LoginForm({
               type="password"
               name="password"
               placeholder="••••••••"
+              defaultValue={formState?.data.password}
               className="pl-10 bg-slate-800/50 border-slate-700 focus:border-blue-500 focus:ring-blue-500/20"
               required
             />
@@ -107,9 +118,8 @@ export function LoginForm({
             Sign up
           </Link>
         </p>
-        {/*<p className="text-center text-xs text-slate-500 mt-2">*/}
-        {/*  Demo: Use admin@careerforge.ai for admin access*/}
-        {/*</p>*/}
+
+
       </CardFooter>
     </form>
   );

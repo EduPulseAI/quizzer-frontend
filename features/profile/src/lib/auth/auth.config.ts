@@ -4,9 +4,9 @@ const VERCEL_DEPLOYMENT = !!process.env.VERCEL_URL;
 
 export const authConfig: NextAuthConfig = {
   pages: {
-    signIn: `/auth`,
-    verifyRequest: `/auth`,
-    error: '/auth', // Error code passed in query string as ?error=
+    signIn: `/login`,
+    verifyRequest: `/login`,
+    error: '/login', // Error code passed in query string as ?error=
     newUser: '/onboarding',
   },
   callbacks: {

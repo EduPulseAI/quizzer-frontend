@@ -1,6 +1,7 @@
 import { submitLoginAction } from '@edupulse/profile';
 import {
   Card,
+  CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
@@ -25,7 +26,10 @@ export default function LoginPage() {
           Sign in to continue your career journey
         </CardDescription>
       </CardHeader>
-      <LoginForm action={submitLoginAction} />
+      <CardContent className="space-y-4">
+        {/*<GithubLogin />*/}
+        <LoginForm action={submitLoginAction} />
+      </CardContent>
     </Card>
   );
 }

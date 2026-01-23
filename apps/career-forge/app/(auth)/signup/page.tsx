@@ -1,4 +1,3 @@
-'use client';
 
 import { submitSignupAction } from '@edupulse/profile';
 import { Button } from '@feature/ui/components/button';

@@ -8,7 +8,8 @@ import { Input } from '@feature/ui/components/input';
 import { Label } from '@feature/ui/components/label';
 import { ArrowRight, Lock, Mail, User } from 'lucide-react';
 import Link from 'next/link';
-import React, { useActionState } from 'react';
+import { useRouter } from 'next/navigation';
+import React, { useActionState, useEffect } from 'react';
 
 interface Props {
   action: (
@@ -29,10 +30,18 @@ export function SignupForm({
     },
   },
 }: Props) {
+  const router = useRouter();
   const [formState, formAction, isPending] = useActionState(
     action,
     initialState
   );
+
+  useEffect(() => {
+    if (formState?.success) {
+      router.push("/login")
+    }
+
+  }, [formState?.success]);
 
   const extractError = (key: string) => {
     if (formState?.error && formState.error.errors) {
@@ -55,6 +64,7 @@ export function SignupForm({
               type="text"
               name="name"
               placeholder="John Doe"
+              defaultValue={formState?.data.name}
               className="pl-10 bg-slate-800/50 border-slate-700 focus:border-blue-500 focus:ring-blue-500/20"
               required
             />
@@ -72,6 +82,7 @@ export function SignupForm({
               type="email"
               placeholder="you@example.com"
               name="email"
+              defaultValue={formState?.data.email}
               className="pl-10 bg-slate-800/50 border-slate-700 focus:border-blue-500 focus:ring-blue-500/20"
               required
             />
@@ -89,6 +100,7 @@ export function SignupForm({
               type="password"
               name="password"
               placeholder="••••••••"
+              defaultValue={formState?.data.password}
               className="pl-10 bg-slate-800/50 border-slate-700 focus:border-blue-500 focus:ring-blue-500/20"
               required
             />
@@ -106,6 +118,7 @@ export function SignupForm({
               type="password"
               name="confirmPassword"
               placeholder="••••••••"
+              defaultValue={formState?.data.confirmPassword}
               className="pl-10 bg-slate-800/50 border-slate-700 focus:border-blue-500 focus:ring-blue-500/20"
               required
             />

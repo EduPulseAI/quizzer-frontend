@@ -36,9 +36,10 @@ export async function submitLoginAction(
       };
     }
 
-    await signIn('credentials', body);
-
-    redirect('/dashboard');
+    await signIn('credentials', {
+      ...body,
+      redirect: false
+    });
 
     return {
       success: true,

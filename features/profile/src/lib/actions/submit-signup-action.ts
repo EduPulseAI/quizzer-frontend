@@ -25,13 +25,13 @@ export async function submitSignupAction(
   prevState: ApiResponse<SubmitSignupRequest>,
   formData: FormData
 ): Promise<ApiResponse<SubmitSignupRequest>> {
+  const body: SubmitSignupRequest = {
+    name: formData.get("name") as string,
+    email: formData.get("email") as string,
+    password: formData.get("password") as string,
+    confirmPassword: formData.get("confirmPassword") as string
+  };
   try {
-    const body: SubmitSignupRequest = {
-      name: formData.get("name") as string,
-      email: formData.get("email") as string,
-      password: formData.get("password") as string,
-      confirmPassword: formData.get("confirmPassword") as string
-    };
 
     const parsed = schema.safeParse(body);
 
@@ -46,13 +46,13 @@ export async function submitSignupAction(
       };
     }
 
-    const endpoint = '/api/auth/signup';
+    const endpoint = '/api/users/student';
     const response = await api.post<SubmitSignupResponse>(
       endpoint,
       parsed.data
     );
 
-    redirect("/login");
+    console.log("submitSignUp#response", response)
 
     return {
       success: true,
@@ -62,7 +62,7 @@ export async function submitSignupAction(
   } catch (error) {
     const apiError = ApiError.of(error);
     return {
-      data: prevState.data,
+      data: body,
       error: apiError.body,
       message: apiError.message,
       success: false,
