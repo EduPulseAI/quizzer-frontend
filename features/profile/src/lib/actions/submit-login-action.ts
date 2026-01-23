@@ -57,6 +57,12 @@ export async function submitLoginAction(
   }
 }
 
+export interface LoginResponse {
+  token: { value: string, issuedAt: Date, expiration: Date, }
+  user: User
+}
+
+
 export async function postLogin(
   options: Partial<Record<'email' | 'password', unknown>>
 ): Promise<ApiResponse<User>> {
@@ -80,16 +86,16 @@ export async function postLogin(
     }
 
     const endpoint = '/api/auth/login';
-    const response = await api.post<User>(endpoint, parsed.data);
+    const response = await api.post<LoginResponse>(endpoint, parsed.data);
 
     const user: User = {
-      email: response.email,
-      expiration: 0,
-      jwtToken: response.jwtToken,
-      name: response.name,
+      expiration: response.token.expiration,
+      jwtToken: response.token.value,
       refreshToken: '',
-      role: response.role,
-      id: response.id,
+      email: response.user.email,
+      name: response.user.name,
+      role: response.user.role,
+      id: response.user.id,
     };
 
     return {

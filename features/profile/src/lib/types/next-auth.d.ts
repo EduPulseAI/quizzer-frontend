@@ -10,14 +10,14 @@ declare module 'next-auth' {
     role: Role;
     jwtToken?: string;
     refreshToken?: string;
-    expiration?: number;
+    expiration?: Date;
   }
 }
 
 declare module 'next-auth/jwt' {
   interface JWT {
     jwtToken: string;
-    expiration: number;
+    expiration: Date;
     refreshToken: string;
   }
 }

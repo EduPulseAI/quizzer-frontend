@@ -1,5 +1,5 @@
 {
-  "name": "@coding-quizzer/source",
+  "name": "@edupulse/source",
   "$schema": "node_modules/nx/schemas/project-schema.json",
   "targets": {
     "local-registry": {

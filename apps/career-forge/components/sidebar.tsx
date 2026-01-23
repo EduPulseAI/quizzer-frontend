@@ -25,11 +25,12 @@ const navigation = [
   { name: 'Settings', href: '/settings', icon: Settings },
 ];
 
-// interface Props {
-//   pathname: string;
-// }
-export function Sidebar() {
-  const pathname = usePathname()
+interface Props {
+  pathname?: string;
+}
+
+export async function Sidebar({ pathname = '/' }: Props) {
+  // const pathname = usePathname()
   // const pathname = (await headers()).get('x-pathname') || '/'
 
   return (

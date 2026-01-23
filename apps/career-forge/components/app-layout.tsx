@@ -1,8 +1,8 @@
 "use client"
 
 import type { ReactNode } from "react"
-import { Sidebar } from "../../components/sidebar"
-import { TopBar } from "../../components/top-bar"
+import { Sidebar } from "./sidebar"
+import { TopBar } from "./top-bar"
 
 interface AppLayoutProps {
   children: ReactNode

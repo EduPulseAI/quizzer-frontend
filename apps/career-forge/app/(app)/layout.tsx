@@ -1,3 +1,6 @@
+import { auth } from '@edupulse/profile';
+import { headers } from 'next/headers';
+import { redirect } from 'next/navigation';
 import { ReactNode } from 'react';
 import { Sidebar } from '../../components/sidebar';
 import { TopBar } from '../../components/top-bar';
@@ -7,6 +10,17 @@ interface Props {
 }
 
 async function AppLayout({ children }: Props) {
+  const pathname = (await headers()).get('x-pathname') || '/'
+
+  const session = await auth();
+  if (session === null) {
+    redirect("/login")
+  }
+
+  const user = session.user;
+
+  console.log("AppLayout", { user, pathname })
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-slate-950 to-slate-900">
       {/* Animated background effects */}
@@ -16,9 +30,9 @@ async function AppLayout({ children }: Props) {
       </div>
 
       <div className="flex h-screen relative z-10">
-        <Sidebar />
+        <Sidebar pathname={pathname} />
         <div className="flex-1 flex flex-col overflow-hidden">
-          <TopBar />
+          <TopBar user={user} />
           <main className="flex-1 overflow-y-auto">{children}</main>
         </div>
       </div>
