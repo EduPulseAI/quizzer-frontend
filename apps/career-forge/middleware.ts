@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
+import { auth } from './lib/auth';
 
 export const config = {
   matcher: [
@@ -9,8 +10,7 @@ export const config = {
   ]
 }
 
-
-export function middleware(request: NextRequest) {
+export default auth(async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname
   const requestHeaders = new Headers(request.headers)
   requestHeaders.set('x-pathname', pathname)
@@ -20,4 +20,4 @@ export function middleware(request: NextRequest) {
       headers: requestHeaders,
     },
   })
-}
+});
