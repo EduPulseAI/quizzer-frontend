@@ -1,4 +1,3 @@
-import { auth, GET_DEMO_USER } from "@feature/auth"
 import { FileCode } from "lucide-react";
 import { ReactNode } from 'react';
 import type { Topic } from "../lib/types/topic";

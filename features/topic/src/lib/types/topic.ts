@@ -1,4 +1,4 @@
-import type { Difficulty } from "@edupulse/question";
+import type { Difficulty } from "@edupulse/quiz";
 
 /**
  * [topic]

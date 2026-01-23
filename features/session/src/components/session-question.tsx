@@ -23,14 +23,14 @@ export function SessionQuestion() {
     <div className="space-y-4">
       {currentQuestion.choices.map((option, index) => {
         let buttonClass =
-          'w-full p-4 text-left rounded-xl border-2 transition-all duration-300 transform ';
+          'w-full p-4 text-left rounded-xl border-2 border-white bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 transition-all duration-300 transform ';
 
         const isSelected = selectedChoice?.choiceId === option.choiceId;
 
         if (!hasAnswered) {
           // No answer selected yet
           buttonClass +=
-            'border-gray-200 hover:border-purple-300 hover:bg-purple-50 bg-white hover:scale-[1.02]';
+            'border-gray-200 hover:border-purple-300 hover:bg-purple-50 hover:scale-[1.02]';
         } else if (isSelected && option.isCorrect) {
           // Selected the correct answer
           buttonClass += 'border-green-500 bg-green-100 text-green-800';

@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 const envSchema = z.object({
   NODE_ENV: z.enum(['development', 'production']),
-  BACKEND_API_URL: z.string().url(),
+  QUIZ_API_URL: z.string().url(),
 });
 
 declare global {
@@ -13,4 +13,4 @@ declare global {
 }
 
 export const NODE_ENV = process.env.NODE_ENV;
-export const BACKEND_API_URL = process.env.BACKEND_API_URL;
+export const BACKEND_API_URL = process.env.QUIZ_API_URL;

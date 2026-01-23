@@ -1,12 +1,9 @@
 'use server';
 
-import { Question } from "@edupulse/question/lib/types/question";
+import { Question } from "@edupulse/quiz";
 import api, { ApiError, type ApiResponse } from '../config/client';
 import type { Session } from "../types/session";
 
-export interface GetNextQuestionRequest {}
-
-export interface GetNextQuestionResponse {}
 
 export async function getNextQuestion(
   session: Session

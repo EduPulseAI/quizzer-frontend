@@ -6,7 +6,7 @@ import { z } from 'zod';
 import api from '../config/client';
 import { START_SESSION } from '../constants/session';
 
-import { Question, Difficulty } from "@edupulse/question";
+import { Question, Difficulty } from "@edupulse/quiz";
 
 const schema = z.object({
   studentId: z

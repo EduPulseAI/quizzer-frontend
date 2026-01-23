@@ -19,8 +19,8 @@ const actions = [
     gradient: "from-purple-500 to-pink-600",
   },
   {
-    title: "Get Insights",
-    description: "Discover personalized career recommendations",
+    title: "Interview Prope",
+    description: "Discover personalized interview preparation options",
     icon: Sparkles,
     href: "/insights",
     gradient: "from-pink-500 to-rose-600",

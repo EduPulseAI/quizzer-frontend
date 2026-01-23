@@ -9,7 +9,7 @@ export function SessionProgressBar() {
 
   return (
     <div className="space-y-2">
-      <div className="flex justify-between text-sm text-gray-600">
+      <div className="flex justify-between text-sm text-slate-400">
         <span>
           Question {progress.currentIndex} of {progress.totalQuestions}
         </span>

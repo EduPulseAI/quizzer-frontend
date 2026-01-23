@@ -8,10 +8,9 @@ import {
 } from '@feature/ui/components/card';
 import { BookOpen } from 'lucide-react';
 import TopicsCardContent from '../../../components/prep/topics-card-content';
+import RecentSessionsCardContent from '../../../components/prep/recent-sessions-card-content';
 
 async function PrepPage() {
-  // const recentPractice: any[] = [];
-
   return (
     <div className="max-w-6xl mx-auto p-6 space-y-6">
       <div>
@@ -86,43 +85,7 @@ async function PrepPage() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="space-y-4">
-            {/*      {recentPractice.map((session, index) => (*/}
-            {/*        <div*/}
-            {/*          key={index}*/}
-            {/*          className="flex items-center justify-between p-4 rounded-lg bg-card/50 border border-border/50"*/}
-            {/*        >*/}
-            {/*          <div className="flex-1">*/}
-            {/*            <h4 className="font-medium mb-1">{session.question}</h4>*/}
-            {/*            <div className="flex items-center gap-2">*/}
-            {/*              <Badge*/}
-            {/*                variant={*/}
-            {/*                  session.difficulty === 'Hard'*/}
-            {/*                    ? 'destructive'*/}
-            {/*                    : session.difficulty === 'Medium'*/}
-            {/*                    ? 'default'*/}
-            {/*                    : 'secondary'*/}
-            {/*                }*/}
-            {/*              >*/}
-            {/*                {session.difficulty}*/}
-            {/*              </Badge>*/}
-            {/*              <span className="text-sm text-muted-foreground flex items-center gap-1">*/}
-            {/*                <Clock className="h-3 w-3" />*/}
-            {/*                {session.time}*/}
-            {/*              </span>*/}
-            {/*            </div>*/}
-            {/*          </div>*/}
-            {/*          <div className="text-right">*/}
-            {/*            <div className="text-2xl font-bold text-primary">*/}
-            {/*              {session.score}%*/}
-            {/*            </div>*/}
-            {/*            <Button size="sm" variant="ghost" className="mt-1">*/}
-            {/*              Review*/}
-            {/*            </Button>*/}
-            {/*          </div>*/}
-            {/*        </div>*/}
-            {/*      ))}*/}
-          </div>
+          <RecentSessionsCardContent />
         </CardContent>
       </Card>
 

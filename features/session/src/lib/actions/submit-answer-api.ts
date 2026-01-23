@@ -6,7 +6,7 @@ import { z } from 'zod';
 import api from '../config/client';
 import { SUBMIT_ANSWER } from '../constants/answer';
 import type { Session } from "../types/session";
-import type { AnswerChoice, Question } from "@edupulse/question/lib/types/question";
+import type { AnswerChoice } from "@edupulse/quiz";
 
 const schema = z.object({
   sessionId: z

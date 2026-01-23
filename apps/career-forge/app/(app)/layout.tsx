@@ -1,8 +1,7 @@
 import { auth } from '@edupulse/profile';
-import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { ReactNode } from 'react';
-import { type NavigationRoute, Sidebar } from '../../components/sidebar';
+import { Sidebar } from '../../components/sidebar';
 import { TopBar } from '../../components/top-bar';
 
 interface Props {
@@ -10,7 +9,6 @@ interface Props {
 }
 
 async function AppLayout({ children }: Props) {
-  const pathname = (await headers()).get('x-pathname') as NavigationRoute;
 
   const session = await auth();
   if (session === null) {
@@ -28,7 +26,7 @@ async function AppLayout({ children }: Props) {
       </div>
 
       <div className="flex h-screen relative z-10">
-        <Sidebar pathname={pathname} />
+        <Sidebar />
         <div className="flex-1 flex flex-col overflow-hidden">
           <TopBar user={user} />
           <main className="flex-1 overflow-y-auto">{children}</main>
