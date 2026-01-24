@@ -1,7 +1,7 @@
 'use client';
 
 import { create } from 'zustand';
-import type { AnswerChoice, Question } from '@edupulse/question/lib/types/question';
+import type { AnswerChoice, Question } from '@edupulse/quiz';
 import type { Session, SessionProgress, AnswerFeedback } from '../lib/types/session';
 
 export interface SessionState {

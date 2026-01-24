@@ -10,7 +10,7 @@ interface Props {
 
 export async function TopicsList({ topics }: Props) {
   const session = await auth();
-  const studentId = session?.user?.id || GET_DEMO_USER.id
+  const studentId = session?.user?.id
 
   if (topics.length === 0) {
     return (

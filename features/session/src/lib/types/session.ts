@@ -1,4 +1,4 @@
-import type { Difficulty, Question } from "@edupulse/question/lib/types/question";
+import type { Difficulty, Question } from "@edupulse/quiz";
 
 export type SessionStatus = "STARTED" | "NAVIGATION" | "DWELL" | "PAUSED" | "RESUMED" | "COMPLETED"
 

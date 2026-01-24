@@ -2,7 +2,7 @@
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
-import type { AnswerChoice } from '@edupulse/question/lib/types/question';
+import type { AnswerChoice } from '@edupulse/quiz';
 import { submitAnswer, type SubmitAnswerResponse } from '../lib/actions/submit-answer-api';
 import { useSessionStore } from '../stores/session-store';
 import { ApiError } from "../lib/config/client";
