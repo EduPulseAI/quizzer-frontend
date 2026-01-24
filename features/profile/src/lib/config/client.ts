@@ -1,6 +1,7 @@
 import { ApiClient, type ApiResponse, ApiError } from '@edupulse/api-client';
 import type { InternalAxiosRequestConfig } from 'axios';
 import { BACKEND_API_URL } from '.';
+import { auth } from '../auth';
 /**
  * Centralized API client configuration
  *
@@ -21,6 +22,13 @@ const apiClient = new ApiClient({
       config.url,
       config.data
     );
+    const session = await auth();
+    if (session && session.user) {
+      const token = session.user.jwtToken;
+      config.headers.Authorization = "Bearer " + token;
+
+    }
+
   },
   // timeout: 30000,
   // maxRetries: 3,
