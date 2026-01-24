@@ -6,6 +6,7 @@ import { cn } from '@feature/ui/lib/utils';
 import {
   Briefcase,
   Crown,
+  FileText,
   LayoutDashboard,
   MessageSquare,
   Settings,
@@ -19,7 +20,7 @@ const navigation = [
   { name: 'Portfolio', href: '/portfolio', icon: Briefcase },
   // { name: "Skills Analysis", href: "/skills", icon: Target },
   // { name: "Job Matching", href: "/jobs", icon: TrendingUp },
-  // { name: "Resume Builder", href: "/resume", icon: FileText },
+  { name: "Resume Builder", href: "/resume", icon: FileText },
   { name: 'Interview Prep', href: '/prep', icon: MessageSquare },
   // { name: "Learning", href: "/learning", icon: BookOpen },
   { name: 'Settings', href: '/settings', icon: Settings },

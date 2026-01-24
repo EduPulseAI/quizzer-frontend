@@ -7,7 +7,8 @@ import type { Profile } from '../types/profile';
  */
 export const GET_PROFILE: Profile = {
   personal: {
-    name: "Jane Doe",
+    firstName: "Jane",
+    lastName: "Doe",
     title: "Product Designer",
     location: "San Francisco, CA",
     avatar: "/profile/confident-professional.png",

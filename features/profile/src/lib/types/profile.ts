@@ -15,7 +15,8 @@ export interface Profile {
 }
 
 export interface Personal {
-  name: string;
+  firstName: string;
+  lastName: string;
   title: string;
   location: string;
   avatar: string;

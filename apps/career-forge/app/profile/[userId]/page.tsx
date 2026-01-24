@@ -13,7 +13,6 @@ import { Card, CardContent } from '@feature/ui/components/card';
 
 interface Props {
   params: Promise<{ userId: string }>;
-  searchParams: Promise<{}>;
 }
 
 const SkillTagComponent = ({ children }: { children: React.ReactNode }) => {
