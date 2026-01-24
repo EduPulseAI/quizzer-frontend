@@ -10,6 +10,9 @@ const schema = z.object({
   email: z.string().email("invalid email"),
   title: z.string().min(3, "Must contain at least 3 characters"),
   location: z.string().min(3, "Must contain at least 3 characters"),
+  phone: z.string().optional(),
+  workingHours: z.string().optional(),
+  availableForWork: z.boolean(),
   avatarUpload: z.instanceof(File).optional()
 });
 
@@ -28,6 +31,9 @@ export async function updatePersonalInfoAction(
       email: formData.get("email") as string,
       title: formData.get("title") as string,
       location: formData.get("location") as string,
+      phone: formData.get("phone") as string || undefined,
+      workingHours: formData.get("workingHours") as string || undefined,
+      availableForWork: formData.get("availableForWork") === "on",
       avatarUpload: formData.get("avatar-upload") as File
     };
 

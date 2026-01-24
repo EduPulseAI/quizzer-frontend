@@ -1,8 +1,8 @@
 import { ReactNode } from 'react';
-import { ScrollProgressIndicator } from '../../../components/profile/scroll-progress-indicator';
-import { AnimationProvider } from '../../../contexts/animation-context';
+import { ScrollProgressIndicator } from '../../components/profile/scroll-progress-indicator';
+import { AnimationProvider } from '../../contexts/animation-context';
 
-import "./styles.css"
+import "./[userId]/styles.css"
 
 interface Props {
   children: ReactNode;

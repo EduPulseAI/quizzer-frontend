@@ -11,6 +11,7 @@ import { Button } from '@feature/ui/components/button';
 import { CardContent } from '@feature/ui/components/card';
 import { Input } from '@feature/ui/components/input';
 import { Label } from '@feature/ui/components/label';
+import { Switch } from '@feature/ui/components/switch';
 import React, { useActionState, useState } from 'react';
 
 interface Props {
@@ -24,7 +25,7 @@ interface Props {
 export function ProfileSettingsContentForm({
   action,
   initialState = {
-    name: '',
+    firstName: '',
     lastName: '',
     title: '',
     location: '',
@@ -34,7 +35,13 @@ export function ProfileSettingsContentForm({
     workingHours: '',
     availableForWork: false,
     badges: [],
-    social: undefined,
+    social: {
+      Github: '#',
+      Linkedin: '#',
+      Discord: '#',
+      Twitter: '#',
+      Instagram: '#',
+    },
   },
 }: Props) {
   const [formState, formAction, isPending] = useActionState(action, {
@@ -178,6 +185,44 @@ export function ProfileSettingsContentForm({
             className="bg-background/50"
           />
           {displayError('location')}
+        </div>
+        <div className="grid md:grid-cols-2 gap-4">
+          <div className="space-y-2">
+            <Label htmlFor="phone">Phone</Label>
+            <Input
+              id="phone"
+              name="phone"
+              type="tel"
+              autoComplete="tel"
+              defaultValue={formState?.data?.phone}
+              className="bg-background/50"
+            />
+            {displayError('phone')}
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="workingHours">Working Hours</Label>
+            <Input
+              id="workingHours"
+              name="workingHours"
+              placeholder="e.g., 9 AM - 5 PM EST"
+              defaultValue={formState?.data?.workingHours}
+              className="bg-background/50"
+            />
+            {displayError('workingHours')}
+          </div>
+        </div>
+        <div className="flex items-center justify-between rounded-lg border p-4">
+          <div className="space-y-0.5">
+            <Label htmlFor="availableForWork">Available for Work</Label>
+            <p className="text-sm text-muted-foreground">
+              Show that you are open to new opportunities
+            </p>
+          </div>
+          <Switch
+            id="availableForWork"
+            name="availableForWork"
+            defaultChecked={formState?.data?.availableForWork}
+          />
         </div>
         <Button
           type="submit"
