@@ -18,6 +18,7 @@ import { usePathname } from "next/navigation";
 const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
   { name: 'Portfolio', href: '/portfolio', icon: Briefcase },
+  { name: 'Profile', href: '/profile', icon: Briefcase },
   // { name: "Skills Analysis", href: "/skills", icon: Target },
   // { name: "Job Matching", href: "/jobs", icon: TrendingUp },
   { name: "Resume Builder", href: "/resume", icon: FileText },

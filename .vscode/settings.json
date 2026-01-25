@@ -1,0 +1,8 @@
+{
+  "typescript.preferences.includePackageJsonAutoImports": "off",
+  "typescript.suggest.autoImports": true,
+  "typescript.validate.enable": true,
+  "typescript.preferences.jsx": "react-jsx",
+  "typescript.tsdk": "./node_modules/typescript/lib",
+  "npm.packageManager": "pnpm",
+}

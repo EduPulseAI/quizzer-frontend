@@ -70,7 +70,7 @@ export function TopBar({ user }: TopBarProps) {
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" className="gap-2 hover:bg-slate-800/50">
               <Avatar className="h-8 w-8 ring-2 ring-blue-500/50">
-                <AvatarImage src={`${user?.image}?height=32&width=32`} />
+                <AvatarImage src={user?.image} />
                 <AvatarFallback className="bg-gradient-to-br from-blue-500 to-cyan-500 text-white">
                   {initials()}
                 </AvatarFallback>

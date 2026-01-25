@@ -358,8 +358,8 @@ importers:
         specifier: ~22.1.0
         version: 22.1.0
       next-feature:
-        specifier: 0.1.1-beta.6
-        version: 0.1.1-beta.6(b11516869d47df264816f7c1c2f707e4)
+        specifier: 0.1.1-beta.7
+        version: 0.1.1-beta.7(b11516869d47df264816f7c1c2f707e4)
       nx:
         specifier: 22.3.3
         version: 22.3.3(@swc-node/register@1.9.2(@swc/core@1.5.29(@swc/helpers@0.5.17))(@swc/types@0.1.23)(typescript@5.9.3))(@swc/core@1.5.29(@swc/helpers@0.5.17))
@@ -8328,8 +8328,8 @@ packages:
       nodemailer:
         optional: true
 
-  next-feature@0.1.1-beta.6:
-    resolution: {integrity: sha512-1IKlx7l2HpJakKm5YOvsFCUqmYUCHdhGjs3gHuyYezBhMrrhs32AETU1fKqbgQ4gIdWVjDHgftpQkP+xZBWtiA==}
+  next-feature@0.1.1-beta.7:
+    resolution: {integrity: sha512-kwkEmJGwlSbNTZ2k1i1kVpUG3N3eld0uIlcR1pVzZ69vLiBgQmEr/wwr9js5xVxJsEJLkvdgc+5ITSRncBZ6JQ==}
 
   next-themes@0.4.6:
     resolution: {integrity: sha512-pZvgD5L0IEvX5/9GWyHMf3m8BKiVQwsCMHfoFosXtXBMnaS0ZnIJ9ST4b4NqLVKDEm8QBxoNNGNaBv2JNF6XNA==}
@@ -20610,7 +20610,7 @@ snapshots:
       next: 15.5.9(@babel/core@7.28.0)(@opentelemetry/api@1.9.0)(babel-plugin-macros@3.1.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.89.2)
       react: 19.1.0
 
-  next-feature@0.1.1-beta.6(b11516869d47df264816f7c1c2f707e4):
+  next-feature@0.1.1-beta.7(b11516869d47df264816f7c1c2f707e4):
     dependencies:
       '@nx/devkit': 22.0.3(nx@22.3.3(@swc-node/register@1.9.2(@swc/core@1.5.29(@swc/helpers@0.5.17))(@swc/types@0.1.23)(typescript@5.9.3))(@swc/core@1.5.29(@swc/helpers@0.5.17)))
       '@nx/eslint': 22.0.3(@babel/traverse@7.28.0)(@swc-node/register@1.9.2(@swc/core@1.5.29(@swc/helpers@0.5.17))(@swc/types@0.1.23)(typescript@5.9.3))(@swc/core@1.5.29(@swc/helpers@0.5.17))(@zkochan/js-yaml@0.0.7)(eslint@9.32.0(jiti@2.4.2))(nx@22.3.3(@swc-node/register@1.9.2(@swc/core@1.5.29(@swc/helpers@0.5.17))(@swc/types@0.1.23)(typescript@5.9.3))(@swc/core@1.5.29(@swc/helpers@0.5.17)))(verdaccio@6.2.4(encoding@0.1.13)(typanion@3.14.0))

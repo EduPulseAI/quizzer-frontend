@@ -16,13 +16,6 @@ export { default as SessionProgressBar } from './components/session-progress-bar
 export { default as SessionQuestion } from './components/session-question';
 export { default as SessionResults } from './components/session-results';
 
-/**
- * @deprecated Use useSessionStore from './stores/session-store' instead
- */
-export {
-  default as SessionContextProvider,
-  useSession,
-} from './stores/use-session-context';
 
 export * from './hooks/use-next-question';
 export * from './hooks/use-session-events';

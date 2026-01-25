@@ -35,17 +35,37 @@ export function LoginForm({
   const router = useRouter();
 
   useEffect(() => {
-    if (formState?.success) {
+    console.log("[DEBUG] LoginForm#useEffect$formState.success")
+
+    if (formState.success) {
       router.push("/dashboard")
     }
 
-  }, [formState?.success]);
+  }, [formState.success]);
 
   const extractError = (key: string) => {
-    if (formState?.error && formState.error.errors) {
+    if (formState.error && formState.error.errors) {
       return formState.error.errors[key] || '';
     }
     return '';
+  };
+
+  const displayMessage = () => {
+    if (!formState.message) return null;
+
+    const color = formState.success
+      ? 'green'
+      : formState.error
+        ? 'red'
+        : 'primary';
+
+    return (
+      <div
+        className={`rounded-md bg-${color}-50 p-3 text-sm text-${color}-700`}
+      >
+        {formState.message}
+      </div>
+    );
   };
 
   return (
@@ -92,6 +112,8 @@ export function LoginForm({
             {extractError('password')}
           </div>
         </div>
+
+        {displayMessage()}
         <div className="flex items-center justify-between text-sm">
           <Link
             // href="/forgot-password"

@@ -152,29 +152,29 @@ export function ProfileSettingsContentForm({
             />
             {displayError('lastName')}
           </div>
-        </div>
-        <div className="space-y-2">
-          <Label htmlFor="email">Email</Label>
-          <Input
-            id="email"
-            type="email"
-            name="email"
-            autoComplete="email"
-            defaultValue={formState?.data.email}
-            className="bg-background/50"
-          />
-          {displayError('email')}
-        </div>
-        <div className="space-y-2">
-          <Label htmlFor="title">Professional Title</Label>
-          <Input
-            id="title"
-            name="title"
-            autoComplete="organization-title"
-            defaultValue={formState?.data?.title}
-            className="bg-background/50"
-          />
-          {displayError('title')}
+          <div className="space-y-2">
+            <Label htmlFor="email">Email</Label>
+            <Input
+              id="email"
+              type="email"
+              name="email"
+              autoComplete="email"
+              defaultValue={formState?.data.email}
+              className="bg-background/50"
+            />
+            {displayError('email')}
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="title">Professional Title</Label>
+            <Input
+              id="title"
+              name="title"
+              autoComplete="organization-title"
+              defaultValue={formState?.data?.title}
+              className="bg-background/50"
+            />
+            {displayError('title')}
+          </div>
         </div>
         <div className="space-y-2">
           <Label htmlFor="location">Location</Label>
@@ -195,6 +195,7 @@ export function ProfileSettingsContentForm({
               name="phone"
               type="tel"
               autoComplete="tel"
+              placeholder="+1 (555) 000-0000"
               defaultValue={formState?.data?.phone}
               className="bg-background/50"
             />

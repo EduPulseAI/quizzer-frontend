@@ -1,5 +1,2 @@
 // Use this file to export React client components (e.g. those with 'use client' directive) or other non-server utilities
 
-export * from './lib/actions/get-topics-api';
-export * from './lib/constants/topic';
-export * from './lib/types/topic';
