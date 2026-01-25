@@ -1,7 +1,6 @@
 'use server';
 
 import type { User } from 'next-auth';
-import { redirect } from 'next/navigation';
 import { z } from 'zod';
 import { signIn } from '../auth';
 import api, { ApiError, type ApiResponse } from '../config/client';

@@ -26,7 +26,6 @@ async function ProfilePage(props: Props) {
   if (!success || error) {
     console.log("ProfilePage#error", error);
     notFound();
-
   }
 
   return (
@@ -57,7 +56,7 @@ async function ProfilePage(props: Props) {
                 <CardContent className="p-4 sm:p-6">
                   <div className="flex items-center mb-4 sm:mb-6">
                     <BriefcaseIcon className="w-5 h-5 mr-2 text-cyan-400" />
-                    <h3 className="text-lg font-medium">Experience</h3>
+                    <h3 className="text-lg font-medium">Professional Experience</h3>
                   </div>
 
                   <div className="space-y-6 sm:space-y-8">
@@ -179,7 +178,7 @@ async function ProfilePage(props: Props) {
           delay={500}
           className="mt-8 sm:mt-12 py-4 sm:py-6 text-center text-xs sm:text-sm text-zinc-500"
         >
-          <p>© {new Date().getFullYear()} {profile.personal.name}. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} {profile.personal.firstName + " " + profile.personal.lastName}. All rights reserved.</p>
         </AnimatedSection>
       </div>
 

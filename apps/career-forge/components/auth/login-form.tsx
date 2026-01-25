@@ -62,6 +62,7 @@ export function LoginForm({
               id="email"
               type="email"
               name="email"
+              autoComplete="email"
               defaultValue={formState?.data.email}
               placeholder="you@example.com"
               className="pl-10 bg-slate-800/50 border-slate-700 focus:border-blue-500 focus:ring-blue-500/20"
@@ -82,6 +83,7 @@ export function LoginForm({
               id="password"
               type="password"
               name="password"
+              autoComplete={"current-password"}
               placeholder="••••••••"
               defaultValue={formState?.data.password}
               className="pl-10 bg-slate-800/50 border-slate-700 focus:border-blue-500 focus:ring-blue-500/20"

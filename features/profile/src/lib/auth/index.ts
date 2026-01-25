@@ -17,10 +17,11 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
       async authorize(credentials) {
         try {
           const response = await postLogin(credentials);
-          if (response.error) {
-            console.error('authorize#error', response.error);
+          if (response.success) {
+            return response.data;
           }
-          return response.data;
+
+          console.error('authorize#error', response.error);
         } catch (e) {
           console.log('authorize#error', e);
         }

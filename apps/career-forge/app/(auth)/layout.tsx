@@ -7,10 +7,6 @@ interface Props {
 }
 
 async function AuthLayout(props: Props) {
-  const session = await auth();
-  if (session !== null) {
-    redirect("/dashboard")
-  }
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-slate-950 to-blue-950 flex items-center justify-center p-4 relative overflow-hidden">
       {/* Animated background effects */}

@@ -6,11 +6,9 @@ import api from '../config/client';
 import { GET_PROFILE } from '../constants/profile';
 import type { Profile } from '../types/profile';
 
-export async function getProfile(
-  userId: string
-): Promise<ApiResponse<Profile>> {
+export async function getProfile(): Promise<ApiResponse<Profile>> {
   try {
-    const endpoint = '/api/profiles/' + userId;
+    const endpoint = '/api/profiles/me';
     const response = await api.get<Profile>(endpoint);
 
     return {

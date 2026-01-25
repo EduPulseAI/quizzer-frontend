@@ -1,5 +1,4 @@
-
-import { updatePersonalInfoAction, getProfile, auth } from '@edupulse/profile';
+import { getProfile, updatePersonalInfoAction } from '@edupulse/profile';
 import { Button } from '@feature/ui/components/button';
 import {
   Card,
@@ -15,13 +14,7 @@ import type React from 'react';
 import ProfileSettingsContentForm from '../../../components/settings/profile-settings-content-form';
 
 export default async function SettingsPage() {
-  const userId = (await auth())?.user?.id || "";
-  const { data: profile } = await getProfile(userId);
-
-
-  const handleLogout = () => {
-    // router.push('/login');
-  };
+  const { data: profile } = await getProfile();
 
   return (
     <div className="max-w-4xl mx-auto p-6 space-y-6">
@@ -42,7 +35,8 @@ export default async function SettingsPage() {
         </CardHeader>
         <ProfileSettingsContentForm
           action={updatePersonalInfoAction}
-          initialState={profile.personal} />
+          initialState={profile.personal}
+        />
       </Card>
 
       <Card className="glass-effect card-hover">

@@ -17,6 +17,8 @@ interface Props {
 export function EnhancedProfile({ aboutInfo, personalInfo }: Props) {
   const [activeTab, setActiveTab] = useState<"about"|"contact"|string>("about");
 
+  const fullName = personalInfo.firstName + " " + personalInfo.lastName
+
   return (
     <Card className="bg-zinc-900/70 border-zinc-800 backdrop-blur-sm col-span-1 flex flex-col">
       <CardContent className="p-0">
@@ -25,14 +27,15 @@ export function EnhancedProfile({ aboutInfo, personalInfo }: Props) {
           <div className="flex flex-col sm:flex-col items-center w-full">
             <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden mb-4 border-2 border-cyan-400/20 ring-4 ring-zinc-800/50">
               <Image
-                src={personalInfo.avatar || "/confident-professional.png"}
-                alt={personalInfo.name}
+                // src={personalInfo.avatar || "/profile/confident-professional.png"}
+                src={personalInfo.avatar || "/placeholder-logo.png"}
+                alt={fullName}
                 fill
                 className="object-cover"
               />
             </div>
             <div className="text-center">
-              <h2 className="text-xl sm:text-2xl font-bold">{personalInfo.name}</h2>
+              <h2 className="text-xl sm:text-2xl font-bold">{fullName}</h2>
               <p className="text-sm text-cyan-400 mb-1">{personalInfo.title}</p>
               <div className="flex items-center justify-center text-xs text-zinc-400 mb-3">
                 <MapPin className="w-3 h-3 mr-1" />

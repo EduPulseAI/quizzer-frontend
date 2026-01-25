@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 import { ScrollProgressIndicator } from '../../components/profile/scroll-progress-indicator';
 import { AnimationProvider } from '../../contexts/animation-context';
 
-import "./[userId]/styles.css"
+import "./styles.css"
 
 interface Props {
   children: ReactNode;

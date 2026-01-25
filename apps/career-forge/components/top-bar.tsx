@@ -1,6 +1,6 @@
-'use client';
+"use client"
 
-import { signOut } from '@edupulse/profile';
+import { signOut } from 'next-auth/react';
 import {
   Avatar,
   AvatarFallback,
@@ -31,18 +31,13 @@ interface TopBarProps {
 }
 
 export function TopBar({ user }: TopBarProps) {
-
-  const handleLogout = async () => {
-    await signOut({ redirectTo: "/login"})
-  }
-
   const initials = () => {
-    return (user?.name ?? "").split(" ")
-      .map(n => n.at(0))
-      .join("")
+    return (user?.name ?? '')
+      .split(' ')
+      .map((n) => n.at(0))
+      .join('')
       .toUpperCase();
-  }
-
+  };
 
   return (
     <header className="h-16 border-b border-slate-800/50 bg-slate-900/30 backdrop-blur-xl flex items-center justify-between px-6">
@@ -81,7 +76,9 @@ export function TopBar({ user }: TopBarProps) {
                 </AvatarFallback>
               </Avatar>
               <div className="text-left hidden md:block">
-                <p className="text-sm font-medium text-slate-200">{user?.name}</p>
+                <p className="text-sm font-medium text-slate-200">
+                  {user?.name}
+                </p>
                 <p className="text-xs text-slate-500">Free Plan</p>
               </div>
             </Button>
@@ -99,22 +96,20 @@ export function TopBar({ user }: TopBarProps) {
               Profile
             </DropdownMenuItem>
 
-            <Link href='/pricing'>
-              <DropdownMenuItem
-                className="text-slate-300 focus:bg-slate-800 focus:text-slate-100"
-              >
+            <Link href="/pricing">
+              <DropdownMenuItem className="text-slate-300 focus:bg-slate-800 focus:text-slate-100">
                 <CreditCard className="mr-2 h-4 w-4" />
                 Upgrade to Pro
               </DropdownMenuItem>
             </Link>
             <DropdownMenuSeparator className="bg-slate-800" />
-            <DropdownMenuItem
-              className="text-red-400 focus:bg-red-950 focus:text-red-300"
-              onClick={handleLogout}
-            >
-              <LogOut className="mr-2 h-4 w-4" />
-              Log out
-            </DropdownMenuItem>
+              <DropdownMenuItem
+                className="text-red-400 focus:bg-red-950 focus:text-red-300"
+                onClick={() => signOut({ redirectTo: '/login' })}
+              >
+                <LogOut className="mr-2 h-4 w-4" />
+                Log out
+              </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>

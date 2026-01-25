@@ -12,30 +12,24 @@ import { auth } from '../auth';
  * - Authentication handling
  */
 
+const NO_AUTH_PATH_PATTERNS = [
+  /auth\/login/,
+  /users\/student/
+]
+
 const apiClient = new ApiClient({
   baseURL: BACKEND_API_URL,
-  enableRefreshToken: false,
-  async onAuthenticated(config: InternalAxiosRequestConfig) {
-    console.log(
-      '[profile-client]',
-      config.method.toUpperCase(),
-      config.url,
-      config.data
-    );
+  enableRefreshToken: true,
+  skipRefreshPaths: NO_AUTH_PATH_PATTERNS,  // Don't attempt refresh for login/signup
+  maxRetries: 3,
+  onAuthenticated: async (config: InternalAxiosRequestConfig) => {
     const session = await auth();
-    if (session && session.user) {
-      const token = session.user.jwtToken;
-      config.headers.Authorization = "Bearer " + token;
-
+    if (session?.user?.jwtToken) {
+      config.headers.Authorization = `Bearer ${session.user.jwtToken}`;
     }
-
   },
-  // timeout: 30000,
-  // maxRetries: 3,
-  // retryDelay: 1000
 });
 
-// includeInterceptors
 /**
  * Example: Add custom request interceptor
  */

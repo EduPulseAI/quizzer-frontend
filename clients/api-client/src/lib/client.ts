@@ -31,6 +31,7 @@ export class ApiClient {
       enableRefreshToken: false,
       maxRetries: 1,
       retryDelay: 1000,
+      skipRefreshPaths: [],
       onUnauthorized: async () => {
         console.log('[api-client] Unauthorized');
       },
@@ -42,7 +43,7 @@ export class ApiClient {
           '[api-client]',
           config.method?.toUpperCase(),
           config.url,
-          config.data
+          config.data ?? ""
         );
       },
       onRefreshToken: async () => {
@@ -113,6 +114,16 @@ export class ApiClient {
   }
 
   /**
+   * Check if a path should skip the refresh token logic
+   */
+  private shouldSkipRefresh(url: string | undefined): boolean {
+    if (!url || !this.config.skipRefreshPaths?.length) {
+      return false;
+    }
+    return this.config.skipRefreshPaths.some((pattern) => pattern.test(url));
+  }
+
+  /**
    * Handle response errors with retry logic and token refresh
    */
   private async handleResponseRejected(error: AxiosError): Promise<any> {
@@ -125,8 +136,12 @@ export class ApiClient {
       return Promise.reject(handleApiError(error));
     }
 
-    // Handle 401 Unauthorized - attempt token refresh
-    if (error.response?.status === 401 && this.config.enableRefreshToken) {
+    // Handle 401 Unauthorized - attempt token refresh (skip for auth endpoints)
+    if (
+      error.response?.status === 401 &&
+      this.config.enableRefreshToken &&
+      !this.shouldSkipRefresh(originalRequest.url)
+    ) {
       return this.handleUnauthorizedError(error, originalRequest);
     }
 
@@ -202,8 +217,7 @@ export class ApiClient {
    */
   private async refreshToken(): Promise<string> {
     try {
-      const refreshToken = this.config.onRefreshToken();
-
+      const refreshToken = await this.config.onRefreshToken();
       return refreshToken;
     } catch (error) {
       console.error('Token refresh failed:', error);

@@ -1,19 +1,19 @@
 'use server';
 
-import { redirect } from 'next/navigation';
 import { z } from 'zod';
-import { type ApiResponse, ApiError } from '../config/client';
-import api from '../config/client';
+import api, { ApiError, type ApiResponse } from '../config/client';
 
-const schema = z.object({
-  name: z.string().min(2),
-  email: z.string().email(),
-  password: z.string().min(3),
-  confirmPassword: z.string().min(3)
-}).refine((data) => data.password === data.confirmPassword, {
-  message: "Password must match",
-  path: ["confirmPassword"]
-});
+const schema = z
+  .object({
+    name: z.string().min(2),
+    email: z.string().email(),
+    password: z.string().min(3),
+    confirmPassword: z.string().min(3),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: 'Password must match',
+    path: ['confirmPassword'],
+  });
 
 export type SubmitSignupRequest = z.infer<typeof schema>;
 
@@ -51,8 +51,6 @@ export async function submitSignupAction(
       endpoint,
       parsed.data
     );
-
-    console.log("submitSignUp#response", response)
 
     return {
       success: true,

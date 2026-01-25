@@ -79,10 +79,11 @@ export function ProfileSettingsContentForm({
     if (!formState.message) return null;
 
     const color = formState.success
-      ? 'success'
+      ? 'green'
       : formState.error
-      ? 'destructive'
+      ? 'red'
       : 'primary';
+
     return (
       <div
         className={`rounded-md bg-${color}-50 p-3 text-sm text-${color}-700`}

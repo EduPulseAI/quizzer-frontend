@@ -24,6 +24,7 @@ const getIconComponent = (platform: keyof SocialLink) => {
 }
 
 export function SocialLinks({ socialLinks }: SocialLinksProps) {
+  if (!socialLinks) return null;
   return (
     <div className="flex justify-center gap-2 sm:gap-3 my-2 sm:my-3">
       {Object.entries(socialLinks).map(([platform, link], index) => {

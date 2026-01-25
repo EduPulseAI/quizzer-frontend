@@ -27,7 +27,6 @@ export default function LoginPage() {
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
-        {/*<GithubLogin />*/}
         <LoginForm action={submitLoginAction} />
       </CardContent>
     </Card>
