@@ -21,10 +21,12 @@ import {
   CreditCard,
   LogOut,
   Search,
+  Sparkles,
   User as UserIcon,
 } from 'lucide-react';
 import type { User } from 'next-auth';
 import Link from 'next/link';
+import { PROJECT_NAME } from '@feature/base';
 
 interface TopBarProps {
   user?: User | undefined;
@@ -41,8 +43,23 @@ export function TopBar({ user }: TopBarProps) {
 
   return (
     <header className="h-16 border-b border-slate-800/50 bg-slate-900/30 backdrop-blur-xl flex items-center justify-between px-6">
+      <div className="border-b border-slate-800/50">
+        <Link href="/dashboard" className="flex items-center gap-3 group">
+          <div className="p-2 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg shadow-lg shadow-blue-500/50 group-hover:shadow-blue-500/70 transition-all animate-glow">
+            <Sparkles className="h-5 w-5 text-white" />
+          </div>
+          <div>
+            <h1 className="text-lg font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+              {PROJECT_NAME}
+            </h1>
+            <p className="text-xs text-slate-500">Free Plan</p>
+          </div>
+        </Link>
+      </div>
+      
+     
       {/* Search */}
-      <div className="flex-1 max-w-xl">
+      {/* <div className="flex-1 max-w-xl">
         <div className="relative">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500" />
           <Input
@@ -51,7 +68,7 @@ export function TopBar({ user }: TopBarProps) {
             className="pl-10 bg-slate-800/50 border-slate-700 focus:border-blue-500 focus:ring-blue-500/20"
           />
         </div>
-      </div>
+      </div> */}
 
       {/* Right side */}
       <div className="flex items-center gap-4">

@@ -7,7 +7,6 @@
 export interface Profile {
   personal: Personal;
   about: About;
-  navigation: NavigationItem[];
   experience: ExperienceItem[];
   credentials: Credentials;
   technicalSkills: TechnicalSkills;
@@ -45,10 +44,6 @@ export interface Language {
   flag: string;
 }
 
-export interface NavigationItem {
-  label: string;
-  href: string;
-}
 
 export interface ExperienceItem {
   title: string;

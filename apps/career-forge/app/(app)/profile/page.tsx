@@ -3,12 +3,12 @@ import { Button } from '@feature/ui/components/button';
 import { BriefcaseIcon, CodeIcon, GlobeIcon } from 'lucide-react';
 import { notFound } from "next/navigation";
 // import { ProjectCard } from "../../../components/profile/project-card"
-import { ExperienceCard } from "../../components/profile/experience-card"
-import { EnhancedScrollIndicator } from "../../components/profile/enhanced-scroll-indicator"
-import { AnimatedSection } from "../../components/profile/animated-section"
-import { EnhancedProfile } from "../../components/profile/enhanced-profile"
-import { CredentialsSection } from "../../components/profile/credentials-section"
-import { PortfolioHeader } from "../../components/profile/portfolio-header"
+import { ExperienceCard } from "../../../components/profile/experience-card"
+import { EnhancedScrollIndicator } from "../../../components/profile/enhanced-scroll-indicator"
+import { AnimatedSection } from "../../../components/profile/animated-section"
+import { EnhancedProfile } from "../../../components/profile/enhanced-profile"
+import { CredentialsSection } from "../../../components/profile/credentials-section"
+import { PortfolioHeader } from "../../../components/profile/portfolio-header"
 import type React from 'react';
 import { Card, CardContent } from '@feature/ui/components/card';
 

@@ -1,6 +1,5 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@reference "../../globals.css"
+
 
 :root {
     --background: 0 0% 0%;

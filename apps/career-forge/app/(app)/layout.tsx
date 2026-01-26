@@ -26,11 +26,11 @@ async function AppLayout({ children }: Props) {
       </div>
 
       <div className="flex h-screen relative z-10">
-        <Sidebar />
         <div className="flex-1 flex flex-col overflow-hidden">
           <TopBar user={user} />
-          <main className="flex-1 overflow-y-auto">{children}</main>
-        </div>
+            {/* <Sidebar /> */}
+            <main className="flex-1 overflow-y-auto">{children}</main>
+          </div>
       </div>
     </div>
   );

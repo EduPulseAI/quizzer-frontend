@@ -105,8 +105,8 @@ export function EducationFormDialog({
                 required
                 className="bg-background/50"
               />
-              {state.error?.degree && (
-                <p className="text-sm text-destructive">{state.error.degree}</p>
+              {state.error?.errors?.degree && (
+                <p className="text-sm text-destructive">{state.error.errors.degree}</p>
               )}
             </div>
             <div className="grid gap-2">
@@ -119,9 +119,9 @@ export function EducationFormDialog({
                 required
                 className="bg-background/50"
               />
-              {state.error?.institution && (
+              {state.error?.errors?.institution && (
                 <p className="text-sm text-destructive">
-                  {state.error.institution}
+                  {state.error.errors.institution}
                 </p>
               )}
             </div>
@@ -139,8 +139,8 @@ export function EducationFormDialog({
                 required
                 className="bg-background/50"
               />
-              {state.error?.year && (
-                <p className="text-sm text-destructive">{state.error.year}</p>
+              {state.error?.errors?.year && (
+                <p className="text-sm text-destructive">{state.error.errors.year}</p>
               )}
             </div>
             <div className="grid gap-2">
