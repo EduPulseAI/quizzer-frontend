@@ -1,16 +1,19 @@
-import { Card, CardContent, CardHeader, CardTitle } from '@feature/ui/components/card';
-import type {
+"use client"
+
+import {
+  type Education,
+  type ExperienceItem,
   Profile,
-  ExperienceItem,
-  Education,
-  TechnicalSkills,
+  type TechnicalSkills,
+  useProfileStore
 } from '@edupulse/profile';
+import { Card, CardContent, CardHeader, CardTitle } from '@feature/ui/components/card';
 
 interface ResumePreviewProps {
-  profile: Profile;
 }
 
-export function ResumePreview({ profile }: ResumePreviewProps) {
+export function ResumePreview({}: ResumePreviewProps) {
+  const profile: Profile = useProfileStore((state) => state.profile);
   const { personal, about, experience, credentials, technicalSkills } = profile;
 
   const fullName = `${personal?.firstName || 'Your'} ${personal?.lastName || 'Name'}`;

@@ -5,13 +5,11 @@ import { Card, CardContent, CardHeader, CardTitle } from '@feature/ui/components
 import { Button } from '@feature/ui/components/button';
 import { Briefcase, Trash2 } from 'lucide-react';
 import { ExperienceFormDialog } from './experience-form-dialog';
-import { deleteExperienceAction, type ExperienceItem } from '@edupulse/profile';
+import { deleteExperienceAction, useProfileStore, type ExperienceItem } from '@edupulse/profile';
 
-interface ExperienceListProps {
-  experiences: ExperienceItem[];
-}
+export function ExperienceList() {
+  const { experience } = useProfileStore(state => state.profile)
 
-export function ExperienceList({ experiences }: ExperienceListProps) {
   const [isPending, startTransition] = useTransition();
 
   const handleDelete = (index: number) => {
@@ -32,13 +30,13 @@ export function ExperienceList({ experiences }: ExperienceListProps) {
         <ExperienceFormDialog mode="add" />
       </CardHeader>
       <CardContent className="space-y-4">
-        {experiences.length === 0 ? (
+        {experience.length === 0 ? (
           <p className="text-sm text-muted-foreground text-center py-4">
             No work experience added yet. Click the + button to add one.
           </p>
         ) : (
           <div className="space-y-4">
-            {experiences.map((exp, index) => (
+            {experience.map((exp, index) => (
               <div
                 key={index}
                 className="border border-border rounded-lg p-4 space-y-2"

@@ -1,18 +1,10 @@
-import { getProfile } from '@edupulse/profile';
 import { Button } from '@feature/ui/components/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@feature/ui/components/card';
-import { Input } from '@feature/ui/components/input';
-import { Textarea } from '@feature/ui/components/textarea';
-import { Download, FileText, Upload } from 'lucide-react';
-import { ExperienceList } from '../../../components/resume/experience-list';
-import { EducationList } from '../../../components/resume/education-list';
-import { ResumePreview } from '../../../components/resume/resume-preview';
+import ProfileView from 'apps/career-forge/components/resume/profile-view';
+import { Download, Upload } from 'lucide-react';
 import { ProfileChatPanel } from '../../../components/resume/profile-chat-panel';
+import { ResumePreview } from '../../../components/resume/resume-preview';
 
 export default async function ResumePage() {
-  const { data: profile } = await getProfile();
-
-  const { personal, about, experience, credentials } = profile;
 
   return (
     <div className="min-h-screen bg-background pb-24">
@@ -54,83 +46,11 @@ export default async function ResumePage() {
         </div>
 
         <div className="grid lg:grid-cols-3 gap-6">
-          <div className="space-y-6">
-            {/* Personal Information Card */}
-            <Card className="glass-effect card-hover">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <FileText className="h-5 w-5 text-blue-400" />
-                  Personal Information
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium">First Name</label>
-                    <Input
-                      placeholder="John"
-                      defaultValue={personal?.firstName || ''}
-                      className="bg-background/50"
-                      readOnly
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium">Last Name</label>
-                    <Input
-                      placeholder="Doe"
-                      defaultValue={personal?.lastName || ''}
-                      className="bg-background/50"
-                      readOnly
-                    />
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-medium">Email</label>
-                  <Input
-                    type="email"
-                    placeholder="john@example.com"
-                    defaultValue={personal?.email || ''}
-                    className="bg-background/50"
-                    readOnly
-                  />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-medium">Phone</label>
-                  <Input
-                    type="tel"
-                    placeholder="+1 (555) 000-0000"
-                    defaultValue={personal?.phone || ''}
-                    className="bg-background/50"
-                    readOnly
-                  />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-medium">
-                    Professional Summary
-                  </label>
-                  <Textarea
-                    placeholder="Brief summary of your experience..."
-                    defaultValue={about?.bio || ''}
-                    className="min-h-24 bg-background/50"
-                    readOnly
-                  />
-                </div>
-                <p className="text-xs text-muted-foreground">
-                  Edit personal information in your profile settings
-                </p>
-              </CardContent>
-            </Card>
-
-            {/* Work Experience List */}
-            <ExperienceList experiences={experience || []} />
-
-            {/* Education List */}
-            <EducationList education={credentials?.education || []} />
-          </div>
+          <ProfileView />
 
           {/* Resume Preview */}
           <div className="lg:sticky lg:top-6 h-fit">
-            <ResumePreview profile={profile} />
+            <ResumePreview />
           </div>
 
           {/* AI Chat Panel */}

@@ -7,6 +7,46 @@ import type { Profile } from '../types/profile';
  */
 export const GET_PROFILE: Profile = {
   personal: {
+    firstName: '',
+    lastName: '',
+    title: '',
+    location: '',
+    avatar: '',
+    email: '',
+    phone: '',
+    workingHours: '',
+    availableForWork: false,
+    badges: [],
+    social: {
+      Github: '',
+      Linkedin: '',
+      Discord: '',
+      Twitter: '',
+      Instagram: ''
+    }
+  },
+  about: {
+    bio: '',
+    focus: [],
+    languages: [],
+    interests: []
+  },
+  experience: [],
+  credentials: {
+    certifications: [],
+    education: [],
+    skills: []
+  },
+  technicalSkills: {
+    design: [],
+    development: [],
+    uxMethods: [],
+    softSkills: []
+  }
+}
+
+export const MOCK_PROFILE: Profile = {
+  personal: {
     firstName: "Jane",
     lastName: "Doe",
     title: "Product Designer",

@@ -1,17 +1,16 @@
 'use client';
 
-import { useTransition } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@feature/ui/components/card';
+import { deleteEducationAction, useProfileStore } from '@edupulse/profile';
 import { Button } from '@feature/ui/components/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@feature/ui/components/card';
 import { GraduationCap, Trash2 } from 'lucide-react';
+import { useTransition } from 'react';
 import { EducationFormDialog } from './education-form-dialog';
-import { deleteEducationAction, type Education } from '@edupulse/profile';
 
-interface EducationListProps {
-  education: Education[];
-}
+export function EducationList() {
+  const { credentials } = useProfileStore(state => state.profile);
+  const education = credentials.education;
 
-export function EducationList({ education }: EducationListProps) {
   const [isPending, startTransition] = useTransition();
 
   const handleDelete = (index: number) => {
