@@ -6,4 +6,5 @@ export * from './lib/actions/experience-actions';
 export * from './lib/actions/education-actions';
 export * from './lib/auth';
 export * from './lib/constants/profile';
+export * from './lib/constants/prompts';
 export * from './lib/types/profile';

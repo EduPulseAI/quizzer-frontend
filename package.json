@@ -5,7 +5,10 @@
   "scripts": {},
   "private": true,
   "dependencies": {
+    "@ai-sdk/google": "^3.0.13",
     "@ai-sdk/groq": "3.0.10",
+    "@ai-sdk/openai": "^3.0.18",
+    "@ai-sdk/react": "^3.0.51",
     "@auth/prisma-adapter": "^2.11.1",
     "@emotion/is-prop-valid": "latest",
     "@hookform/resolvers": "^3.10.0",

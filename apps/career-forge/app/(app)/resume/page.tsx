@@ -7,6 +7,7 @@ import { Download, FileText, Upload } from 'lucide-react';
 import { ExperienceList } from '../../../components/resume/experience-list';
 import { EducationList } from '../../../components/resume/education-list';
 import { ResumePreview } from '../../../components/resume/resume-preview';
+import { ProfileChatPanel } from '../../../components/resume/profile-chat-panel';
 
 export default async function ResumePage() {
   const { data: profile } = await getProfile();
@@ -52,7 +53,7 @@ export default async function ResumePage() {
           </div>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-6">
+        <div className="grid lg:grid-cols-3 gap-6">
           <div className="space-y-6">
             {/* Personal Information Card */}
             <Card className="glass-effect card-hover">
@@ -130,6 +131,11 @@ export default async function ResumePage() {
           {/* Resume Preview */}
           <div className="lg:sticky lg:top-6 h-fit">
             <ResumePreview profile={profile} />
+          </div>
+
+          {/* AI Chat Panel */}
+          <div className="lg:sticky lg:top-6 h-fit">
+            <ProfileChatPanel />
           </div>
         </div>
       </div>

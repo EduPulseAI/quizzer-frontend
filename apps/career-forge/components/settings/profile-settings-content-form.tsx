@@ -14,6 +14,22 @@ import { Label } from '@feature/ui/components/label';
 import { Switch } from '@feature/ui/components/switch';
 import React, { useActionState, useState } from 'react';
 
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupButton,
+  InputGroupInput,
+  InputGroupText,
+  InputGroupTextarea,
+} from '@feature/ui/components/input-group'
+import { Separator } from '@feature/ui/components/separator'
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '@feature/ui/components/tooltip'
+import { Info } from 'lucide-react';
+
 interface Props {
   action: (
     prevState: ApiResponse<Personal>,
@@ -213,6 +229,40 @@ export function ProfileSettingsContentForm({
             {displayError('workingHours')}
           </div>
         </div>
+
+        <Separator />
+
+        <div className="grid md:grid-cols-2 gap-4">
+          <div className="space-y-2">
+            <Label htmlFor="social-github">Github</Label>
+            <InputGroup>
+              <InputGroupInput
+              placeholder="EdupulseAi" 
+              className="text-bold" 
+              type=""
+              name="social-github"
+              id="social-github"
+              autoComplete="username"
+              />
+              <InputGroupAddon>
+                <InputGroupText>https://github.com/</InputGroupText>
+              </InputGroupAddon>
+              <InputGroupAddon align="inline-end">
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <InputGroupButton className="rounded-full" size="icon-xs">
+                      <Info />
+                    </InputGroupButton>
+                  </TooltipTrigger>
+                  <TooltipContent>This is content in a tooltip.</TooltipContent>
+                </Tooltip>
+              </InputGroupAddon>
+            </InputGroup>
+          </div>
+        </div>
+
+        <Separator />
+        
         <div className="flex items-center justify-between rounded-lg border p-4">
           <div className="space-y-0.5">
             <Label htmlFor="availableForWork">Available for Work</Label>
