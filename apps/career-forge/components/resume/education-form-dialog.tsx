@@ -71,10 +71,11 @@ export function EducationFormDialog({
         {mode === 'add' ? (
           <Button
             size="sm"
-            variant="ghost"
-            className="text-blue-400 hover:text-blue-300"
+            variant="outline"
+            className="text-blue-400 cursor-pointer hover:text-blue-300 bg-transparent w-full"
           >
             <Plus className="h-4 w-4" />
+            Add Education
           </Button>
         ) : (
           <Button size="icon" variant="ghost" className="h-8 w-8">

@@ -8,11 +8,10 @@ import {
   useProfileStore
 } from '@edupulse/profile';
 import { Card, CardContent, CardHeader, CardTitle } from '@feature/ui/components/card';
+import { Button } from '@feature/ui/components/button';
+import { Download, FileText } from 'lucide-react';
 
-interface ResumePreviewProps {
-}
-
-export function ResumePreview({}: ResumePreviewProps) {
+export function ResumePreview() {
   const profile: Profile = useProfileStore((state) => state.profile);
   const { personal, about, experience, credentials, technicalSkills } = profile;
 
@@ -26,12 +25,24 @@ export function ResumePreview({}: ResumePreviewProps) {
     .join(' | ');
 
   return (
-    <Card className="glass-effect">
-      <CardHeader>
-        <CardTitle>Resume Preview</CardTitle>
+    <Card className="glass-effect flex flex-col h-full !py-0 !gap-0">
+      <CardHeader className="flex-shrink-0 border-b border-border py-4 px-4">
+        <div className="flex items-center justify-between">
+          <CardTitle className="flex items-center gap-2">
+            <FileText className="h-5 w-5 text-blue-400" />
+            Resume Preview
+          </CardTitle>
+          <Button
+            size="sm"
+            className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500"
+          >
+            <Download className="h-4 w-4 mr-2" />
+            Download PDF
+          </Button>
+        </div>
       </CardHeader>
-      <CardContent>
-        <div className="bg-white text-black p-8 rounded-lg min-h-[800px] shadow-xl">
+      <CardContent className="flex-1 min-h-0 overflow-y-auto p-4">
+        <div className="bg-white text-black p-8 rounded-lg shadow-xl">
           <div className="space-y-6">
             {/* Header */}
             <div className="border-b-2 border-blue-600 pb-4">

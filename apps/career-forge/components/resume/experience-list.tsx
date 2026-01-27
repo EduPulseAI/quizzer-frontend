@@ -1,11 +1,11 @@
 'use client';
 
-import { useTransition } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@feature/ui/components/card';
+import { deleteExperienceAction, useProfileStore } from '@edupulse/profile';
 import { Button } from '@feature/ui/components/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@feature/ui/components/card';
 import { Briefcase, Trash2 } from 'lucide-react';
+import { useTransition } from 'react';
 import { ExperienceFormDialog } from './experience-form-dialog';
-import { deleteExperienceAction, useProfileStore, type ExperienceItem } from '@edupulse/profile';
 
 export function ExperienceList() {
   const { experience } = useProfileStore(state => state.profile)
