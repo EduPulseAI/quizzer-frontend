@@ -1,6 +1,12 @@
 'use client';
 
-import { useActionState, useEffect, useState } from 'react';
+import type { ApiResponse } from '@edupulse/api-client';
+import {
+  addExperienceAction,
+  updateExperienceAction,
+  type ExperienceItem
+} from '@edupulse/profile';
+import { Button } from '@feature/ui/components/button';
 import {
   Dialog,
   DialogContent,
@@ -10,17 +16,11 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@feature/ui/components/dialog';
-import { Button } from '@feature/ui/components/button';
 import { Input } from '@feature/ui/components/input';
 import { Label } from '@feature/ui/components/label';
 import { Textarea } from '@feature/ui/components/textarea';
 import { Pencil, Plus } from 'lucide-react';
-import {
-  addExperienceAction,
-  updateExperienceAction,
-  type ExperienceItem,
-} from '@edupulse/profile';
-import type { ApiResponse } from '@edupulse/api-client';
+import { useActionState, useEffect, useState } from 'react';
 
 interface ExperienceFormDialogProps {
   mode: 'add' | 'edit';
@@ -41,10 +41,11 @@ const initialState: ApiResponse<ExperienceItem> = {
   },
 };
 
-export function ExperienceFormDialog({
+export function 
+ExperienceFormDialog({
   mode,
   index,
-  experience,
+  experience
 }: ExperienceFormDialogProps) {
   const [open, setOpen] = useState(false);
 
@@ -66,7 +67,6 @@ export function ExperienceFormDialog({
     }
   }, [state.success]);
 
-  const defaultValues = mode === 'edit' && experience ? experience : initialState.data;
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -105,7 +105,7 @@ export function ExperienceFormDialog({
                 id="title"
                 name="title"
                 placeholder="Senior Software Engineer"
-                defaultValue={defaultValues.title}
+                defaultValue={state.data.title}
                 required
                 className="bg-background/50"
               />
@@ -119,7 +119,7 @@ export function ExperienceFormDialog({
                 id="company"
                 name="company"
                 placeholder="Tech Corp Inc."
-                defaultValue={defaultValues.company}
+                defaultValue={state.data.company}
                 required
                 className="bg-background/50"
               />
@@ -134,7 +134,7 @@ export function ExperienceFormDialog({
                 name="period"
                 type="month"
                 placeholder="Jan 2020 - Present"
-                defaultValue={defaultValues.period}
+                defaultValue={state.data.period}
                 required
                 className="bg-background/50"
               />
@@ -148,7 +148,7 @@ export function ExperienceFormDialog({
                 id="description"
                 name="description"
                 placeholder="Brief description of your role..."
-                defaultValue={defaultValues.description}
+                defaultValue={state.data.description}
                 className="min-h-20 resize-none bg-background/50"
               />
             </div>
@@ -160,7 +160,7 @@ export function ExperienceFormDialog({
                 id="achievements"
                 name="achievements"
                 placeholder="Led team of 5 engineers&#10;Reduced deployment time by 50%&#10;Implemented CI/CD pipeline"
-                defaultValue={defaultValues.achievements?.join('\n')}
+                defaultValue={state.data.achievements?.join('\n')}
                 className="min-h-24 resize-none bg-background/50"
               />
             </div>
@@ -172,7 +172,7 @@ export function ExperienceFormDialog({
                 id="technologies"
                 name="technologies"
                 placeholder="React, TypeScript, Node.js, AWS"
-                defaultValue={defaultValues.technologies?.join(', ')}
+                defaultValue={state.data.technologies?.join(', ')}
                 className="bg-background/50"
               />
             </div>

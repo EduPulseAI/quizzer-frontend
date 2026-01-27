@@ -13,8 +13,8 @@ import {
   AccordionTrigger,
 } from '@feature/ui/components/accordion';
 import { Button } from '@feature/ui/components/button';
-import { Textarea } from '@feature/ui/components/textarea';
 import { Briefcase, GraduationCap, Trash2, User } from 'lucide-react';
+import { AboutFormDialog } from './about-form-dialog';
 import { ExperienceFormDialog } from './experience-form-dialog';
 import { EducationFormDialog } from './education-form-dialog';
 
@@ -95,14 +95,14 @@ function AboutForm() {
 
   return (
     <div className="space-y-4 pt-2">
+      <div className="flex justify-end">
+        <AboutFormDialog />
+      </div>
       <div className="space-y-1">
         <label className="text-xs font-medium text-muted-foreground">Bio</label>
-        <Textarea
-          placeholder="Brief summary of your experience..."
-          defaultValue={about?.bio || ''}
-          className="min-h-24 bg-background/50 text-sm"
-          readOnly
-        />
+        <p className="text-sm text-foreground/80 whitespace-pre-wrap">
+          {about?.bio || 'No bio added yet'}
+        </p>
       </div>
       {about?.focus && about.focus.length > 0 && (
         <div className="space-y-1">

@@ -46,7 +46,7 @@ export function EducationFormDialog({
   const [open, setOpen] = useState(false);
 
   const boundAction =
-    mode === 'edit' && index !== undefined
+      mode === 'edit' && index !== undefined
       ? updateEducationAction.bind(null, index)
       : addEducationAction;
 
