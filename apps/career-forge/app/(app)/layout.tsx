@@ -25,7 +25,8 @@ async function AppLayout({ children }: Props) {
         <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl animate-pulse delay-1000" />
       </div>
 
-      <div className="flex h-screen relative z-10">
+      {/* <div className="flex h-screen relative z-10"> */}
+      <div className="flex h-screen w-full">
         <div className="flex-1 flex flex-col overflow-hidden">
           <TopBar user={user} />
             {/* <Sidebar /> */}

@@ -1,13 +1,9 @@
 'use client';
 
-import { useEffect, type ReactNode } from 'react';
+import { type ReactNode, useEffect } from 'react';
+import { useSessionEvents } from '../hooks/use-session-events';
 import type { Session } from '../lib/types/session';
 import { useSessionStore } from '../stores/session-store';
-import { useSessionEvents } from '../hooks/use-session-events';
-import SessionHeader from './session-header';
-import SessionProgressBar from './session-progress-bar';
-import SessionQuestion from './session-question';
-import SessionFeedback from './session-feedback';
 
 interface Props {
   session: Session;

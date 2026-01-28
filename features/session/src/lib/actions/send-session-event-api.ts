@@ -1,10 +1,11 @@
 'use server';
 
-import { type ApiResponse, ApiError } from '../config/client';
 import { z } from 'zod';
-
-import api from '../config/client';
-import { SessionEventType, type SessionEventPayload } from '../types/session-event';
+import api, { ApiError, type ApiResponse } from '../config/client';
+import {
+  type SessionEventPayload,
+  SessionEventType,
+} from '../types/session-event';
 
 const schema = z.object({
   sessionId: z.string().min(1, 'Session ID is required'),

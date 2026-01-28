@@ -1,6 +1,12 @@
-import type { Difficulty, Question } from "@edupulse/quiz";
+import type { Difficulty, Question } from '@edupulse/quiz';
 
-export type SessionStatus = "STARTED" | "NAVIGATION" | "DWELL" | "PAUSED" | "RESUMED" | "COMPLETED"
+export type SessionStatus =
+  | 'STARTED'
+  | 'NAVIGATION'
+  | 'DWELL'
+  | 'PAUSED'
+  | 'RESUMED'
+  | 'COMPLETED';
 
 /**
  * [session]

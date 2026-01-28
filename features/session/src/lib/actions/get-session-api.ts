@@ -2,12 +2,11 @@
 
 import api, { ApiError, type ApiResponse } from '../config/client';
 import { GET_SESSION } from '../constants/session';
-import type { Session } from "../types/session";
-
+import type { Session } from '../types/session';
 
 export interface GetSessionResponse {
   isComplete: boolean;
-  session: Session
+  session: Session;
 }
 
 export async function getSession(

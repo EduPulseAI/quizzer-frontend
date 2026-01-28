@@ -8,6 +8,9 @@ import axios, {
 import type { ApiClientConfig } from './types/client';
 import handleApiError from './utils/error';
 
+// @ts-expect-error todo
+import { name, version } from "../../package.json";
+
 /**
  * Pending request queue item
  */
@@ -43,7 +46,7 @@ export class ApiClient {
           '[api-client]',
           config.method?.toUpperCase(),
           config.url,
-          config.data ?? ""
+          config.data ?? ''
         );
       },
       onRefreshToken: async () => {
@@ -57,6 +60,7 @@ export class ApiClient {
       timeout: this.config.timeout,
       headers: {
         'Content-Type': 'application/json',
+        'User-Agent': `${name}:${version}`
       },
     });
 
@@ -88,7 +92,7 @@ export class ApiClient {
   ): Promise<InternalAxiosRequestConfig> {
     try {
       if (this.config.onAuthenticated) {
-        this.config.onAuthenticated(config);
+        await this.config.onAuthenticated(config);
       }
 
       return config;
@@ -188,7 +192,7 @@ export class ApiClient {
     this.isRefreshing = true;
 
     try {
-      const newToken = await this.refreshToken();
+      const newToken = await this.refreshToken(originalRequest);
 
       // Update the original request with new token
       originalRequest.headers.Authorization = `Bearer ${newToken}`;
@@ -215,10 +219,15 @@ export class ApiClient {
   /**
    * Refresh the JWT token using the refresh token
    */
-  private async refreshToken(): Promise<string> {
+  private async refreshToken(
+    originalRequest: InternalAxiosRequestConfig<any> & { _retry?: boolean }
+  ): Promise<string> {
     try {
       const refreshToken = await this.config.onRefreshToken();
-      return refreshToken;
+      return await this.post<string>("/api/auth/refresh", {
+          refreshToken,
+        headers: originalRequest.headers
+      })
     } catch (error) {
       console.error('Token refresh failed:', error);
       throw error;

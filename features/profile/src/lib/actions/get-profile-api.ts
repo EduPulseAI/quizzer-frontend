@@ -1,8 +1,6 @@
 'use server';
 
-import { type ApiResponse, ApiError } from '../config/client';
-
-import api from '../config/client';
+import api, { ApiError, type ApiResponse } from '../config/client';
 import { GET_PROFILE } from '../constants/profile';
 import type { Profile } from '../types/profile';
 

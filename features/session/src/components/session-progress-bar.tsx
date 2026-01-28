@@ -5,7 +5,8 @@ import { useSessionStore } from '../stores/session-store';
 export function SessionProgressBar() {
   const { progress } = useSessionStore();
 
-  const progressPercentage = (progress.currentIndex / progress.totalQuestions) * 100;
+  const progressPercentage =
+    (progress.currentIndex / progress.totalQuestions) * 100;
 
   return (
     <div className="space-y-2">

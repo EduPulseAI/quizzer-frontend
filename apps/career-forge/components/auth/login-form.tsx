@@ -35,8 +35,6 @@ export function LoginForm({
   const router = useRouter();
 
   useEffect(() => {
-    console.log("[DEBUG] LoginForm#useEffect$formState.success")
-
     if (formState.success) {
       router.push("/dashboard")
     }
@@ -130,7 +128,7 @@ export function LoginForm({
           className="w-full bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white shadow-lg shadow-blue-500/30 transition-all hover:shadow-blue-500/50 hover:scale-[1.02]"
           disabled={isPending}
         >
-          {isPending ? 'Signing in...' : 'Sign In'}
+          {isPending ? 'Signing in...' : formState.success ? 'Redirecting..': 'Sign In'}
           <ArrowRight className="ml-2 h-4 w-4" />
         </Button>
         <p className="text-center text-sm text-slate-400">

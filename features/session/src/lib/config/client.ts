@@ -1,6 +1,7 @@
-import { ApiClient, type ApiResponse, ApiError } from '@edupulse/api-client'
+import { ApiClient, ApiError, type ApiResponse } from '@edupulse/api-client';
+import type { InternalAxiosRequestConfig } from 'axios';
 import { BACKEND_API_URL } from '.';
-import type { InternalAxiosRequestConfig } from "axios";
+
 /**
  * Centralized API client configuration
  *
@@ -19,7 +20,7 @@ const apiClient = new ApiClient({
       '[session-client]',
       config.method?.toUpperCase(),
       config.url,
-      config.data
+      config.data ?? ""
     );
   },
   // timeout: 30000,

@@ -1,4 +1,4 @@
-import type { SubmitAnswerResponse } from "../actions/submit-answer-api";
+import type { SubmitAnswerResponse } from '../actions/submit-answer-api';
 
 /**
  * [submit-answer]

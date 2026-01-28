@@ -2,8 +2,8 @@
 
 import { useQuery } from '@tanstack/react-query';
 import { getNextQuestion } from '../lib/actions/get-next-question-api';
+import { ApiError } from '../lib/config/client';
 import { useSessionStore } from '../stores/session-store';
-import { ApiError } from "../lib/config/client";
 
 export function useNextQuestion() {
   const { session, feedback } = useSessionStore();

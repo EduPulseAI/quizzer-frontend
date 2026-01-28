@@ -1,3 +1,5 @@
+import type { Education } from '../types/profile';
+
 /**
  * [education]
  * next-feature@0.1.1-beta.7

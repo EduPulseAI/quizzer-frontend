@@ -1,7 +1,8 @@
-import { ApiClient, type ApiResponse, ApiError } from '@edupulse/api-client';
-import type { InternalAxiosRequestConfig } from 'axios';
+import { ApiClient, ApiError, type ApiResponse } from '@edupulse/api-client';
+import { type InternalAxiosRequestConfig } from 'axios';
 import { BACKEND_API_URL } from '.';
 import { auth } from '../auth';
+
 /**
  * Centralized API client configuration
  *
@@ -19,15 +20,23 @@ const NO_AUTH_PATH_PATTERNS = [
 
 const apiClient = new ApiClient({
   baseURL: BACKEND_API_URL,
-  enableRefreshToken: true,
+  enableRefreshToken: false,
   skipRefreshPaths: NO_AUTH_PATH_PATTERNS,  // Don't attempt refresh for login/signup
   maxRetries: 3,
   onAuthenticated: async (config: InternalAxiosRequestConfig) => {
     const session = await auth();
+
     if (session?.user?.jwtToken) {
       config.headers.Authorization = `Bearer ${session.user.jwtToken}`;
     }
   },
+  onRefreshToken: async () => {
+    const session = await auth();
+    if (session?.user?.refreshToken) {
+        return session.user.refreshToken;
+    }
+    throw new Error("No refresh token found")
+  }
 });
 
 /**

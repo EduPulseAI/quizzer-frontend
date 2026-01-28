@@ -1,20 +1,14 @@
 'use server';
 
-import { type ApiResponse, ApiError } from '../config/client';
+import { Difficulty, Question } from '@edupulse/quiz';
 import { z } from 'zod';
 
-import api from '../config/client';
+import api, { ApiError, type ApiResponse } from '../config/client';
 import { START_SESSION } from '../constants/session';
 
-import { Question, Difficulty } from "@edupulse/quiz";
-
 const schema = z.object({
-  studentId: z
-    .string()
-    .uuid(),
-  topicId: z
-    .string()
-    .uuid()
+  studentId: z.string().uuid(),
+  topicId: z.string().uuid(),
 });
 export type StartSessionRequest = z.infer<typeof schema>;
 

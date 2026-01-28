@@ -1,8 +1,11 @@
 'use client';
 
-import { useEffect, useRef, useCallback } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import { sendSessionEvent } from '../lib/actions/send-session-event-api';
-import { SessionEventType, type SessionEventPayload } from '../lib/types/session-event';
+import {
+  type SessionEventPayload,
+  SessionEventType,
+} from '../lib/types/session-event';
 import { useSessionStore } from '../stores/session-store';
 
 export function useSessionEvents() {
@@ -11,7 +14,10 @@ export function useSessionEvents() {
   const previousQuestionIdRef = useRef<string | null>(null);
 
   const publishEvent = useCallback(
-    async (eventType: SessionEventType, additionalData?: Partial<SessionEventPayload>) => {
+    async (
+      eventType: SessionEventType,
+      additionalData?: Partial<SessionEventPayload>
+    ) => {
       if (!session) return;
 
       const payload: SessionEventPayload = {

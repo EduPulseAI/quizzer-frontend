@@ -1,4 +1,4 @@
-import type { GetSessionResponse } from "../actions/get-session-api";
+import type { GetSessionResponse } from '../actions/get-session-api';
 import type { StartSessionResponse } from '../actions/start-session-api';
 
 /**

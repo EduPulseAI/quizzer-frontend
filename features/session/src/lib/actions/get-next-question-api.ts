@@ -1,9 +1,8 @@
 'use server';
 
-import { Question } from "@edupulse/quiz";
+import { Question } from '@edupulse/quiz';
 import api, { ApiError, type ApiResponse } from '../config/client';
-import type { Session } from "../types/session";
-
+import type { Session } from '../types/session';
 
 export async function getNextQuestion(
   session: Session
@@ -11,7 +10,7 @@ export async function getNextQuestion(
   try {
     const params: URLSearchParams = new URLSearchParams({
       sessionId: session.id,
-      difficulty: session.currentDifficulty
+      difficulty: session.currentDifficulty,
     });
 
     const endpoint = '/api/quiz/questions/next?' + params.toString();

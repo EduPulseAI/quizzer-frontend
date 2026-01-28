@@ -1,17 +1,14 @@
 'use server';
 
-import { type ApiResponse, ApiError } from '../config/client';
-
-import api from '../config/client';
+import api, { ApiError, type ApiResponse } from '../config/client';
 import type { Session } from '../types/session';
-
 
 export async function getRecentSessions(
   studentId: string
 ): Promise<ApiResponse<Session[]>> {
   try {
     const params: URLSearchParams = new URLSearchParams({
-      studentId
+      studentId,
     });
     const endpoint = '/api/quiz/sessions?' + params.toString();
     const response = await api.get<Session[]>(endpoint);

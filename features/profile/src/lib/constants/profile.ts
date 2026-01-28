@@ -86,13 +86,13 @@ export const MOCK_PROFILE: Profile = {
       "Photography",
     ],
   },
-  navigation: [
-    { label: "Home", href: "/" },
-    { label: "Experience", href: "#experience" },
-    { label: "Credentials", href: "#credentials" },
-    { label: "Skills", href: "#skills" },
-    { label: "Projects", href: "#projects" },
-  ],
+  // navigation: [
+  //   { label: "Home", href: "/" },
+  //   { label: "Experience", href: "#experience" },
+  //   { label: "Credentials", href: "#credentials" },
+  //   { label: "Skills", href: "#skills" },
+  //   { label: "Projects", href: "#projects" },
+  // ],
   experience: [
     {
       title: "Senior Product Designer",

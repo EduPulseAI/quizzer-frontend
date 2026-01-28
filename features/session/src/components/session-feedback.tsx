@@ -1,8 +1,8 @@
 'use client';
 
 import { Button } from '@feature/ui/components/button';
-import { useSessionStore } from '../stores/session-store';
 import { useNextQuestion } from '../hooks/use-next-question';
+import { useSessionStore } from '../stores/session-store';
 
 export function SessionFeedback() {
   const { feedback, currentQuestion, proceedToNext } = useSessionStore();

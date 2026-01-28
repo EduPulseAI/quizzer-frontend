@@ -1,6 +1,5 @@
-
-import Link from 'next/link';
 import { Button } from '@feature/ui/components/button';
+import Link from 'next/link';
 import type { GetSessionResponse } from '../lib/actions/get-session-api';
 
 interface Props {

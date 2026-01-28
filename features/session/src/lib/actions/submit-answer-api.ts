@@ -1,18 +1,15 @@
 'use server';
 
-import { type ApiResponse, ApiError } from '../config/client';
+import type { AnswerChoice } from '@edupulse/quiz';
 import { z } from 'zod';
 
-import api from '../config/client';
+import api, { ApiError, type ApiResponse } from '../config/client';
 import { SUBMIT_ANSWER } from '../constants/answer';
-import type { Session } from "../types/session";
-import type { AnswerChoice } from "@edupulse/quiz";
+import type { Session } from '../types/session';
 
 const schema = z.object({
-  sessionId: z
-    .string(),
-  answerId: z
-    .string()
+  sessionId: z.string(),
+  answerId: z.string(),
 });
 export type SubmitAnswerRequest = z.infer<typeof schema>;
 

@@ -11,7 +11,7 @@
     "prefix": ""
   },
   "aliases": {
-    "components": "@app/career-forge/components/search",
+    "components": "@edupulse",
     "utils": "@feature/ui/lib/utils",
     "ui": "@feature/ui/components",
     "lib": "@feature/ui/lib",
