@@ -367,8 +367,8 @@ importers:
         specifier: ~22.1.0
         version: 22.1.0
       next-feature:
-        specifier: 0.1.1-beta.7
-        version: 0.1.1-beta.7(c8bebcfe7aac138445e6e86edeaafa0b)
+        specifier: 0.1.2-0
+        version: 0.1.2-0(c8bebcfe7aac138445e6e86edeaafa0b)
       nx:
         specifier: 22.3.3
         version: 22.3.3(@swc-node/register@1.9.2(@swc/core@1.5.29(@swc/helpers@0.5.18))(@swc/types@0.1.25)(typescript@5.9.3))(@swc/core@1.5.29(@swc/helpers@0.5.18))
@@ -8550,8 +8550,8 @@ packages:
       nodemailer:
         optional: true
 
-  next-feature@0.1.1-beta.7:
-    resolution: {integrity: sha512-kwkEmJGwlSbNTZ2k1i1kVpUG3N3eld0uIlcR1pVzZ69vLiBgQmEr/wwr9js5xVxJsEJLkvdgc+5ITSRncBZ6JQ==}
+  next-feature@0.1.2-0:
+    resolution: {integrity: sha512-HJWT2uk+yv4AZ4Mi8/dRyLHq9r66KgkNqTGQ1oaEeXR4jYSA+psDE/gsl+5i9gbqDl584AZ+bIBPklHX2/sWmA==}
 
   next-themes@0.4.6:
     resolution: {integrity: sha512-pZvgD5L0IEvX5/9GWyHMf3m8BKiVQwsCMHfoFosXtXBMnaS0ZnIJ9ST4b4NqLVKDEm8QBxoNNGNaBv2JNF6XNA==}
@@ -16123,7 +16123,7 @@ snapshots:
 
   '@types/minimatch@6.0.0':
     dependencies:
-      minimatch: 9.0.3
+      minimatch: 10.0.3
 
   '@types/node@22.19.7':
     dependencies:
@@ -21181,7 +21181,7 @@ snapshots:
       next: 15.5.9(@babel/core@7.28.6)(@opentelemetry/api@1.9.0)(babel-plugin-macros@3.1.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.97.3)
       react: 19.1.0
 
-  next-feature@0.1.1-beta.7(c8bebcfe7aac138445e6e86edeaafa0b):
+  next-feature@0.1.2-0(c8bebcfe7aac138445e6e86edeaafa0b):
     dependencies:
       '@nx/devkit': 22.0.3(nx@22.3.3(@swc-node/register@1.9.2(@swc/core@1.5.29(@swc/helpers@0.5.18))(@swc/types@0.1.25)(typescript@5.9.3))(@swc/core@1.5.29(@swc/helpers@0.5.18)))
       '@nx/eslint': 22.0.3(@babel/traverse@7.28.6)(@swc-node/register@1.9.2(@swc/core@1.5.29(@swc/helpers@0.5.18))(@swc/types@0.1.25)(typescript@5.9.3))(@swc/core@1.5.29(@swc/helpers@0.5.18))(@zkochan/js-yaml@0.0.7)(eslint@9.39.2(jiti@2.4.2))(nx@22.3.3(@swc-node/register@1.9.2(@swc/core@1.5.29(@swc/helpers@0.5.18))(@swc/types@0.1.25)(typescript@5.9.3))(@swc/core@1.5.29(@swc/helpers@0.5.18)))(verdaccio@6.2.4(encoding@0.1.13)(typanion@3.14.0))
