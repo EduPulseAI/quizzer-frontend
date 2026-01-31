@@ -9,7 +9,8 @@ import type { ApiClientConfig } from './types/client';
 import handleApiError from './utils/error';
 
 // @ts-expect-error todo
-import { name, version } from "../../package.json";
+import packageJson from "../../package.json";
+const { name, version } = packageJson;
 
 /**
  * Pending request queue item

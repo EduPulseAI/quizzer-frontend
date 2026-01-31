@@ -96,17 +96,8 @@
       "@edupulse/profile/*": [
         "features/profile/src/*"
       ],
-      "@edupulse/perplexity": [
-        "features/perplexity/src/index.ts"
-      ],
-      "@edupulse/perplexity/server": [
-        "features/perplexity/src/server.ts"
-      ],
-      "@edupulse/perplexity/*": [
-        "features/perplexity/src/*"
-      ],
-      "@app/resume-page/*": [
-        "apps/resume-page/*"
+      "@app/test-app/*": [
+        "apps/test-app/*"
       ]
     }
   },

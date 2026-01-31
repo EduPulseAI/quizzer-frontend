@@ -1,1 +1,1 @@
-export { auth as middlewre } from '@edupulse/profile';
+export { auth as middleware } from '@edupulse/profile';

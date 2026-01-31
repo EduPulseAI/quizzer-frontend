@@ -58,7 +58,8 @@ export async function submitLoginAction(
 
 export interface LoginResponse {
   token: { value: string, issuedAt: Date, expiration: Date, }
-  user: User
+  user: User,
+  refreshToken: string;
 }
 
 
@@ -90,7 +91,7 @@ export async function postLogin(
     const user: User = {
       expiration: response.token.expiration,
       jwtToken: response.token.value,
-      refreshToken: '',
+      refreshToken: response.refreshToken,
       email: response.user.email,
       name: response.user.name,
       role: response.user.role,
