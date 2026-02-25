@@ -1,6 +1,6 @@
 import { JobFitForm } from "../../components/job-fit-form"
 import { JobFitResults } from "../../components/job-fit-results"
-import { AppLayout } from "../../components/app-layout"
+import { AppLayout } from "../../components/app/app-layout"
 
 export default function JobsPage() {
   return (

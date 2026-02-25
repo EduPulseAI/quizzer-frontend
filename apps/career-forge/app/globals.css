@@ -4,6 +4,7 @@
 /* Scan feature libraries for Tailwind classes */
 @source "../../../features/ui/src/**/*.{js,ts,jsx,tsx}";
 @source "../../../features/base/src/**/*.{js,ts,jsx,tsx}";
+@source "../../../features/sidebar/src/**/*.{js,ts,jsx,tsx}";
 
 /* Scan this app's source files for Tailwind classes */
 @source "../components/**/*.{js,ts,jsx,tsx}";
@@ -139,6 +140,9 @@
   body {
     @apply bg-background text-foreground;
   }
+   html {
+    scroll-behavior: smooth;
+  }
 }
 
 .glass-effect {
@@ -155,6 +159,42 @@
 .gradient-accent {
   background: linear-gradient(135deg, oklch(0.5 0.2 235) 0%, oklch(0.6 0.22 230) 100%);
 }
+
+/* SIDE BAR */
+/* Added custom animations for smooth transitions */
+@keyframes slide-in-from-bottom-4 {
+  from {
+    transform: translateY(1rem);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in-from-bottom-6 {
+  from {
+    transform: translateY(1.5rem);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in-from-top-2 {
+  from {
+    transform: translateY(-0.5rem);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+/* end sidebar */
 
 @keyframes flip {
     0% { transform: perspective(120px) rotateX(0deg) rotateY(0deg); }

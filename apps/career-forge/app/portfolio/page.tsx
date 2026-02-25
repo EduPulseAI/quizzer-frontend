@@ -1,6 +1,6 @@
 import { PortfolioSidebar } from "../../components/portfolio-sidebar"
 import { PortfolioPreview } from "../../components/portfolio-preview"
-import { AppLayout } from "../../components/app-layout"
+import { AppLayout } from "../../components/app/app-layout"
 
 export default function PortfolioPage() {
   return (

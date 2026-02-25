@@ -86,7 +86,11 @@ export async function postLogin(
     }
 
     const endpoint = '/api/auth/login';
-    const response = await api.post<LoginResponse>(endpoint, parsed.data);
+    const response = await api.post<LoginResponse>(endpoint, parsed.data, {
+      headers:{
+        "Authorization": null
+      }
+    });
 
     const user: User = {
       expiration: response.token.expiration,

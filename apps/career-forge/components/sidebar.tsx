@@ -15,7 +15,7 @@ import {
 import Link from 'next/link';
 import { usePathname } from "next/navigation";
 
-const navigation = [
+export const APP_NAVIGATION = [
   { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
   { name: 'Portfolio', href: '/portfolio', icon: Briefcase },
   { name: 'Profile', href: '/profile', icon: Briefcase },
@@ -27,7 +27,7 @@ const navigation = [
   { name: 'Settings', href: '/settings', icon: Settings },
 ] as const;
 
-export type NavigationRoute = typeof navigation[number]["href"];
+export type NavigationRoute = typeof APP_NAVIGATION[number]["href"];
 
 
 export function Sidebar() {
@@ -51,7 +51,7 @@ export function Sidebar() {
 
       {/* Navigation */}
       <nav className="flex-1 p-4 space-y-1 overflow-y-auto">
-        {navigation.map((item) => {
+        {APP_NAVIGATION.map((item) => {
           const isActive = pathname === item.href
           return (
             <Link key={item.name} href={item.href}>

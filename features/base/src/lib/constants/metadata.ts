@@ -3,7 +3,7 @@
  * next-feature@0.1.1-beta.3
  * December 31st 2025, 3:30:54 pm
  */
-export const PROJECT_NAME = "EduPulse";
+export const PROJECT_NAME = "EvaPulse";
 
 /**
  * [project-description]

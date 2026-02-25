@@ -10,99 +10,46 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "esnext",
-    "lib": [
-      "es2020",
-      "dom"
-    ],
+    "lib": ["es2020", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@app/coding-quizzer/*": [
-        "apps/coding-quizzer/src/*"
-      ],
-      "@app/career-forge/*": [
-        "apps/career-forge/src/*"
-      ],
-      "@feature/base": [
-        "features/base/src/index.ts"
-      ],
-      "@feature/base/*": [
-        "features/base/src/*"
-      ],
-      "@feature/base/server": [
-        "features/base/src/server.ts"
-      ],
-      "@feature/ui": [
-        "features/ui/src/index.ts"
-      ],
-      "@feature/ui/*": [
-        "features/ui/src/*"
-      ],
-      "@feature/ui/server": [
-        "features/ui/src/server.ts"
-      ],
-      "@edupulse/session": [
-        "features/session/src/index.ts"
-      ],
-      "@edupulse/session/server": [
-        "features/session/src/server.ts"
-      ],
-      "@edupulse/session/*": [
-        "features/session/src/*"
-      ],
-      "@edupulse/api-client": [
-        "clients/api-client/src/index.ts"
-      ],
-      "@edupulse/api-client/server": [
-        "clients/api-client/src/server.ts"
-      ],
-      "@edupulse/api-client/*": [
-        "clients/api-client/src/*"
-      ],
-      "@feature/auth": [
-        "features/auth/src/index.ts"
-      ],
-      "@feature/auth/server": [
-        "features/auth/src/server.ts"
-      ],
-      "@feature/auth/*": [
-        "features/auth/src/*"
-      ],
-      "@edupulse/sse": [
-        "features/sse/src/index.ts"
-      ],
-      "@edupulse/sse/server": [
-        "features/sse/src/server.ts"
-      ],
-      "@edupulse/sse/*": [
-        "features/sse/src/*"
-      ],
-      "@edupulse/quiz": [
-        "features/quiz/src/index.ts"
-      ],
-      "@edupulse/quiz/server": [
-        "features/quiz/src/server.ts"
-      ],
-      "@edupulse/quiz/*": [
-        "features/quiz/src/*"
-      ],
-      "@edupulse/profile": [
-        "features/profile/src/index.ts"
-      ],
-      "@edupulse/profile/server": [
-        "features/profile/src/server.ts"
-      ],
-      "@edupulse/profile/*": [
-        "features/profile/src/*"
-      ],
-      "@app/test-app/*": [
-        "apps/test-app/*"
-      ]
+      "@app/coding-quizzer/*": ["apps/coding-quizzer/src/*"],
+      "@app/career-forge/*": ["apps/career-forge/src/*"],
+      "@feature/base": ["features/base/src/index.ts"],
+      "@feature/base/*": ["features/base/src/*"],
+      "@feature/base/server": ["features/base/src/server.ts"],
+      "@feature/ui": ["features/ui/src/index.ts"],
+      "@feature/ui/*": ["features/ui/src/*"],
+      "@feature/ui/server": ["features/ui/src/server.ts"],
+      "@edupulse/session": ["features/session/src/index.ts"],
+      "@edupulse/session/server": ["features/session/src/server.ts"],
+      "@edupulse/session/*": ["features/session/src/*"],
+      "@edupulse/api-client": ["clients/api-client/src/index.ts"],
+      "@edupulse/api-client/server": ["clients/api-client/src/server.ts"],
+      "@edupulse/api-client/*": ["clients/api-client/src/*"],
+      "@feature/auth": ["features/auth/src/index.ts"],
+      "@feature/auth/server": ["features/auth/src/server.ts"],
+      "@feature/auth/*": ["features/auth/src/*"],
+      "@edupulse/sse": ["features/sse/src/index.ts"],
+      "@edupulse/sse/server": ["features/sse/src/server.ts"],
+      "@edupulse/sse/*": ["features/sse/src/*"],
+      "@edupulse/quiz": ["features/quiz/src/index.ts"],
+      "@edupulse/quiz/server": ["features/quiz/src/server.ts"],
+      "@edupulse/quiz/*": ["features/quiz/src/*"],
+      "@edupulse/profile": ["features/profile/src/index.ts"],
+      "@edupulse/profile/server": ["features/profile/src/server.ts"],
+      "@edupulse/profile/*": ["features/profile/src/*"],
+      "@app/test-app/*": ["apps/test-app/*"],
+      "@edupulse/ai": ["features/ai/src/index.ts"],
+      "@edupulse/ai/server": ["features/ai/src/server.ts"],
+      "@edupulse/ai/*": ["features/ai/src/*"],
+      "@app/perplexity/*": ["apps/perplexity/*"],
+      "@edupulse/sidebar": ["features/sidebar/src/index.ts"],
+      "@edupulse/sidebar/server": ["features/sidebar/src/server.ts"],
+      "@edupulse/sidebar/*": ["features/sidebar/src/*"]
     }
   },
-  "exclude": [
-    "node_modules",
-    "tmp"
-  ]
+  "exclude": ["node_modules", "tmp"]
 }
