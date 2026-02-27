@@ -1,6 +1,6 @@
-import { ApiClient, type ApiResponse, ApiError } from '@edupulse/api-client';
+import { ApiClient, type ApiResponse, ApiError } from '@next-feature/client';
 import type { InternalAxiosRequestConfig } from 'axios';
-import { BACKEND_API_URL } from '.';
+import { BACKEND_API_URL } from './env';
 /**
  * Centralized API client configuration
  *
@@ -14,22 +14,31 @@ import { BACKEND_API_URL } from '.';
 const apiClient = new ApiClient({
   baseURL: BACKEND_API_URL,
   enableRefreshToken: false,
-  async onAuthenticated(config: InternalAxiosRequestConfig) {
+  onUnauthorized: async () => {
+    console.log('[auth-client] Unauthorized');
+  },
+  onRefreshTokenExpired: async () => {
+    console.log('[auth-client] Refresh token expired');
+  },
+  onAuthenticated: async (config) => {
     console.log(
       '[auth-client]',
       config.method.toUpperCase(),
       config.url,
-      config.data
+      config.data ?? '',
     );
+  },
+  onRefreshToken: async () => {
+    return '';
   },
   // timeout: 30000,
   // maxRetries: 3,
   // retryDelay: 1000
+  // baseUrl: process.env.BACKEND_API_URL
 });
 
-// includeInterceptors
 /**
- * Example: Add custom request interceptor
+ * Example: Override request interceptor
  */
 // apiClient.interceptors.request.use((config) => {
 //   // Add custom headers, auth tokens, etc.
@@ -37,7 +46,7 @@ const apiClient = new ApiClient({
 // });
 
 /**
- * Example: Add custom response interceptor
+ * Example: Override response interceptor
  */
 // apiClient.interceptors.response.use(
 //   (response) => response,

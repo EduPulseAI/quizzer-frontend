@@ -1,0 +1,21 @@
+/* eslint-disable @typescript-eslint/no-empty-object-type */
+/* eslint-disable @typescript-eslint/no-empty-interface */
+import { z } from 'zod';
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const envSchema = z.object({
+  NODE_ENV: z.enum(['development', 'production']),
+  AUTH_API_URL: z.string().url(),
+  TOKEN_EXPIRATION_SKEW: z.number()
+});
+
+declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace NodeJS {
+    interface ProcessEnv extends z.infer<typeof envSchema> {}
+  }
+}
+const FIVE_MINUTES = 5 * 1000 * 60;
+export const NODE_ENV = process.env.NODE_ENV;
+export const BACKEND_API_URL = process.env.AUTH_API_URL;
+export const TOKEN_EXPIRATION_SKEW = process.env.TOKEN_EXPIRATION_SKEW || FIVE_MINUTES;

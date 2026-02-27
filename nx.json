@@ -89,7 +89,7 @@
         "appProjectName": "career-forge"
       },
       "auth": {
-        "projectName": "profile"
+        "projectName": "auth"
       },
       "store": {
         "projectName": "quiz"

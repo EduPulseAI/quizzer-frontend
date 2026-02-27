@@ -1,12 +1,33 @@
 import type { Session, User } from 'next-auth';
-import NextAuth from 'next-auth';
+import NextAuth, { AuthError } from 'next-auth';
 import type { JWT } from 'next-auth/jwt';
 import CredentialsProvider from 'next-auth/providers/credentials';
+import { submitLogin, submitRefresh } from '../actions/login';
+import { TOKEN_EXPIRATION_SKEW } from '../config/env';
 import { authConfig } from './auth.config';
-import { getDemoUser } from "../actions/get-demo-user-api";
+import { ProblemDetail } from '@next-feature/client';
+
+class AuthException extends AuthError {
+  body: ProblemDetail;
+
+  constructor(body: ProblemDetail) {
+    super(body.detail)
+    this.body = body;
+  }
+
+}
 
 export const { auth, handlers, signIn, signOut } = NextAuth({
   ...authConfig,
+  logger: {
+    error(error) {
+      if (error instanceof AuthException) {
+        console.error("[auth][error]", error.body);
+        return ;
+      }
+      console.error("[auth][error]", error.name, error)
+    }
+  },
   providers: [
     CredentialsProvider({
       name: 'Credentials',
@@ -15,25 +36,52 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
         password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials) {
-        const { data, success } = await getDemoUser(credentials.email as string);
+        const response = await submitLogin(credentials);
+        if (response.success) {
+          return response.data;
+        }
 
-        const user: User = {
-          id: data.id,
-          email: data.email,
-          name: data.name,
-          role: "student"
-        };
-        return user;
+        console.error("authorize#error", response.error);
+        if (response.error.title === "EmailNotFoundException") {
+          throw new AuthError("Email not found")
+        }
+
+        throw new AuthException(response.error)
       },
     }),
   ],
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
-        token.role = user.role;
+        token.roles = user.roles;
         token.jwtToken = user.jwtToken;
         token.refreshToken = user.refreshToken;
+        token.expiration = user.expiration;
       }
+
+      
+      
+      // handle refresh
+      const now = Date.now();
+      const tokenExpiration = token.expiration - TOKEN_EXPIRATION_SKEW;
+      // console.log("callback#jwt", { expired: now >= tokenExpiration, hoursToExp: (now - tokenExpiration) / 1000 / 60 / 60})
+      
+      if (now >= tokenExpiration) {
+        console.log("callback#jwt refreshing token")
+        const response = await submitRefresh(token.refreshToken);
+        if (response.success) {
+          token.jwtToken = response.data.token.value;
+          token.expiration = new Date(response.data.token.expiration).getTime();
+          token.refreshToken = response.data.verificationToken;
+          token.roles = response.data.user.roles;
+        } else {
+          token.error = response.error.title
+          console.error("jwt#refreshError", response.error);
+        }
+      }
+
+
+
       return token;
     },
     async session({
@@ -44,12 +92,13 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
       token: JWT;
       user: User;
     }) {
-      // console.log("SESSION-CALLBACK", { session, token, user })
+      // console.log("callback#session", { session, token })
       if (token && session.user) {
         session.user.id = token.sub as string;
-        session.user.role = token.role as string;
+        session.user.roles = token.roles as string[];
         session.user.jwtToken = token.jwtToken as string;
         session.user.refreshToken = token.refreshToken as string;
+        session.user.expiration = token.expiration;
       }
       return session;
     },
@@ -63,3 +112,6 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
     },
   },
 });
+
+
+
