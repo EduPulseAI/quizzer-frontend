@@ -1,4 +1,4 @@
-import { auth } from '@edupulse/profile';
+import { auth } from '@edupulse/auth';
 import { redirect } from 'next/navigation';
 import { ReactNode } from 'react';
 

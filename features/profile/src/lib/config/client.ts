@@ -1,7 +1,7 @@
 import { ApiClient, ApiError, type ApiResponse } from '@next-feature/client';
 import { type InternalAxiosRequestConfig } from 'axios';
 import { BACKEND_API_URL } from '.';
-import { auth } from '../auth';
+import { auth } from '@edupulse/auth';
 
 /**
  * Centralized API client configuration
@@ -26,16 +26,13 @@ const apiClient = new ApiClient({
   onAuthenticated: async (config: InternalAxiosRequestConfig) => {
     const session = await auth();
 
-    if (session?.user?.jwtToken) {
-      config.headers.Authorization = `Bearer ${session.user.jwtToken}`;
+    if (session?.user) {
+      const token = (session.user as any).jwtToken;
+      config.headers.Authorization = `Bearer ${token}`;
     }
   },
   onRefreshToken: async () => {
-    const session = await auth();
-    if (session?.user?.refreshToken) {
-        return session.user.refreshToken;
-    }
-    throw new Error("No refresh token found")
+    return "";
   }
 });
 
