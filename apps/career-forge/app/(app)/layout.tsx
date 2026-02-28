@@ -1,4 +1,4 @@
-import { auth } from '@edupulse/profile';
+import { auth } from '@edupulse/auth';
 import { Sidebar } from '@edupulse/sidebar';
 import { redirect } from 'next/navigation';
 import { ReactNode } from 'react';
@@ -14,7 +14,7 @@ async function AppLayout({ children }: Props) {
   }
 
   const user = session.user;
-
+  
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-slate-950 to-slate-900">
       {/* Animated background effects */}
@@ -26,10 +26,10 @@ async function AppLayout({ children }: Props) {
       {/* <div className="flex h-screen relative z-10"> */}
       <div className="flex h-screen w-full">
         <Sidebar />
-        <div className="flex-1 flex flex-col overflow-hidden">
-          <main className="flex-1 flex-col ">{children}</main>
+        {/* <div className="flex-1 flex flex-col overflow-hidden"> */}
+          <main className="flex-1 flex-col overflow-y-scroll">{children}</main>
           {/* <TopBar user={user} /> */}
-        </div>
+        {/* </div> */}
       </div>
     </div>
   );

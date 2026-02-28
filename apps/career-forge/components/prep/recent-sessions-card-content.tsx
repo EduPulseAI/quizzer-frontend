@@ -1,5 +1,5 @@
 
-import { auth } from '@edupulse/profile';
+import { auth } from '@edupulse/auth';
 import { getRecentSessions } from '@edupulse/session';
 import { ReactNode } from 'react';
 import RecentSessionInfo from "./recent-session-info"

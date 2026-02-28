@@ -58,14 +58,10 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
         token.refreshToken = user.refreshToken;
         token.expiration = user.expiration;
       }
-
-      
       
       // handle refresh
       const now = Date.now();
       const tokenExpiration = token.expiration - TOKEN_EXPIRATION_SKEW;
-      // console.log("callback#jwt", { expired: now >= tokenExpiration, hoursToExp: (now - tokenExpiration) / 1000 / 60 / 60})
-      
       if (now >= tokenExpiration) {
         console.log("callback#jwt refreshing token")
         const response = await submitRefresh(token.refreshToken);

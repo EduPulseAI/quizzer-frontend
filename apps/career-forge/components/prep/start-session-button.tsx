@@ -1,5 +1,5 @@
 'use client';
-import { auth } from '@edupulse/profile';
+import { auth } from '@edupulse/auth';
 import { startSession } from '@edupulse/session';
 import { Button } from '@feature/ui/components/button';
 import { Play } from 'lucide-react';

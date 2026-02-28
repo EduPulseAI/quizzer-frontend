@@ -38,7 +38,6 @@
       "@edupulse/profile": ["features/profile/src/index.ts"],
       "@edupulse/profile/server": ["features/profile/src/server.ts"],
       "@edupulse/profile/*": ["features/profile/src/*"],
-      "@app/test-app/*": ["apps/test-app/*"],
       "@edupulse/ai": ["features/ai/src/index.ts"],
       "@edupulse/ai/server": ["features/ai/src/server.ts"],
       "@edupulse/ai/*": ["features/ai/src/*"],

@@ -92,7 +92,7 @@
         "projectName": "auth"
       },
       "store": {
-        "projectName": "quiz"
+        "projectName": "profile"
       },
       "feature": {
         "orgName": "edupulse"
@@ -105,19 +105,19 @@
         "componentType": "component"
       },
       "action": {
-        "projectName": "quiz"
+        "projectName": "profile"
       },
       "constant": {
-        "projectName": "quiz"
+        "projectName": "profile"
       },
       "utility": {
-        "projectName": "quiz"
+        "projectName": "profile"
       },
       "data-type": {
-        "projectName": "quiz"
+        "projectName": "profile"
       },
       "client-config": {
-        "clientPackage": "@edupulse/api-client"
+        "clientPackage": "@next-feature/client"
       }
     }
   },

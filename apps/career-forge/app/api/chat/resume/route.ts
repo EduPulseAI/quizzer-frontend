@@ -5,7 +5,7 @@ import {
   RESUME_ASSISTANT_PROMPT,
   PROFILE_CONTEXT_TEMPLATE,
 } from '@edupulse/profile';
-import { auth } from '@edupulse/profile';
+import { auth } from '@edupulse/auth';
 
 const PROFILE_API_URL = process.env.PROFILE_API_URL || 'http://localhost:8084';
 

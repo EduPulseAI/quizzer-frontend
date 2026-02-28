@@ -6,7 +6,7 @@ interface ExperienceCardProps {
   company: string
   period: string
   description: string
-  achievements: string[]
+  responsibilities: string[]
   technologies: string[]
 }
 
@@ -15,7 +15,7 @@ export function ExperienceCard({
   company,
   period,
   description,
-  achievements,
+  responsibilities,
   technologies,
 }: ExperienceCardProps) {
   return (
@@ -35,7 +35,7 @@ export function ExperienceCard({
       <div className="space-y-3">
         <h5 className="text-sm font-medium text-zinc-400">Key Achievements</h5>
         <ul className="space-y-2">
-          {achievements.map((achievement, index) => (
+          {responsibilities.map((achievement, index) => (
             <li key={index} className="flex text-sm text-zinc-300">
               <CheckCircle2 className="w-4 h-4 mr-2 text-cyan-400 flex-shrink-0 mt-0.5" />
               <span>{achievement}</span>

@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import { useSidebarStore } from '../stores/sidebar-store';
+import { signOut } from "next-auth/react"
 
 interface Props {
   data?: unknown;
@@ -103,7 +104,7 @@ export function AccountMenu(props: Props) {
           <div className="my-2 border-t border-border" />
 
           {/* Profile Switcher */}
-          <button className="w-full flex items-center gap-3 px-3 py-2.5 text-sm hover:bg-accent rounded transition-colors group">
+          <button onClick={() => signOut({ redirectTo: "/login"})} className="w-full flex items-center gap-3 px-3 py-2.5 text-sm hover:bg-accent rounded transition-colors group">
             <div className="relative">
               <Image
                 src="/placeholder-user.jpg"

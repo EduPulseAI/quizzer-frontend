@@ -19,10 +19,9 @@ export function SidebarPanel(props: Props) {
     if (openPanel) {
       const item = APP_NAVIGATION.find(nav => nav.name === openPanel);
       return item !== undefined ? item.nodes : [];
-    } else {
-      return [];
     }
   }, [openPanel])
+
 
   return (
     <div className={`${!openPanel && "hidden"} w-[216px] bg-background border-r border-border `}>
@@ -40,24 +39,17 @@ export function SidebarPanel(props: Props) {
             />
           </Button>
         </div>
+
         <div className="p-1.5">
-          <button className="w-full flex items-center gap-2.5 px-2.5 py-2 text-[13px] hover:bg-accent rounded transition-colors">
-            <LayoutGrid className="h-4 w-4 shrink-0" />
-            <span className="font-normal">Templates</span>
-          </button>
-          <button className="w-full flex items-center gap-2.5 px-2.5 py-2 text-[13px] hover:bg-accent rounded transition-colors">
-            <Plus className="h-4 w-4 shrink-0" />
-            <span className="font-normal">Create new Space</span>
-          </button>
+          {nodes && nodes.map(node => (
+            <Link key={node.name} href={node.href}>
+              <button className="w-full flex items-center gap-2.5 px-2.5 py-2 text-[13px] hover:bg-accent rounded transition-colors">
+                <node.icon className="h-4 w-4 shrink-0" />
+                <span className="font-normal">{node.name}</span>
+              </button>
+            </Link>
+          ))}
         </div>
-        {nodes && nodes.map(node => (
-          <Link href={node.href}>
-            <button className="w-full flex items-center gap-2.5 px-2.5 py-2 text-[13px] hover:bg-accent rounded transition-colors">
-              <node.icon className="h-4 w-4 shrink-0" />
-              <span className="font-normal">{node.name}</span>
-            </button>
-          </Link>
-        ))}
         {props.children}
       </div>
     </div>

@@ -1,4 +1,4 @@
-import { auth } from '@edupulse/profile';
+import { auth } from '@edupulse/auth';
 import type { Topic } from '@feature/topic';
 import { CheckCircle2 } from 'lucide-react';
 import StartSessionButton from './start-session-button';
