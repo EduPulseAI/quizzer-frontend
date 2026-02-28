@@ -1,0 +1,51 @@
+{
+  "name": "perplexity",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/perplexity",
+  "projectType": "application",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/next:build",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/apps/perplexity"
+      },
+      "configurations": {
+        "development": {
+          "outputPath": "apps/perplexity"
+        },
+        "production": {}
+      }
+    },
+    "serve": {
+      "executor": "@nx/next:server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "perplexity:build",
+        "dev": true
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "perplexity:build:development",
+          "dev": true
+        },
+        "production": {
+          "buildTarget": "perplexity:build:production",
+          "dev": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/perplexity/jest.config.cts"
+      }
+    }
+  }
+}
