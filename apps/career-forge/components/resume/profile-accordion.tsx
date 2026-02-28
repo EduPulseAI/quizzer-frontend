@@ -23,7 +23,7 @@ export function ProfileAccordion() {
   const { about, experience, credentials } = profile;
 
   return (
-    <Accordion type="multiple" defaultValue={['about']} className="w-full">
+    <Accordion type="multiple" className="w-full">
       {/* About Section */}
       <AccordionItem value="about" className="border-border">
         <AccordionTrigger className="hover:no-underline">

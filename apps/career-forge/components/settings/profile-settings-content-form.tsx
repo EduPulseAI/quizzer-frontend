@@ -19,15 +19,14 @@ import {
   InputGroupAddon,
   InputGroupButton,
   InputGroupInput,
-  InputGroupText,
-  InputGroupTextarea,
-} from '@feature/ui/components/input-group'
-import { Separator } from '@feature/ui/components/separator'
+  InputGroupText
+} from '@feature/ui/components/input-group';
+import { Separator } from '@feature/ui/components/separator';
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from '@feature/ui/components/tooltip'
+} from '@feature/ui/components/tooltip';
 import { Info } from 'lucide-react';
 
 interface Props {
@@ -45,19 +44,8 @@ export function ProfileSettingsContentForm({
     lastName: '',
     title: '',
     location: '',
-    avatar: '',
     email: '',
     phone: '',
-    workingHours: '',
-    availableForWork: false,
-    badges: [],
-    social: {
-      Github: '#',
-      Linkedin: '#',
-      Discord: '#',
-      Twitter: '#',
-      Instagram: '#',
-    },
   },
 }: Props) {
   const [formState, formAction, isPending] = useActionState(action, {
@@ -65,7 +53,6 @@ export function ProfileSettingsContentForm({
   });
 
   const [avatarPreview, setAvatarPreview] = useState<string | undefined>(
-    formState?.data.avatar
   );
 
   const handleAvatarUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -97,8 +84,8 @@ export function ProfileSettingsContentForm({
     const color = formState.success
       ? 'green'
       : formState.error
-      ? 'red'
-      : 'primary';
+        ? 'red'
+        : 'primary';
 
     return (
       <div
@@ -110,9 +97,11 @@ export function ProfileSettingsContentForm({
   };
 
   const getInitials = (data: Personal) => {
-    const first = (data.firstName ?? '').at(0) as string;
-    const last = (data.lastName ?? '').at(0) as string;
-    return (first + last).toUpperCase();
+    return [data.firstName, data.lastName]
+      .filter(Boolean)
+      .map(n => n.at(0))
+      .join("")
+      .toUpperCase();
   };
 
   return (
@@ -217,17 +206,7 @@ export function ProfileSettingsContentForm({
             />
             {displayError('phone')}
           </div>
-          <div className="space-y-2">
-            <Label htmlFor="workingHours">Working Hours</Label>
-            <Input
-              id="workingHours"
-              name="workingHours"
-              placeholder="e.g., 9 AM - 5 PM EST"
-              defaultValue={formState?.data?.workingHours}
-              className="bg-background/50"
-            />
-            {displayError('workingHours')}
-          </div>
+          
         </div>
 
         <Separator />
@@ -237,12 +216,12 @@ export function ProfileSettingsContentForm({
             <Label htmlFor="social-github">Github</Label>
             <InputGroup>
               <InputGroupInput
-              placeholder="EdupulseAi" 
-              className="text-bold" 
-              type=""
-              name="social-github"
-              id="social-github"
-              autoComplete="username"
+                placeholder="EdupulseAi"
+                className="text-bold"
+                type=""
+                name="social-github"
+                id="social-github"
+                autoComplete="username"
               />
               <InputGroupAddon>
                 <InputGroupText>https://github.com/</InputGroupText>
@@ -262,7 +241,7 @@ export function ProfileSettingsContentForm({
         </div>
 
         <Separator />
-        
+
         <div className="flex items-center justify-between rounded-lg border p-4">
           <div className="space-y-0.5">
             <Label htmlFor="availableForWork">Available for Work</Label>
@@ -273,7 +252,7 @@ export function ProfileSettingsContentForm({
           <Switch
             id="availableForWork"
             name="availableForWork"
-            defaultChecked={formState?.data?.availableForWork}
+            defaultChecked={true}
           />
         </div>
         <Button

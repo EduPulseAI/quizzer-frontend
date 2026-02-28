@@ -1,4 +1,4 @@
-import { getProfile, updatePersonalInfoAction } from '@edupulse/profile';
+import { getProfile, updatePersonalInfoAction } from '@edupulse/profile/server';
 import { Button } from '@feature/ui/components/button';
 import {
   Card,

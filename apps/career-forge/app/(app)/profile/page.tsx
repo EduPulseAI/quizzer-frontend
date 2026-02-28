@@ -1,4 +1,4 @@
-import { getProfile } from '@edupulse/profile';
+import { getProfile } from '@edupulse/profile/server';
 import { Button } from '@feature/ui/components/button';
 import { BriefcaseIcon, CodeIcon, GlobeIcon } from 'lucide-react';
 import { notFound } from "next/navigation";
@@ -67,7 +67,7 @@ async function ProfilePage(props: Props) {
                           company={experience.company}
                           period={experience.period}
                           description={experience.description}
-                          achievements={experience.achievements}
+                          responsibilities={experience.responsibilities}
                           technologies={experience.technologies}
                         />
                       </AnimatedSection>
@@ -94,9 +94,9 @@ async function ProfilePage(props: Props) {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                     <AnimatedSection animation="slide-right" delay={100}>
                       <div className="space-y-3">
-                        <h4 className="text-sm font-medium text-zinc-400">Design</h4>
+                        <h4 className="text-sm font-medium text-zinc-400">Backend</h4>
                         <div className="flex flex-wrap gap-2">
-                          {profile.technicalSkills.design.map((skill, index) => (
+                          {profile.technicalSkills.backend.map((skill, index) => (
                             <SkillTagComponent key={index}>{skill}</SkillTagComponent>
                           ))}
                         </div>
@@ -105,9 +105,9 @@ async function ProfilePage(props: Props) {
 
                     <AnimatedSection animation="slide-left" delay={200}>
                       <div className="space-y-3">
-                        <h4 className="text-sm font-medium text-zinc-400">Development</h4>
+                        <h4 className="text-sm font-medium text-zinc-400">Fronted</h4>
                         <div className="flex flex-wrap gap-2">
-                          {profile.technicalSkills.development.map((skill, index) => (
+                          {profile.technicalSkills.frontend.map((skill, index) => (
                             <SkillTagComponent key={index}>{skill}</SkillTagComponent>
                           ))}
                         </div>
@@ -116,9 +116,9 @@ async function ProfilePage(props: Props) {
 
                     <AnimatedSection animation="slide-right" delay={300}>
                       <div className="space-y-3">
-                        <h4 className="text-sm font-medium text-zinc-400">UX Methods</h4>
+                        <h4 className="text-sm font-medium text-zinc-400">Cloud</h4>
                         <div className="flex flex-wrap gap-2">
-                          {profile.technicalSkills.uxMethods.map((skill, index) => (
+                          {profile.technicalSkills.cloud.map((skill, index) => (
                             <SkillTagComponent key={index}>{skill}</SkillTagComponent>
                           ))}
                         </div>
@@ -127,9 +127,9 @@ async function ProfilePage(props: Props) {
 
                     <AnimatedSection animation="slide-left" delay={400}>
                       <div className="space-y-3">
-                        <h4 className="text-sm font-medium text-zinc-400">Soft Skills</h4>
+                        <h4 className="text-sm font-medium text-zinc-400">Tools</h4>
                         <div className="flex flex-wrap gap-2">
-                          {profile.technicalSkills.softSkills.map((skill, index) => (
+                          {profile.technicalSkills.tools.map((skill, index) => (
                             <SkillTagComponent key={index}>{skill}</SkillTagComponent>
                           ))}
                         </div>

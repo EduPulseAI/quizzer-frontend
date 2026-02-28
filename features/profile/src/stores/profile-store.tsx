@@ -1,6 +1,7 @@
 'use client';
 
 import { create, StoreApi, UseBoundStore } from 'zustand';
+import { persist } from 'zustand/middleware';
 import type { About, Education, ExperienceItem, Profile } from '../lib/types/profile';
 import { GET_PROFILE } from '../lib/constants/profile';
 
@@ -31,7 +32,7 @@ const initialState: ProfileState = {
   isLoading: true,
 };
 
-export const useProfileStore: UseBoundStore<StoreApi<ProfileStore>> = create<ProfileStore>((set, get) => ({
+export const useProfileStore = create<ProfileStore>((set, get) => ({
   ...initialState,
 
   initializeProfile: (profile: Profile) => {

@@ -10,7 +10,6 @@ export interface Profile {
   experience: ExperienceItem[];
   credentials: Credentials;
   technicalSkills: TechnicalSkills;
-
 }
 
 export interface Personal {
@@ -18,23 +17,15 @@ export interface Personal {
   lastName: string;
   title: string;
   location: string;
-  avatar: string;
   email: string;
   phone: string;
-  workingHours: string;
-  availableForWork: boolean;
-  badges: string[];
-  social: SocialLink;
 }
 
 
 export type SocialLink = Record<"Github" | "Linkedin" | "Discord" | "Twitter" | "Instagram", "#" | string>
 
 export interface About {
-  bio: string;
-  focus: string[];
-  languages: Language[];
-  interests: string[];
+  summary: string[];
 }
 
 export interface Language {
@@ -48,16 +39,16 @@ export interface Language {
 export interface ExperienceItem {
   title: string;
   company: string;
+  location: string;
   period: string;
   description: string;
-  achievements: string[];
+  responsibilities: string[];
   technologies: string[];
 }
 
 export interface Credentials {
   certifications: Certification[];
   education: Education[];
-  skills: string[];
 }
 
 export interface Certification {
@@ -71,12 +62,14 @@ export interface Education {
   degree: string;
   institution: string;
   year: string;
-  logo: string | null;
 }
 
 export interface TechnicalSkills {
-  design: string[];
-  development: string[];
-  uxMethods: string[];
-  softSkills: string[];
+  languages: string[]
+  backend: string[]
+  frontend: string[]
+  database: string[]
+  cloud: string[]
+  tools: string[]
+  methodologies: string[]
 }

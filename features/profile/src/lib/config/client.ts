@@ -1,7 +1,7 @@
-import { ApiClient, ApiError, type ApiResponse } from '@next-feature/client';
-import { type InternalAxiosRequestConfig } from 'axios';
-import { BACKEND_API_URL } from '.';
 import { auth } from '@edupulse/auth';
+import { ApiClient, ApiError, type ApiResponse } from '@next-feature/client';
+import { BACKEND_API_URL } from './env';
+const json = require("../../../package.json");
 
 /**
  * Centralized API client configuration
@@ -13,17 +13,11 @@ import { auth } from '@edupulse/auth';
  * - Authentication handling
  */
 
-const NO_AUTH_PATH_PATTERNS = [
-  /auth\/login/,
-  /users\/student/
-]
 
 const apiClient = new ApiClient({
   baseURL: BACKEND_API_URL,
   enableRefreshToken: false,
-  skipRefreshPaths: NO_AUTH_PATH_PATTERNS,  // Don't attempt refresh for login/signup
-  maxRetries: 3,
-  onAuthenticated: async (config: InternalAxiosRequestConfig) => {
+  onAuthenticated: async (config) => {
     const session = await auth();
 
     if (session?.user) {
@@ -31,10 +25,12 @@ const apiClient = new ApiClient({
       config.headers.Authorization = `Bearer ${token}`;
     }
   },
-  onRefreshToken: async () => {
+  onRefreshToken: async (originalRequest) => {
     return "";
   }
 });
+
+apiClient.getAxiosInstance().defaults.headers.common['User-Agent'] = [json.name, json.version].join(":")
 
 /**
  * Example: Add custom request interceptor
