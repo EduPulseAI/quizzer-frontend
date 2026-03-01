@@ -38,9 +38,6 @@
       "@edupulse/profile": ["features/profile/src/index.ts"],
       "@edupulse/profile/server": ["features/profile/src/server.ts"],
       "@edupulse/profile/*": ["features/profile/src/*"],
-      "@edupulse/ai": ["features/ai/src/index.ts"],
-      "@edupulse/ai/server": ["features/ai/src/server.ts"],
-      "@edupulse/ai/*": ["features/ai/src/*"],
       "@app/perplexity/*": ["apps/perplexity/*"],
       "@edupulse/sidebar": ["features/sidebar/src/index.ts"],
       "@edupulse/sidebar/server": ["features/sidebar/src/server.ts"],
@@ -50,5 +47,6 @@
       "@edupulse/auth/*": ["features/auth/src/*"]
     }
   },
-  "exclude": ["node_modules", "tmp"]
+  "exclude": ["node_modules", "tmp"],
+  "include": ["features/auth/**/types/*.d.ts"]
 }

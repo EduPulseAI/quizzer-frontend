@@ -1,27 +1,18 @@
-import type { Session, User } from 'next-auth';
-import NextAuth, { AuthError } from 'next-auth';
+import { ApiError } from '@next-feature/client';
+import NextAuth, { AuthError, CredentialsSignin } from 'next-auth';
 import type { JWT } from 'next-auth/jwt';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { submitLogin, submitRefresh } from '../actions/login';
 import { TOKEN_EXPIRATION_SKEW } from '../config/env';
+import type { Session, User } from '../types/next-auth';
 import { authConfig } from './auth.config';
-import { ProblemDetail } from '@next-feature/client';
 
-class AuthException extends AuthError {
-  body: ProblemDetail;
-
-  constructor(body: ProblemDetail) {
-    super(body.detail)
-    this.body = body;
-  }
-
-}
 
 export const { auth, handlers, signIn, signOut } = NextAuth({
   ...authConfig,
   logger: {
     error(error) {
-      if (error instanceof AuthException) {
+      if (error instanceof ApiError) {
         console.error("[auth][error]", error.body);
         return ;
       }
@@ -42,11 +33,11 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
         }
 
         console.error("authorize#error", response.error);
-        if (response.error.title === "EmailNotFoundException") {
-          throw new AuthError("Email not found")
+        if (response.error.body.title === "EmailNotFoundException") {
+          throw new CredentialsSignin("Email not found")
         }
 
-        throw new AuthException(response.error)
+        throw new AuthError(response.error.message)
       },
     }),
   ],
@@ -71,7 +62,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
           token.refreshToken = response.data.verificationToken;
           token.roles = response.data.user.roles;
         } else {
-          token.error = response.error.title
+          token.error = response.error.body.title
           console.error("jwt#refreshError", response.error);
         }
       }

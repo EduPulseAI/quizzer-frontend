@@ -4,6 +4,7 @@ import { withApi, withForm } from '@next-feature/client/server';
 import { z } from 'zod';
 import api from '../config/client';
 import { Personal } from '../types/profile';
+import { revalidatePath } from 'next/cache';
 
 /**
  * [update-personal-info]
@@ -45,6 +46,9 @@ export const updatePersonalInfo = withApi(
       endpoint,
       parsed.data,
     );
+
+    revalidatePath("/resume")
+    
     return response;
   },
   { successMessage: "Personal info updated" },

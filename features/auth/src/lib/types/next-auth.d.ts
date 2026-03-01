@@ -21,3 +21,5 @@ declare module 'next-auth/jwt' {
     expiration: number
   }
 }
+
+export type { User, Session, JWT }

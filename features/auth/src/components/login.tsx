@@ -32,7 +32,8 @@ export default function LoginComponent() {
     const { error } = await login(formData)
 
     if (error) {
-      setErrors(error.errors ?? { [error.title]: error.detail})
+      const pd = error.body;
+      setErrors(pd.errors ?? { [pd.title]: pd.detail})
       setIsLoading(false)
       setTimeout(() => {
         errorSummaryRef.current?.focus()

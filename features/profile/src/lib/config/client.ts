@@ -21,7 +21,7 @@ const apiClient = new ApiClient({
     const session = await auth();
 
     if (session?.user) {
-      const token = (session.user as any).jwtToken;
+      const token = (session.user).jwtToken;
       config.headers.Authorization = `Bearer ${token}`;
     }
   },
@@ -30,7 +30,7 @@ const apiClient = new ApiClient({
   }
 });
 
-apiClient.getAxiosInstance().defaults.headers.common['User-Agent'] = [json.name, json.version].join(":")
+apiClient.axios.defaults.headers.common['User-Agent'] = [json.name, json.version].join(":")
 
 /**
  * Example: Add custom request interceptor

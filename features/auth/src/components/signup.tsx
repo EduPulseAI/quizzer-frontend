@@ -37,7 +37,8 @@ export default function SignUp() {
         const { error } = await signup(formData);
 
         if (error) {
-            setErrors(error.errors ?? { [error.title]: error.detail })
+            const pd = error.body;
+            setErrors(pd.errors ?? { [pd.title]: pd.detail })
             setIsLoading(false)
 
             // Focus first error field
