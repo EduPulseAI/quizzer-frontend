@@ -1,3 +1,4 @@
+import { ApiError } from '@next-feature/client';
 import type { NextAuthConfig } from 'next-auth';
 
 const VERCEL_DEPLOYMENT = !!process.env.VERCEL_URL;
@@ -29,6 +30,15 @@ export const authConfig: NextAuthConfig = {
         secure: VERCEL_DEPLOYMENT,
       },
     },
+  },
+  logger: {
+    error(error) {
+      if (error instanceof ApiError) {
+        console.error("[auth][error]", error.body);
+        return;
+      }
+      console.error("[auth][error]", error.name, error)
+    }
   },
   providers: [],
 } satisfies NextAuthConfig;

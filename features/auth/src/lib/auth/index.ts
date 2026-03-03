@@ -1,24 +1,15 @@
-import { ApiError } from '@next-feature/client';
 import NextAuth, { AuthError, CredentialsSignin } from 'next-auth';
-import type { JWT } from 'next-auth/jwt';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { submitLogin, submitRefresh } from '../actions/login';
 import { TOKEN_EXPIRATION_SKEW } from '../config/env';
 import type { Session, User } from '../types/next-auth';
+import type { JWT } from 'next-auth/jwt'
 import { authConfig } from './auth.config';
 
 
 export const { auth, handlers, signIn, signOut } = NextAuth({
   ...authConfig,
-  logger: {
-    error(error) {
-      if (error instanceof ApiError) {
-        console.error("[auth][error]", error.body);
-        return ;
-      }
-      console.error("[auth][error]", error.name, error)
-    }
-  },
+  
   providers: [
     CredentialsProvider({
       name: 'Credentials',
@@ -79,7 +70,6 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
       token: JWT;
       user: User;
     }) {
-      // console.log("callback#session", { session, token })
       if (token && session.user) {
         session.user.id = token.sub as string;
         session.user.roles = token.roles as string[];
