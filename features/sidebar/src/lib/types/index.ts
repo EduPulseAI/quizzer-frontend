@@ -1,4 +1,4 @@
-import { LucideIcon } from "lucide-react";
+import type { IconName } from "lucide-react/dynamic";
 
 /**
  * [navigation-item]
@@ -8,6 +8,6 @@ import { LucideIcon } from "lucide-react";
 export interface NavigationItem {
     name: string;
     href: string;
-    icon: LucideIcon;
+    icon: IconName;
     nodes: NavigationItem[];
 }

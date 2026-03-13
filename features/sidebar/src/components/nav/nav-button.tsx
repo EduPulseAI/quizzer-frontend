@@ -18,7 +18,7 @@ export function NavButton(props: Props) {
       <Button
         variant="ghost"
         onMouseEnter={() => changePanel(props.panel)}
-        className={`h-10 w-10 shrink-0 mx-auto transition-colors ${openPanel === props.panel
+        className={`cursor-pointer h-10 w-10 shrink-0 mx-auto transition-colors ${openPanel === props.panel
           ? "text-foreground bg-accent"
           : "text-muted-foreground hover:text-foreground hover:bg-accent"
           }`}

@@ -55,10 +55,9 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
         } else {
           token.error = response.error.body.title
           console.error("jwt#refreshError", response.error);
+
         }
       }
-
-
 
       return token;
     },

@@ -1,10 +1,12 @@
 'use client';
 
 import { create } from 'zustand';
+import { APP_NAVIGATION, NavigationItem } from '../server';
 
 export type Panel = string;
 
 interface SidebarState {
+  items: NavigationItem[] // todo: should this be in the store? or just passed down from the server component?
   openPanel: Panel | null;
   pinnedPanel: Panel | null;
   showUpgradeModal: boolean;
@@ -12,7 +14,7 @@ interface SidebarState {
 }
 
 interface SidebarActions {
-  initializeSidebar: (panel: Panel) => void;
+  initializeSidebar: (panel: Panel, items: NavigationItem[]) => void;
   changePanel: (panel: Panel) => void;
   togglePinned: (panel: Panel) => void;
   toggleAccountMenu: () => void;
@@ -25,6 +27,7 @@ interface SidebarActions {
 export type SidebarStore = SidebarState & SidebarActions;
 
 const initialState: SidebarState = {
+  items: APP_NAVIGATION,
   openPanel: null,
   pinnedPanel: null,
   showUpgradeModal: false,
@@ -34,9 +37,10 @@ const initialState: SidebarState = {
 export const useSidebarStore = create<SidebarStore>((set, get) => ({
   ...initialState,
 
-  initializeSidebar: (panel: Panel) => {
+  initializeSidebar: (panel: Panel, items: NavigationItem[]) => {
     set({
       openPanel: panel,
+      items: items
     });
   },
 

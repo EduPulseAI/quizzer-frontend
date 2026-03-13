@@ -104,7 +104,7 @@ export function AccountMenu(props: Props) {
           <div className="my-2 border-t border-border" />
 
           {/* Profile Switcher */}
-          <button onClick={() => signOut({ redirectTo: "/login"})} className="w-full flex items-center gap-3 px-3 py-2.5 text-sm hover:bg-accent rounded transition-colors group">
+          <button className="w-full flex items-center gap-3 px-3 py-2.5 text-sm hover:bg-accent rounded transition-colors group">
             <div className="relative">
               <Image
                 src="/placeholder-user.jpg"
@@ -121,11 +121,11 @@ export function AccountMenu(props: Props) {
             <Check className="h-4 w-4 text-primary shrink-0" />
           </button>
 
-          <button className="w-full flex items-center gap-3 px-3 py-2.5 text-sm hover:bg-accent rounded transition-colors group">
+          <button onClick={() => signOut({ redirectTo: "/login"})} className="w-full flex items-center gap-3 px-3 py-2.5 text-sm hover:bg-accent rounded transition-colors group">
             <div className="h-6 w-6 rounded-full bg-muted flex items-center justify-center shrink-0">
               <span className="text-xs">🕶️</span>
             </div>
-            <span className="flex-1 text-left">Incognito</span>
+            <span className="flex-1 text-left">Sign out</span>
             <HelpCircle className="h-4 w-4 text-muted-foreground shrink-0" />
           </button>
         </div>
