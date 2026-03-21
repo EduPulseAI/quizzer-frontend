@@ -2,8 +2,10 @@
 
 import { useTransition } from 'react';
 import {
-  deleteExperienceAction,
+  deleteExperience,
   deleteEducationAction,
+} from '@edupulse/profile/server';
+import {
   useProfileStore,
 } from '@edupulse/profile';
 import {
@@ -34,7 +36,7 @@ export function ProfileAccordion() {
             <div className="text-left">
               <p className="font-medium">About</p>
               <p className="text-xs text-muted-foreground line-clamp-1 max-w-[200px]">
-                {about?.bio ? about.bio.slice(0, 50) + '...' : 'Add your bio'}
+                {about?.summary ? about.summary.slice(0, 50) + '...' : 'Add your bio'}
               </p>
             </div>
           </div>
@@ -101,10 +103,10 @@ function AboutForm() {
       <div className="space-y-1">
         <label className="text-xs font-medium text-muted-foreground">Bio</label>
         <p className="text-sm text-foreground/80 whitespace-pre-wrap">
-          {about?.bio || 'No bio added yet'}
+          {about?.summary || 'No bio added yet'}
         </p>
       </div>
-      {about?.focus && about.focus.length > 0 && (
+      {/* {about?.focus && about.focus.length > 0 && (
         <div className="space-y-1">
           <label className="text-xs font-medium text-muted-foreground">Focus Areas</label>
           <div className="flex flex-wrap gap-1">
@@ -145,7 +147,7 @@ function AboutForm() {
             ))}
           </div>
         </div>
-      )}
+      )} */}
     </div>
   );
 }
@@ -157,7 +159,7 @@ function ExperienceContent() {
   const handleDelete = (index: number) => {
     if (confirm('Delete this experience?')) {
       startTransition(async () => {
-        await deleteExperienceAction(index);
+        await deleteExperience(index);
       });
     }
   };

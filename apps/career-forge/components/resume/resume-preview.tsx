@@ -1,14 +1,16 @@
 "use client"
 
 import {
+  useProfileStore
+} from '@edupulse/profile';
+import {
   type Education,
   type ExperienceItem,
   Profile,
-  type TechnicalSkills,
-  useProfileStore
-} from '@edupulse/profile';
-import { Card, CardContent, CardHeader, CardTitle } from '@feature/ui/components/card';
+  type TechnicalSkills
+} from '@edupulse/profile/server';
 import { Button } from '@feature/ui/components/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@feature/ui/components/card';
 import { Download, FileText } from 'lucide-react';
 
 export function ResumePreview() {
@@ -58,13 +60,13 @@ export function ResumePreview() {
             </div>
 
             {/* Summary */}
-            {about?.bio && (
+            {about?.summary?.length > 0 && (
               <div>
                 <h3 className="text-xl font-bold text-blue-600 mb-2">
                   SUMMARY
                 </h3>
                 <p className="text-sm text-gray-700 whitespace-pre-line">
-                  {about.bio}
+                  {about.summary.join('. ')}
                 </p>
               </div>
             )}
@@ -107,27 +109,19 @@ export function ResumePreview() {
 }
 
 function TechnicalSkillsSection({ skills }: { skills: TechnicalSkills }) {
-  const categories = [
-    { label: 'Design', items: skills.design },
-    { label: 'Development', items: skills.development },
-    { label: 'UX Methods', items: skills.uxMethods },
-    { label: 'Soft Skills', items: skills.softSkills },
-  ].filter((cat) => cat.items && cat.items.length > 0);
-
-  if (categories.length === 0) return null;
 
   return (
     <div>
       <h3 className="text-xl font-bold text-blue-600 mb-2">TECHNICAL SKILLS</h3>
       <table className="w-full text-sm">
         <tbody>
-          {categories.map((category) => (
-            <tr key={category.label} className="border-b border-gray-200">
+          {Object.entries(skills).map(([label, skills]) => (
+            <tr key={label} className="border-b border-gray-200">
               <td className="py-1 pr-4 font-semibold text-gray-700 w-32">
-                {category.label}
+                {label}
               </td>
               <td className="py-1 text-gray-600">
-                {category.items?.join(', ')}
+                {skills?.join(', ')}
               </td>
             </tr>
           ))}
@@ -152,12 +146,12 @@ function ExperienceSection({ experience }: { experience: ExperienceItem }) {
         <p className="text-sm text-gray-700 mt-2">{experience.description}</p>
       )}
 
-      {experience.achievements && experience.achievements.length > 0 && (
+      {experience.responsibilities && experience.responsibilities.length > 0 && (
         <ul className="mt-2 space-y-1">
-          {experience.achievements.map((achievement, i) => (
+          {experience.responsibilities.map((responsibility, i) => (
             <li key={i} className="text-sm text-gray-700 flex">
               <span className="mr-2">•</span>
-              <span>{achievement}</span>
+              <span>{responsibility}</span>
             </li>
           ))}
         </ul>
