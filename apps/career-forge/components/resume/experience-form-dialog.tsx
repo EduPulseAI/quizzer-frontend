@@ -1,11 +1,11 @@
 'use client';
 
-import type { ApiResponse } from '@edupulse/api-client';
+import type { ApiResponse } from '@next-feature/client';
 import {
   addExperienceAction,
   updateExperienceAction,
   type ExperienceItem
-} from '@edupulse/profile';
+} from '@edupulse/profile/server';
 import { Button } from '@feature/ui/components/button';
 import {
   Dialog,
@@ -36,8 +36,9 @@ const initialState: ApiResponse<ExperienceItem> = {
     company: '',
     period: '',
     description: '',
-    achievements: [],
     technologies: [],
+    location: '',
+    responsibilities: []
   },
 };
 
@@ -51,7 +52,8 @@ ExperienceFormDialog({
 
   const boundAction =
     mode === 'edit' && index !== undefined
-      ? updateExperienceAction.bind(null, index)
+      ? (state: ApiResponse<ExperienceItem>, formData: FormData) => 
+        updateExperienceAction(index, state, formData)
       : addExperienceAction;
 
   const [state, formAction, isPending] = useActionState(
@@ -109,8 +111,8 @@ ExperienceFormDialog({
                 required
                 className="bg-background/50"
               />
-              {state.error?.errors?.title && (
-                <p className="text-sm text-destructive">{state.error.errors.title}</p>
+              {state.error?.body?.errors?.title && (
+                <p className="text-sm text-destructive">{state.error.body.errors.title}</p>
               )}
             </div>
             <div className="grid gap-2">
@@ -123,8 +125,8 @@ ExperienceFormDialog({
                 required
                 className="bg-background/50"
               />
-              {state.error?.errors?.company && (
-                <p className="text-sm text-destructive">{state.error.errors.company}</p>
+              {state.error?.body?.errors?.company && (
+                <p className="text-sm text-destructive">{state.error.body.errors.company}</p>
               )}
             </div>
             <div className="grid gap-2">
@@ -138,8 +140,8 @@ ExperienceFormDialog({
                 required
                 className="bg-background/50"
               />
-              {state.error?.errors?.period && (
-                <p className="text-sm text-destructive">{state.error.errors.period}</p>
+              {state.error?.body.errors?.period && (
+                <p className="text-sm text-destructive">{state.error.body.errors.period}</p>
               )}
             </div>
             <div className="grid gap-2">
@@ -153,14 +155,14 @@ ExperienceFormDialog({
               />
             </div>
             <div className="grid gap-2">
-              <Label htmlFor="achievements">
-                Achievements (one per line)
+              <Label htmlFor="responsibilities">
+                Responsibilities (one per line)
               </Label>
               <Textarea
-                id="achievements"
-                name="achievements"
+                id="responsibilities"
+                name="responsibilities"
                 placeholder="Led team of 5 engineers&#10;Reduced deployment time by 50%&#10;Implemented CI/CD pipeline"
-                defaultValue={state.data.achievements?.join('\n')}
+                defaultValue={state.data.responsibilities?.join('\n')}
                 className="min-h-24 resize-none bg-background/50"
               />
             </div>

@@ -1,16 +1,15 @@
 
 import { PROJECT_NAME } from '@feature/base';
-import {
-  Sparkles
-} from 'lucide-react';
-import type { NavigationItem } from '../lib/types';
+import { Sparkles } from 'lucide-react';
+import { DynamicIcon } from 'lucide-react/dynamic';
+import { ReactNode } from 'react';
 import { APP_NAVIGATION } from '../lib/constants/navigation';
+import type { NavigationItem } from '../lib/types';
 import AccountMenu from './account-menu';
 import ModalButtons from './modal-buttons';
 import NavButton from './nav/nav-button';
 import SidebarContent from './sidebar-content';
 import SidebarPanel from './sidebar-panel';
-import { ReactNode } from 'react';
 
 
 interface Props {
@@ -37,16 +36,17 @@ export function Sidebar({ items = APP_NAVIGATION, children }: Props) {
             {items !== null && items.map((item) => (
               <div key={item.name} className="relative mb-2">
                 <NavButton panel={item.name} href={item.href}>
-                  <item.icon className="h-5 w-5" />
+                  <DynamicIcon name={item.icon} className="h-5 w-5" />
                 </NavButton>
                 <div className="text-[9px] text-muted-foreground text-center mt-1 font-medium">{item.name}</div>
               </div>
             ))}
           </nav>
-          <ModalButtons />
 
+          <ModalButtons />
         </div>
-        <SidebarPanel>
+        
+        <SidebarPanel items={items}>
           {children}
         </SidebarPanel>
       </SidebarContent>

@@ -18,8 +18,8 @@ import {
   addEducationAction,
   updateEducationAction,
   type Education,
-} from '@edupulse/profile';
-import type { ApiResponse } from '@edupulse/api-client';
+} from '@edupulse/profile/server';
+import type { ApiResponse } from '@next-feature/client';
 
 interface EducationFormDialogProps {
   mode: 'add' | 'edit';
@@ -34,7 +34,6 @@ const initialState: ApiResponse<Education> = {
     degree: '',
     institution: '',
     year: '',
-    logo: null,
   },
 };
 
@@ -47,7 +46,8 @@ export function EducationFormDialog({
 
   const boundAction =
       mode === 'edit' && index !== undefined
-      ? updateEducationAction.bind(null, index)
+      ? (prevState: ApiResponse<Education>, formData: FormData) => 
+        updateEducationAction(index, prevState, formData)
       : addEducationAction;
 
   const [state, formAction, isPending] = useActionState(
@@ -106,8 +106,8 @@ export function EducationFormDialog({
                 required
                 className="bg-background/50"
               />
-              {state.error?.errors?.degree && (
-                <p className="text-sm text-destructive">{state.error.errors.degree}</p>
+              {state.error?.body?.errors?.degree && (
+                <p className="text-sm text-destructive">{state.error.body.errors.degree}</p>
               )}
             </div>
             <div className="grid gap-2">
@@ -120,9 +120,9 @@ export function EducationFormDialog({
                 required
                 className="bg-background/50"
               />
-              {state.error?.errors?.institution && (
+              {state.error?.body?.errors?.institution && (
                 <p className="text-sm text-destructive">
-                  {state.error.errors.institution}
+                  {state.error.body.errors.institution}
                 </p>
               )}
             </div>
@@ -140,8 +140,8 @@ export function EducationFormDialog({
                 required
                 className="bg-background/50"
               />
-              {state.error?.errors?.year && (
-                <p className="text-sm text-destructive">{state.error.errors.year}</p>
+              {state.error?.body?.errors?.year && (
+                <p className="text-sm text-destructive">{state.error.body.errors.year}</p>
               )}
             </div>
             <div className="grid gap-2">
@@ -151,7 +151,7 @@ export function EducationFormDialog({
                 name="logo"
                 type="url"
                 placeholder="https://example.com/logo.png"
-                defaultValue={defaultValues.logo || ''}
+                defaultValue={''}
                 className="bg-background/50"
               />
             </div>

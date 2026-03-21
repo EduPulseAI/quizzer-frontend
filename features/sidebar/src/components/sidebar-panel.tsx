@@ -1,26 +1,27 @@
 'use client';
 
 import { Button } from '@feature/ui/components/button';
-import { LayoutGrid, Pin, Plus } from 'lucide-react';
+import { Pin } from 'lucide-react';
 import Link from 'next/link';
 import { ReactNode, useMemo } from 'react';
-import { APP_NAVIGATION } from '../server';
+import { NavigationItem } from '../server';
 import { useSidebarStore } from '../stores/sidebar-store';
+import { DynamicIcon } from 'lucide-react/dynamic';
 
 interface Props {
-  data?: unknown;
   children?: ReactNode;
+  items: NavigationItem[]
 }
 
-export function SidebarPanel(props: Props) {
+export function SidebarPanel({ children, items }: Props) {
   const { openPanel, pinnedPanel, togglePinned } = useSidebarStore();
 
   const nodes = useMemo(() => {
     if (openPanel) {
-      const item = APP_NAVIGATION.find(nav => nav.name === openPanel);
+      const item = items.find(nav => nav.name === openPanel);
       return item !== undefined ? item.nodes : [];
     }
-  }, [openPanel])
+  }, [openPanel, items])
 
 
   return (
@@ -44,13 +45,13 @@ export function SidebarPanel(props: Props) {
           {nodes && nodes.map(node => (
             <Link key={node.name} href={node.href}>
               <button className="w-full flex items-center gap-2.5 px-2.5 py-2 text-[13px] hover:bg-accent rounded transition-colors">
-                <node.icon className="h-4 w-4 shrink-0" />
+                <DynamicIcon name={node.icon} className="h-4 w-4 shrink-0" />
                 <span className="font-normal">{node.name}</span>
               </button>
             </Link>
           ))}
         </div>
-        {props.children}
+        {children}
       </div>
     </div>
   );

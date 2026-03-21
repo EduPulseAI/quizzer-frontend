@@ -6,3 +6,4 @@ export * from './lib/actions/profile';
 export * from './lib/actions/resume';
 export * from './lib/constants/education';
 export * from './lib/constants/experience';
+export * from './lib/types/profile';

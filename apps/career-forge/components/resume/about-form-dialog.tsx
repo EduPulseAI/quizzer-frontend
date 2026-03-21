@@ -17,28 +17,19 @@ import { Textarea } from '@feature/ui/components/textarea';
 import { Pencil, Plus, Trash2 } from 'lucide-react';
 import {
   updateAboutAction,
-  useProfileStore,
   type About,
-  type Language,
+} from '@edupulse/profile/server';
+import {
+  useProfileStore
 } from '@edupulse/profile';
-import type { ApiResponse } from '@edupulse/api-client';
+import type { ApiResponse } from '@next-feature/client';
 
 const initialState: ApiResponse<About> = {
   success: false,
   message: '',
   data: {
-    bio: '',
-    focus: [],
-    interests: [],
-    languages: [],
+    summary: [],
   },
-};
-
-const defaultLanguage: Language = {
-  name: '',
-  proficiency: 'Beginner',
-  level: 25,
-  flag: '',
 };
 
 export function AboutFormDialog() {
@@ -46,7 +37,7 @@ export function AboutFormDialog() {
   const { profile } = useProfileStore();
   const about = profile.about;
 
-  const [languages, setLanguages] = useState<Language[]>(about.languages || []);
+  const [summary, setSummary] = useState<string[]>(about.summary || []);
 
   const [state, formAction, isPending] = useActionState(
     updateAboutAction,
@@ -60,21 +51,21 @@ export function AboutFormDialog() {
   }, [state.success]);
 
   useEffect(() => {
-    setLanguages(about.languages || []);
-  }, [about.languages]);
+    setSummary(about.summary || []);
+  }, [about.summary]);
 
-  const addLanguage = () => {
-    setLanguages([...languages, { ...defaultLanguage }]);
+  const addSummary = () => {
+    setSummary([...summary, ""]);
   };
 
-  const removeLanguage = (index: number) => {
-    setLanguages(languages.filter((_, i) => i !== index));
+  const removeSummary = (index: number) => {
+    setSummary(summary.filter((_, i) => i !== index));
   };
 
-  const updateLanguage = (index: number, field: keyof Language, value: string | number) => {
-    setLanguages(
-      languages.map((lang, i) =>
-        i === index ? { ...lang, [field]: value } : lang
+  const updateSummary = (index: number, value: string) => {
+    setSummary(
+      summary.map((lang, i) =>
+        i === index ? value : lang
       )
     );
   };
@@ -90,17 +81,17 @@ export function AboutFormDialog() {
         <DialogHeader>
           <DialogTitle>Edit About</DialogTitle>
           <DialogDescription>
-            Update your bio, focus areas, interests, and languages.
+            Update your bio, focus areas, interests, and summary.
           </DialogDescription>
         </DialogHeader>
         <form action={formAction}>
           <input
             type="hidden"
-            name="languages"
-            value={JSON.stringify(languages)}
+            name="summary"
+            value={JSON.stringify(summary)}
           />
           <div className="grid gap-4 py-4">
-            <div className="grid gap-2">
+            {/* <div className="grid gap-2">
               <Label htmlFor="bio">Bio</Label>
               <Textarea
                 id="bio"
@@ -113,9 +104,9 @@ export function AboutFormDialog() {
               {state.error?.errors?.bio && (
                 <p className="text-sm text-destructive">{state.error.errors.bio}</p>
               )}
-            </div>
+            </div> */}
 
-            <div className="grid gap-2">
+            {/* <div className="grid gap-2">
               <Label htmlFor="focus">Focus Areas (comma-separated)</Label>
               <Input
                 id="focus"
@@ -135,16 +126,16 @@ export function AboutFormDialog() {
                 defaultValue={about.interests?.join(', ')}
                 className="bg-background/50"
               />
-            </div>
+            </div> */}
 
             <div className="grid gap-2">
               <div className="flex items-center justify-between">
-                <Label>Languages</Label>
+                <Label>Summary</Label>
                 <Button
                   type="button"
                   size="sm"
                   variant="outline"
-                  onClick={addLanguage}
+                  onClick={addSummary}
                   className="h-7 text-xs"
                 >
                   <Plus className="h-3 w-3 mr-1" />
@@ -152,18 +143,18 @@ export function AboutFormDialog() {
                 </Button>
               </div>
               <div className="space-y-3">
-                {languages.map((lang, index) => (
+                {summary.map((text, index) => (
                   <div
                     key={index}
                     className="grid grid-cols-[1fr_1fr_auto] gap-2 p-2 rounded border border-border/50 bg-background/30"
                   >
                     <Input
-                      placeholder="Language"
-                      value={lang.name}
-                      onChange={(e) => updateLanguage(index, 'name', e.target.value)}
+                      placeholder="Summary"
+                      value={text}
+                      onChange={(e) => updateSummary(index, 'name', e.target.value)}
                       className="bg-background/50 h-8 text-sm"
                     />
-                    <select
+                    {/* <select
                       value={lang.proficiency}
                       onChange={(e) => {
                         const proficiency = e.target.value;
@@ -173,8 +164,8 @@ export function AboutFormDialog() {
                           Advanced: 75,
                           Native: 100,
                         };
-                        updateLanguage(index, 'proficiency', proficiency);
-                        updateLanguage(index, 'level', levelMap[proficiency] || 25);
+                        updateSummary(index, 'proficiency', proficiency);
+                        updateSummary(index, 'level', levelMap[proficiency] || 25);
                       }}
                       className="h-8 text-sm rounded border border-input bg-background/50 px-2"
                     >
@@ -182,21 +173,21 @@ export function AboutFormDialog() {
                       <option value="Intermediate">Intermediate</option>
                       <option value="Advanced">Advanced</option>
                       <option value="Native">Native</option>
-                    </select>
+                    </select> */}
                     <Button
                       type="button"
                       size="icon"
                       variant="ghost"
-                      onClick={() => removeLanguage(index)}
+                      onClick={() => removeSummary(index)}
                       className="h-8 w-8 text-destructive hover:text-destructive"
                     >
                       <Trash2 className="h-4 w-4" />
                     </Button>
                   </div>
                 ))}
-                {languages.length === 0 && (
+                {summary.length === 0 && (
                   <p className="text-sm text-muted-foreground text-center py-2">
-                    No languages added yet
+                    No summary added yet
                   </p>
                 )}
               </div>
