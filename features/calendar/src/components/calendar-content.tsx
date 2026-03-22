@@ -1,30 +1,20 @@
 'use client';
 
-import { ReactNode } from 'react';
+import { useCalendarStore } from "../stores/calendar-store"
+import { MonthView } from "./month-view"
+import { WeekView } from "./week-view"
+import { DayView } from "./day-view"
 
-const WEEKDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+export function CalendarContent() {
+  const { view } = useCalendarStore()
 
-interface Props {
-  data?: unknown;
-  children?: ReactNode;
-}
-
-export function CalendarContent(props: Props) {
   return (
-    <div className="flex h-full flex-col">
-      {/* Weekday headers */}
-      <div className="grid grid-cols-7 border-b bg-muted/50">
-        {WEEKDAYS.map((day) => (
-          <div
-            key={day}
-            className="px-1 py-2 text-center text-xs font-medium text-muted-foreground"
-          >
-            {day}
-          </div>
-        ))}
-      </div>
-    </div>
-  );
+    <>
+      {view === "month" && <MonthView />}
+      {view === "week" && <WeekView />}
+      {view === "day" && <DayView />}
+    </>
+  )
 }
 
-export default CalendarContent;
+export default CalendarContent

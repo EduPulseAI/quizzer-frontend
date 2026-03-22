@@ -91,30 +91,30 @@
       "auth": {
         "projectName": "auth"
       },
-      "store": {
-        "projectName": "profile"
-      },
       "feature": {
         "orgName": "edupulse"
       },
       "client": {
         "orgName": "edupulse"
       },
+      "store": {
+        "projectName": "calendar"
+      },
       "component": {
-        "projectName": "career-forge",
+        "projectName": "calendar",
         "componentType": "component"
       },
       "action": {
-        "projectName": "profile"
+        "projectName": "calendar"
       },
       "constant": {
-        "projectName": "profile"
+        "projectName": "calendar"
       },
       "utility": {
-        "projectName": "profile"
+        "projectName": "calendar"
       },
       "data-type": {
-        "projectName": "profile"
+        "projectName": "calendar"
       },
       "client-config": {
         "clientPackage": "@next-feature/client"

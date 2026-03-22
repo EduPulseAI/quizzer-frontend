@@ -1,26 +1,24 @@
 'use client';
 
-import { Button } from '@feature/ui/components/button';
-import { cn } from '@feature/ui/lib/utils';
 import {
   ChevronLeft,
   ChevronRight,
+  Home,
   Menu,
   MessageSquare,
   Moon,
   Plus,
   Settings,
-  Sun
-} from "lucide-react";
-import Link from 'next/link';
-import { ReactNode } from 'react';
-import { formatDayHeader, formatMonthYear, formatWeekRange, getWeekDays } from '../lib/utils/date';
-import { CalendarView, useCalendarStore } from '../stores/calendar-store';
-
-interface Props {
-  data?: unknown;
-  children?: ReactNode;
-}
+  Sun,
+  X,
+} from "lucide-react"
+import Link from "next/link"
+import { useState } from "react"
+import { useTheme } from "next-themes"
+import { Button } from "@feature/ui/components/button"
+import { cn } from "@feature/ui/lib/utils"
+import { formatDayHeader, formatMonthYear, formatWeekRange, getWeekDays } from "../../lib/utils/date"
+import { useCalendarStore, type CalendarView } from "../../stores/calendar-store"
 
 const VIEW_OPTIONS: { value: CalendarView; label: string }[] = [
   { value: "month", label: "Month" },
@@ -28,13 +26,13 @@ const VIEW_OPTIONS: { value: CalendarView; label: string }[] = [
   { value: "day", label: "Day" },
 ]
 
-
-export function Header(props: Props) {
-
+export function Header() {
   const { currentDate, view, setView, navigateForward, navigateBack, navigateToday } =
     useCalendarStore()
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const { theme, setTheme } = useTheme()
 
-    const getTitle = () => {
+  const getTitle = () => {
     if (view === "month") return formatMonthYear(currentDate)
     if (view === "week") return formatWeekRange(getWeekDays(currentDate))
     return formatDayHeader(currentDate)
@@ -45,7 +43,10 @@ export function Header(props: Props) {
       <header className="sticky top-0 z-40 flex items-center justify-between border-b bg-card px-3 py-2 md:px-6 md:py-3">
         {/* Left: title + nav */}
         <div className="flex items-center gap-2 md:gap-4">
-          <Link href="/" className="text-base font-semibold tracking-tight text-foreground hover:underline md:text-lg">
+          <Link
+            href="/"
+            className="text-base font-semibold tracking-tight text-foreground hover:underline md:text-lg"
+          >
             Chronos
           </Link>
           <span className="hidden text-muted-foreground md:inline">/</span>
@@ -89,7 +90,7 @@ export function Header(props: Props) {
           <Button
             variant="ghost"
             size="icon"
-            // onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
             className="hidden md:flex"
             aria-label="Toggle theme"
           >
@@ -99,7 +100,6 @@ export function Header(props: Props) {
           <Button
             variant="ghost"
             size="icon"
-            // onClick={onOpenChat}
             className="hidden md:flex"
             aria-label="Open AI assistant"
           >
@@ -108,21 +108,17 @@ export function Header(props: Props) {
           <Button
             variant="ghost"
             size="icon"
-            // onClick={onOpenSettings}
             className="hidden md:flex"
             aria-label="Settings"
           >
             <Settings className="h-4 w-4" />
           </Button>
-          <Button size="sm"
-            // onClick={onNewEvent} 
-            className="hidden gap-1.5 md:flex"
-          >
+          <Button size="sm" className="hidden gap-1.5 md:flex">
             <Plus className="h-4 w-4" />
             New Event
           </Button>
 
-          {/* Mobile: title + hamburger */}
+          {/* Mobile: current title */}
           <span className="mr-1 text-xs text-muted-foreground md:hidden">
             {view === "month"
               ? formatMonthYear(currentDate)
@@ -134,7 +130,7 @@ export function Header(props: Props) {
             variant="ghost"
             size="icon"
             className="md:hidden"
-            // onClick={() => setMobileMenuOpen(true)}
+            onClick={() => setMobileMenuOpen(true)}
             aria-label="Open menu"
           >
             <Menu className="h-5 w-5" />
@@ -174,14 +170,14 @@ export function Header(props: Props) {
       </div>
 
       {/* Mobile full-screen menu */}
-      {/* {mobileMenuOpen && (
+      {mobileMenuOpen && (
         <div className="fixed inset-0 z-50 flex flex-col bg-background md:hidden">
           <div className="flex items-center justify-between border-b px-4 py-3">
             <h2 className="text-lg font-semibold text-foreground">Chronos</h2>
             <Button
               variant="ghost"
               size="icon"
-              // onClick={() => setMobileMenuOpen(false)}
+              onClick={() => setMobileMenuOpen(false)}
               aria-label="Close menu"
             >
               <X className="h-5 w-5" />
@@ -190,38 +186,29 @@ export function Header(props: Props) {
           <nav className="flex flex-1 flex-col gap-1 p-4">
             <Link
               href="/"
-              // onClick={() => setMobileMenuOpen(false)}
+              onClick={() => setMobileMenuOpen(false)}
               className="flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-medium text-foreground hover:bg-accent"
             >
               <Home className="h-5 w-5" />
               Home
             </Link>
             <button
-              onClick={() => {
-                onNewEvent()
-                setMobileMenuOpen(false)
-              }}
               className="flex items-center gap-3 rounded-lg px-4 py-3 text-left text-sm font-medium text-foreground hover:bg-accent"
+              onClick={() => setMobileMenuOpen(false)}
             >
               <Plus className="h-5 w-5" />
               New Event
             </button>
             <button
-              onClick={() => {
-                onOpenChat()
-                setMobileMenuOpen(false)
-              }}
               className="flex items-center gap-3 rounded-lg px-4 py-3 text-left text-sm font-medium text-foreground hover:bg-accent"
+              onClick={() => setMobileMenuOpen(false)}
             >
               <MessageSquare className="h-5 w-5" />
               AI Assistant
             </button>
             <button
-              onClick={() => {
-                onOpenSettings()
-                setMobileMenuOpen(false)
-              }}
               className="flex items-center gap-3 rounded-lg px-4 py-3 text-left text-sm font-medium text-foreground hover:bg-accent"
+              onClick={() => setMobileMenuOpen(false)}
             >
               <Settings className="h-5 w-5" />
               Settings
@@ -238,10 +225,9 @@ export function Header(props: Props) {
             </button>
           </nav>
         </div>
-      )} */}
+      )}
     </>
-  );
-
+  )
 }
 
-export default Header;
+export default Header

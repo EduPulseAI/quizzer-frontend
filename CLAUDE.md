@@ -50,19 +50,22 @@ npx nx affected:build
 
 ```
 apps/                  # Next.js applications
+├── career-forge/      # Career platform app (standalone package.json)
 ├── coding-quizzer/    # Main quiz application (port 4200)
-├── career-forge/      # Career forge app (standalone with own package.json)
-└── session-app/       # Session management app
+├── calendar/          # Calendar app
+├── logistics/         # Logistics app
+└── perplexity/        # Perplexity-clone app
 
-features/              # Shared feature libraries (@edupulse/* or @feature/*)
-├── quiz/              # Quiz feature (@edupulse/quiz)
-├── ui/                # UI components (@feature/ui) - shadcn/Radix based
+features/              # Shared feature libraries
+├── auth/              # Authentication (@edupulse/auth)
 ├── base/              # Base utilities (@feature/base)
-├── auth/              # Authentication (@feature/auth)
+├── calendar/          # Calendar feature (@edupulse/calendar)
+├── profile/           # User profile (@edupulse/profile)
+├── quiz/              # Quiz feature (@edupulse/quiz)
 ├── session/           # Session management (@edupulse/session)
-├── question/          # Question handling (@edupulse/question)
+├── sidebar/           # Sidebar navigation (@edupulse/sidebar)
 ├── sse/               # Server-sent events (@edupulse/sse)
-└── topic/             # Topic management (@feature/topic)
+└── ui/                # UI components (@feature/ui) - shadcn/Radix based
 
 clients/               # API client libraries
 └── api-client/        # @edupulse/api-client - axios-based API client
@@ -71,14 +74,19 @@ clients/               # API client libraries
 ### Import Aliases (tsconfig.base.json)
 
 ```typescript
-// App imports
+// App-specific imports
 import { Component } from '@app/coding-quizzer/components/Component';
+import { Component } from '@app/career-forge/components/Component';
 
-// Feature imports (two naming conventions)
-import { Component } from '@feature/ui';           // @feature/* for ui, base, topic, auth
-import { useQuiz } from '@edupulse/quiz';          // @edupulse/* for quiz, session, question, sse
+// Feature imports
+import { Component } from '@feature/ui';           // @feature/* for ui, base
+import { useQuiz } from '@edupulse/quiz';          // @edupulse/* for quiz, session, auth, etc.
+import { auth } from '@edupulse/auth';
+import { getProfile } from '@edupulse/profile/server';
+import { SidebarNav } from '@edupulse/sidebar';
+import { CalendarView } from '@edupulse/calendar';
 
-// Server-only exports
+// Server-only exports (each feature has a /server entry point)
 import { serverAction } from '@edupulse/quiz/server';
 
 // API client
@@ -91,7 +99,7 @@ Each feature library follows this pattern:
 ```
 features/<name>/src/
 ├── index.ts           # Client exports
-├── server.ts          # Server-only exports
+├── server.ts          # Server-only exports (actions, server utilities)
 └── lib/
     ├── actions/       # Server actions
     ├── components/    # React components
@@ -109,11 +117,32 @@ features/<name>/src/
 - **State:** Zustand for client state, TanStack Query for server state
 - **Forms:** react-hook-form + zod validation
 - **API:** axios via `@edupulse/api-client`
-- **Auth:** next-auth v5 beta
+- **Auth:** next-auth v5 beta with JWT credentials provider + token refresh
+- **Database (career-forge):** Prisma with PostgreSQL (schema at `apps/career-forge/prisma/schema.prisma`)
+
+## Application-Specific Notes
+
+### career-forge
+- Has its own `package.json` and `pnpm-lock.yaml` (standalone dependencies)
+- Uses Next.js App Router with route groups: `(app)`, `(auth)`, `admin`
+- Has `middleware.ts` that re-exports `auth` from `@edupulse/auth` for route protection
+- Prisma client generated to `apps/career-forge/prisma/generated/prisma/`
+- Environment: `.env` file in app directory
+
+### Auth (`@edupulse/auth`)
+- NextAuth v5 with CredentialsProvider; calls backend `submitLogin` / `submitRefresh`
+- JWT callbacks store `roles`, `jwtToken`, `refreshToken`, and `expiration` on the token
+- Auto-refreshes JWT before expiration using `TOKEN_EXPIRATION_SKEW` config
+- `auth.config.ts` in the auth feature holds route matchers used by middleware
+
+### coding-quizzer
+- Main quiz application
+- Uses turbo mode for dev server
+- Source in `src/` directory (different from career-forge)
 
 ## Code Generation (next-feature plugin)
 
-The monorepo uses `next-feature` generators. Default project is configured in `nx.json`.
+The monorepo uses `next-feature` generators. Default project in `nx.json` is set to `calendar`.
 
 ```bash
 # Generate component
@@ -132,19 +161,6 @@ npx nx g next-feature:feature --name=payments
 npx nx g next-feature:data-type --name=User --projectName=quiz
 npx nx g next-feature:constant --name=endpoints --projectName=quiz
 ```
-
-## Application-Specific Notes
-
-### career-forge
-- Has its own `package.json` and `pnpm-lock.yaml` (standalone dependencies)
-- Uses Next.js App Router with route groups: `(app)`, `(auth)`, `admin`
-- Has middleware.ts for auth protection
-- Environment: `.env` file in app directory
-
-### coding-quizzer
-- Main quiz application
-- Uses turbo mode for dev server
-- Source in `src/` directory (different from career-forge)
 
 ## Testing
 

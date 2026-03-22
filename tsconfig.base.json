@@ -44,7 +44,10 @@
       "@edupulse/sidebar/*": ["features/sidebar/src/*"],
       "@edupulse/auth": ["features/auth/src/index.ts"],
       "@edupulse/auth/server": ["features/auth/src/server.ts"],
-      "@edupulse/auth/*": ["features/auth/src/*"]
+      "@edupulse/auth/*": ["features/auth/src/*"],
+      "@edupulse/calendar": ["features/calendar/src/index.ts"],
+      "@edupulse/calendar/server": ["features/calendar/src/server.ts"],
+      "@edupulse/calendar/*": ["features/calendar/src/*"]
     }
   },
   "exclude": ["node_modules", "tmp"],
