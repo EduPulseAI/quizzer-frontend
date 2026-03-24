@@ -47,7 +47,10 @@
       "@edupulse/auth/*": ["features/auth/src/*"],
       "@edupulse/calendar": ["features/calendar/src/index.ts"],
       "@edupulse/calendar/server": ["features/calendar/src/server.ts"],
-      "@edupulse/calendar/*": ["features/calendar/src/*"]
+      "@edupulse/calendar/*": ["features/calendar/src/*"],
+      "@edupulse/prisma": ["features/prisma/src/index.ts"],
+      "@edupulse/prisma/server": ["features/prisma/src/server.ts"],
+      "@edupulse/prisma/*": ["features/prisma/src/*"]
     }
   },
   "exclude": ["node_modules", "tmp"],
