@@ -5,11 +5,13 @@ import { TOKEN_EXPIRATION_SKEW } from '../config/env';
 import type { Session, User } from '../types/next-auth';
 import type { JWT } from 'next-auth/jwt'
 import { authConfig } from './auth.config';
+import { PrismaAdapter } from "@auth/prisma-adapter"
+import prisma  from "prisma"
 
 
 export const { auth, handlers, signIn, signOut } = NextAuth({
   ...authConfig,
-  
+  adapter: PrismaAdapter(prisma),
   providers: [
     CredentialsProvider({
       name: 'Credentials',
@@ -88,6 +90,3 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
     },
   },
 });
-
-
-

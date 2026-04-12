@@ -1,7 +1,8 @@
-import { PrismaClient } from "../../prisma/generated/prisma/client"
-import { PrismaPg } from '@prisma/adapter-pg'
-import { withAccelerate } from "@prisma/extension-accelerate"
-import { DATABASE_URL } from './index';
+import { PrismaPg } from '@prisma/adapter-pg';
+import { withAccelerate } from "@prisma/extension-accelerate";
+import "dotenv/config";
+import { PrismaClient } from "../../generated/prisma/client";
+import { DATABASE_URL } from './env';
 
 const globalForPrisma = globalThis as unknown as { prisma: PrismaClient }
 

@@ -1,84 +1,73 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client"
-  output   = "./generated/prisma"
+  output   = "../generated/prisma"
 }
 
 datasource db {
   provider = "postgresql"
 }
 
-model User {
-  id            String          @id @default(uuid())
-  name          String?
-  email         String          @unique
-  emailVerified DateTime?
-  image         String?
-  accounts      Account[]
-  sessions      Session[]
-  // Optional for WebAuthn support
-  Authenticator Authenticator[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-model Account {
-  userId            String
-  type              String
-  provider          String
-  providerAccountId String
-  refresh_token     String?
-  access_token      String?
+model accounts {
   expires_at        Int?
-  token_type        String?
-  scope             String?
-  id_token          String?
-  session_state     String?
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdat         DateTime? @db.Timestamp(6)
+  updatedat         DateTime? @db.Timestamp(6)
+  userId            String?   @db.Uuid
+  access_token      String?   @db.VarChar(255)
+  id_token          String?   @db.VarChar(255)
+  provider          String    @db.VarChar(255)
+  providerAccountId String    @db.VarChar(255)
+  refresh_token     String?   @db.VarChar(255)
+  scope             String?   @db.VarChar(255)
+  session_state     String?   @db.VarChar(255)
+  token_type        String?   @db.VarChar(255)
+  users             users?    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fkkhd68ixy8n5b3kt3vp4r4wt50")
 
   @@id([provider, providerAccountId])
 }
 
-model Session {
-  sessionToken String   @unique
-  userId       String
-  expires      DateTime
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+model roles {
+  id          BigInt       @id @default(autoincrement())
+  name        String       @db.VarChar(50)
+  description String?      @db.VarChar(255)
+  users_roles users_roles?
 }
 
-model VerificationToken {
-  identifier String
-  token      String
-  expires    DateTime
+model sessions {
+  expires      DateTime? @db.Timestamp(6)
+  userId       String?   @db.Uuid
+  id           String    @id @db.VarChar(255)
+  sessionToken String?   @unique @db.VarChar(255)
+  users        users?    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk6ii26lpwbni9yt8spnl0tftne")
+}
+
+model users {
+  created_at    DateTime      @db.Timestamptz(6)
+  emailVerified DateTime?     @db.Timestamptz(6)
+  updated_at    DateTime      @db.Timestamptz(6)
+  id            String        @id @db.Uuid
+  email         String        @unique @db.VarChar(255)
+  image         String?       @db.VarChar(255)
+  name          String?       @db.VarChar(255)
+  pwd_hash      String        @db.VarChar(255)
+  accounts      accounts[]
+  sessions      sessions[]
+  users_roles   users_roles[]
+}
+
+model users_roles {
+  roles_id BigInt @unique
+  user_id  String @db.Uuid
+  roles    roles  @relation(fields: [roles_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fka62j07k5mhgifpp955h37ponj")
+  users    users  @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fke6k7h92pkxjim6t1176b7h95x")
+
+  @@id([roles_id, user_id])
+}
+
+model verification_tokens {
+  expires    DateTime @db.Timestamptz(6)
+  issued_at  DateTime @db.Timestamptz(6)
+  identifier String   @db.VarChar(255)
+  token      String   @unique @db.VarChar(255)
 
   @@id([identifier, token])
-}
-
-// Optional for WebAuthn support
-model Authenticator {
-  credentialID         String  @unique
-  userId               String
-  providerAccountId    String
-  credentialPublicKey  String
-  counter              Int
-  credentialDeviceType String
-  credentialBackedUp   Boolean
-  transports           String?
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@id([userId, credentialID])
 }
