@@ -1,13 +1,12 @@
 'use client';
+import { uploadResume } from "@edupulse/profile/server";
 import { Button } from '@feature/ui/components/button';
 import { Card, CardContent } from '@feature/ui/components/card';
 import { cn } from '@feature/ui/lib/utils';
 import { AlertCircle, FileSpreadsheet, Upload } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { uploadResume } from "@edupulse/profile/server";
 
 import React, { ReactNode, useCallback, useState } from 'react';
-import { useProfileStore } from '@edupulse/profile';
 
 const MAX_SIZE_MB = 20;
 
@@ -21,7 +20,7 @@ export function UploadDropzone(props: Props) {
   const [isDragging, setIsDragging] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const store = useProfileStore();
+  const [resumeId, setResumeId] = useState<string | null>(null);
 
   const handleFile = useCallback(
     async (file: File) => {
@@ -30,17 +29,20 @@ export function UploadDropzone(props: Props) {
 
       try {
         // Upload file
-        const { success, data, error } = await uploadResume(file);
+        const formData = new FormData();
+        formData.append("file", file);
+        const { success, data, error } = await uploadResume(formData);
         if (error) {
-          if (error.title === "ZodError" && error.errors) {
-            setError(error.errors["file"] ?? error.detail)
+          console.log("UploadDropzone#uploadResumeError", error);
+          if (error.body?.title === "ZodError" && error.body?.errors) {
+            setError(error.body.errors["file"] ?? error.body.detail)
           } else {
-            setError(error.detail);
+            setError(error.body?.detail || error.message);
           }
         }
 
         if (success) {
-          store.setProfile(data);
+          setResumeId(data.resumeId);
         }
 
       } catch (err) {
@@ -100,10 +102,10 @@ export function UploadDropzone(props: Props) {
           onDragLeave={handleDragLeave}
           className="flex flex-col items-center justify-center gap-4 p-12"
         >
-          {isUploading ? (
+          {isUploading || resumeId ? (
             <>
               <div className="h-12 w-12 animate-spin rounded-full border-4 border-muted border-t-primary" />
-              <p className="text-muted-foreground">Parusing resume text...</p>
+              <p className="text-muted-foreground">{resumeId ? `Uploaded resume ID: ${resumeId}` : 'Uploading resume text...'}</p>
             </>
           ) : (
             <>

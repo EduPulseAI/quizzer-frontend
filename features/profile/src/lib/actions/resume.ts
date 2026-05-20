@@ -3,8 +3,6 @@
 import { withApi } from '@next-feature/client/server';
 import { z } from 'zod';
 import api from '../config/client';
-import type 
-{ Profile } from '../types/profile';
 
 const MAX_SIZE_MB = 20;
 
@@ -27,24 +25,22 @@ const uploadResumeSchema = z.object({
 
 export type UploadResumeRequest = z.infer<typeof uploadResumeSchema>;
 
-export const uploadResume = withApi(async (file: File) => {
-  const parsed = uploadResumeSchema.safeParse({ file });
+export const uploadResume = withApi(async (formData: FormData) => {
+  const parsed = uploadResumeSchema.safeParse({ file: formData.get("file") as File });
 
   if (!parsed.success) {
     throw parsed.error;
   }
 
-  const formData = new FormData();
-  formData.append("file", file);
+  const backendFormData = new FormData();
+  backendFormData.append("file", parsed.data.file);
 
-  const endpoint = '/api/resumes/upload';
-  return await api.post<Profile>(endpoint, formData, {
-    headers: { "Content-Type": "multipart/form-data" },
-    timeout: null,
-    onUploadProgress: (event) => {
-      if (!event.total) return;
-      const percent = Math.round((event.loaded * 100) / event.total);
-      console.log(percent);
-    },
+  const endpoint = `/api/resumes/upload`;
+  const response = await api.post<{ resumeId: string }>(endpoint, backendFormData, {
+    headers: {
+      "Content-Type": "multipart/form-data"
+    }
   });
+  console.log("uploadResume#response", response);
+  return response;
 }, {});

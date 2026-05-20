@@ -1,6 +1,7 @@
 import { auth } from '@edupulse/auth';
 import { ApiClient, ApiError, type ApiResponse } from '@next-feature/client';
 import { BACKEND_API_URL } from './env';
+import { PROJECT_NAME } from '@feature/base';
 const json = require("../../../package.json");
 
 /**
@@ -30,7 +31,9 @@ const apiClient = new ApiClient({
   }
 });
 
-apiClient.axios.defaults.headers.common['User-Agent'] = [json.name, json.version].join(":")
+export const USER_AGENT = `${json.name}/${json.version} (${PROJECT_NAME})`;
+
+apiClient.axios.defaults.headers.common['User-Agent'] = USER_AGENT;
 
 /**
  * Example: Add custom request interceptor

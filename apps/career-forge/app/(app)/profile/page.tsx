@@ -24,7 +24,7 @@ async function ProfilePage(props: Props) {
   const { success, data: profile, error }  = await getProfile();
 
   if (!success || error) {
-    console.log("ProfilePage#error", error?.body);
+    console.log("ProfilePage#error", error);
     notFound();
   }
 
