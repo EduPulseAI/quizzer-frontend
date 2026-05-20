@@ -17,7 +17,7 @@ export const getProfile = withApi(async () => {
   const response = await api.get<Profile>(endpoint);
   // todo: backend returns null values for missing fields, we should fix this to not return nulls and just omit the fields instead, but in the meantime we can filter out null values here
   return Object.entries(response).reduce((p, [k,v]) => {
-    if (v) p[k] = v;
+    if (v) p[k as keyof typeof p] = v;
     return p;
   }, GET_PROFILE);
 }, { fallbackData: GET_PROFILE });

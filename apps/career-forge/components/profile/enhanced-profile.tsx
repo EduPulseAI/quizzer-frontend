@@ -27,9 +27,7 @@ export function EnhancedProfile({ aboutInfo, personalInfo }: Props) {
           <div className="flex flex-col sm:flex-col items-center w-full">
             <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden mb-4 border-2 border-cyan-400/20 ring-4 ring-zinc-800/50">
               <Image
-                // src={personalInfo.avatar || "/profile/confident-professional.png"}
-                src={"/placeholder-user.png"}
-                // src={personalInfo.avatar || "/placeholder-logo.png"}
+                src={"/placeholder-user.jpg"}
                 alt={fullName}
                 fill
                 className="object-cover"
